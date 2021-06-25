@@ -8,20 +8,20 @@ public class Restaurant {
 	private String name;
 	private String type;
 	private ArrayList<Integer> articles;
-	private String status;
+	private Boolean working;
 	private Location location;
 	private Image logo;
 	private String id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
-	public Restaurant(String name, String type, String status, Location location, Image logo,
+	public Restaurant(String name, String type, Boolean status, Location location, Image logo,
 			String id) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.articles = new ArrayList<Integer>();
-		this.status = status;
+		this.working = status;
 		this.location = location;
 		this.logo = logo;
 		this.id = id;
@@ -51,12 +51,12 @@ public class Restaurant {
 		this.articles.add(article);
 	}
 
-	public String getStatus() {
-		return status;
+	public Boolean getStatus() {
+		return working;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(Boolean status) {
+		this.working = status;
 	}
 
 	public Location getLocation() {
