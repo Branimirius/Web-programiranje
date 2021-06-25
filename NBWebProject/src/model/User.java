@@ -14,8 +14,8 @@ public class User {
 	private String role;
 	// polja za kupca
 	private ArrayList<Integer> orderList;
-	private String cart;
-	private int bonusPoints;
+	private Integer cart;
+	private Integer bonusPoints;
 	private CustomerType type;
 	// polja za dostavljaca	
 	private ArrayList<Integer> demandList;	
@@ -24,8 +24,8 @@ public class User {
 	
 	//konstruktor
 	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
-			String role, List<Integer> orderList, String cart, int bonusPoints, CustomerType type,
-			List<Integer> demandList, String restaurant) {
+			String role,Integer cart, Integer bonusPoints, CustomerType type,
+			String restaurant) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -50,10 +50,18 @@ public class User {
 			this.bonusPoints = 0;
 			this.type = null;
 		}
-		else {
+		else if(role == "manager"){
 			this.demandList = null;
 			this.orderList = null;
 			this.restaurant = restaurant;
+			this.cart = null;
+			this.bonusPoints = 0;
+			this.type = null;
+		}
+		else {
+			this.demandList = null;
+			this.orderList = null;
+			this.restaurant = null;
 			this.cart = null;
 			this.bonusPoints = 0;
 			this.type = null;
@@ -112,10 +120,10 @@ public class User {
 	public void addOrder(Integer order) {
 		this.orderList.add(order);
 	}
-	public String getCart() {
+	public Integer getCart() {
 		return cart;
 	}
-	public void setCart(String cart) {
+	public void setCart(Integer cart) {
 		this.cart = cart;
 	}
 	public CustomerType getType() {

@@ -7,11 +7,11 @@ public class Cart {
 	private HashMap<Integer, Integer> articles; //artikal i njegova kolicina
 	private String user;
 	private double price;
-	private String id;
+	private Integer id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
-	public Cart(HashMap<Integer, Integer> articles, String user, double price, String id) {
+	public Cart(HashMap<Integer, Integer> articles, String user, double price, Integer id) {
 		super();
 		this.articles = articles;
 		this.user = user;
@@ -42,7 +42,7 @@ public class Cart {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	 
