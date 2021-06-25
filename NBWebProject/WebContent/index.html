@@ -11,6 +11,8 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     
     <link rel="stylesheet" type="text/css" href="css/homepage.css">
+    <link rel="stylesheet" type="text/css" href="css/restaurants.css">
+	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
     <script src="js/loadpage.js"></script>
   	<script src="js/scrollScript.js"></script>
     
@@ -33,7 +35,19 @@
                 </ul>
             </div>
         </nav>
-        
+        <!-- Sidebar -->
+			<div id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+					<div id="kategorije-restorana">
+						<li><a href="#" id="pice-prikaz">Srpsko</a></li>
+						<li><a href="#" id="rostilj-prikaz-restorana">Italijansko</a></li>
+						<li><a href="#" id="kineska-hrana-prikaz-restorana">Grcko</a></li>
+						<li><a href="#" id="indijska-hrana-prikaz-restorana">Francusko</a></li>
+						<li><a href="#" id="poslasticarnica-prikaz-restorana">Meksicko</a></li>
+						<li><a href="#" id="picerija-prikaz-restorana">Kinesko</a></li>
+					</div>
+				</ul>
+			</div>
         <section class="sec1"></section>
             
         <section class="content">
@@ -41,11 +55,52 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/ind.png"
-                    alt="Card image cap">
+                  <img class="card-img-top" src="pictures/serbia.jpg"
+                    alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <a href="#" >
-                        <h5 class="card-title">Restoran 1</h5>
+                        <h5 class="card-title">Srpsko</h5>
+                    </a>
+                    <p class="card-text">Some quick example text to.</p>
+                    <button id="srpska-hrana-restoran" class="btn btn-primary">Saznaj više...</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card text-center" style="width: 18rem;">
+                  <img class="card-img-top" src="pictures/italy.jpg"
+                    alt="Card image cap" style="width: 5rem; ">
+                  <div class="card-body">
+                    <h5 class="card-title">Italijansko</h5>
+                    <p class="card-text">Some quick example text to.</p>
+                    <button id="italija-restoran" class="btn btn-primary">Saznaj više...</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card text-center" style="width: 18rem;">
+                  <img class="card-img-top" src="pictures/greece.jpg"
+                    alt="Card image cap" style="width: 5rem; ">
+                  <div class="card-body">
+                    <h5 class="card-title">Grcko</h5>
+                    <p class="card-text">Some quick example text to.</p>
+                    <button id="picerija-restoran" class="btn btn-primary">Saznaj više...</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <section class="content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="card text-center" style="width: 18rem;">
+                  <img class="card-img-top" src="pictures/france.png"
+                    alt="Card image cap" style="width: 5rem; ">
+                  <div class="card-body">
+                    <a href="#" >
+                        <h5 class="card-title">Francusko</h5>
                     </a>
                     <p class="card-text">Some quick example text to.</p>
                     <button id="indijska-hrana-restoran" class="btn btn-primary">Saznaj više...</button>
@@ -54,10 +109,10 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/6_0.png"
-                    alt="Card image cap">
+                  <img class="card-img-top" src="pictures/mexico.jpg"
+                    alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
-                    <h5 class="card-title">Restoran 2</h5>
+                    <h5 class="card-title">Meksicko</h5>
                     <p class="card-text">Some quick example text to.</p>
                     <button id="poslasticarnica-restoran" class="btn btn-primary">Saznaj više...</button>
                   </div>
@@ -65,10 +120,10 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/12_0.png"
-                    alt="Card image cap">
+                  <img class="card-img-top" src="pictures/china.png"
+                    alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
-                    <h5 class="card-title">PICERIJA</h5>
+                    <h5 class="card-title">Kinesko</h5>
                     <p class="card-text">Some quick example text to.</p>
                     <button id="picerija-restoran" class="btn btn-primary">Saznaj više...</button>
                   </div>

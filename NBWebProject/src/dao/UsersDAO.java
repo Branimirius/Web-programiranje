@@ -135,7 +135,7 @@ public class UsersDAO {
 	}
 	
 	// Ucitavanje test podataka korisnika
-	private void ucitajTestPodatke() {
+	private void loadTestData() {
 		
 		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
 				"3/3/1946", "admin", 0, 0, null, null);
