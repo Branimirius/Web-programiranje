@@ -15,6 +15,10 @@ public class Location {
 		this.adress = adress;
 		this.zipCode = zipCode;
 	}
+	
+	public Location() {
+		
+	}
 
 	public double getGeoLength() {
 		return geoLength;

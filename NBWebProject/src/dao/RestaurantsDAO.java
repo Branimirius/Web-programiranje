@@ -1,5 +1,6 @@
 package dao;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,66 +17,65 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-
+import model.Restaurant;
 import model.CustomerType;
-import model.User;
+import model.Location;
+import model.Restaurant;
 
+public class RestaurantsDAO {
+	private HashMap<String, Restaurant> restaurants;
+	private String restaurantsPath = "";
 
-public class UsersDAO {
-
-	private HashMap<String, User> users;
-	private String usersPath = "";
-
-	public UsersDAO() {
+	public RestaurantsDAO() {
 		
 	}
 	
-	public UsersDAO(String usersPath) {
+	public RestaurantsDAO(String restaurantsPath) {
 
-		this.setUsers(new HashMap<String, User>());
-		this.setUsersPath(usersPath);
+		this.setRestaurants(new HashMap<String, Restaurant>());
+		this.setRestaurantsPath(restaurantsPath);
 		
-		loadUsers(usersPath);
+		loadRestaurants(restaurantsPath);
 	}
 
-	public HashMap<String, User> getUsers() {
-		if(!users.isEmpty()) {
-			return users;
+	public HashMap<String, Restaurant> getRestaurants() {
+		if(!restaurants.isEmpty()) {
+			return restaurants;
 		}
 		else {
 			return null;
 		}
 	}
 
-	public void setUsers(HashMap<String, User> users) {
-		this.users = users;
+	public String getRestaurantsPath() {
+		return restaurantsPath;
 	}
 
-	public String getUsersPath() {
-		return usersPath;
+	public void setRestaurantsPath(String restaurantsPath) {
+		this.restaurantsPath = restaurantsPath;
 	}
 
-	public void setUsersPath(String usersPath) {
-		this.usersPath = usersPath;
+	public void setRestaurants(HashMap<String, Restaurant> restaurants) {
+		this.restaurants = restaurants;
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadUsers(String contextPath) {
+	private void loadRestaurants(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/users.txt");
+			file = new File(contextPath + "/data/restaurants.txt");
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.setVisibilityChecker(
 						VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 			TypeFactory factory = TypeFactory.defaultInstance();
-			MapType type = factory.constructMapType(HashMap.class, String.class, User.class);
+			MapType type = factory.constructMapType(HashMap.class, String.class, Restaurant.class);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			users = ((HashMap<String, User>) objectMapper.readValue(file, type));
+			restaurants = ((HashMap<String, Restaurant>) objectMapper.readValue(file, type));
 		} catch (FileNotFoundException fnfe) {
 			try {
 				file.createNewFile();
@@ -82,8 +83,8 @@ public class UsersDAO {
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 				objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-				String stringUsers = objectMapper.writeValueAsString(users);
-				fileWriter.write(stringUsers);
+				String stringRestaurants = objectMapper.writeValueAsString(restaurants);
+				fileWriter.write(stringRestaurants);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -110,16 +111,16 @@ public class UsersDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveUsers() {
-		File f = new File(usersPath + "/data/users.txt");
+	private void saveRestaurants() {
+		File f = new File(restaurantsPath + "/data/restaurants.txt");
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			String stringUsers = objectMapper.writeValueAsString(users);
-			fileWriter.write(stringUsers);
+			String stringRestaurants = objectMapper.writeValueAsString(restaurants);
+			fileWriter.write(stringRestaurants);
 			fileWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,26 +134,25 @@ public class UsersDAO {
 			}
 		}
 	}
-	
-	// Ucitavanje test podataka korisnika
 	private void loadTestData() {
-		
-		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
-				"3/3/1946", "admin", 0, 0, null, null);
+		//(String name, String type, String status, Location location, Image logo,
+		//String id) {
+			Restaurant admin = new Restaurant("Zorina krcma", "Serbian", true, new Location(), null,
+					"zorinakrcma1");
 
-		User customer = new User("Jesse", "1234", "Jesse", "Pinkman", "M",
-				"3/3/1988", "customer", 0, 0, new CustomerType("gold"), null);
-		
-		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "delieveryGuy", 0, 0, null, null);
-		
-		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
-				"3/3/1955", "manager", 0, 0, null, null);
+			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(), null,
+					"savoca1");
+			
+			Restaurant delieveryGuy = new Restaurant("Giros master", "Greece", false, new Location(), null,
+					"girosmaster1");
+			
+			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(), null,
+					"crepes1");
 
-		users.put(admin.getUsername(), admin);
-		users.put(customer.getUsername(), customer);
-		users.put(delieveryGuy.getUsername(), delieveryGuy);
-		users.put(manager.getUsername(), manager);
-	}
+			restaurants.put(admin.getId(), admin);
+			restaurants.put(customer.getId(), customer);
+			restaurants.put(delieveryGuy.getId(), delieveryGuy);
+			restaurants.put(manager.getId(), manager);
+		}
 
 }

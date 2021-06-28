@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,66 +18,62 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import model.Order;
 
-import model.CustomerType;
-import model.User;
+public class OrdersDAO {
+	private HashMap<Integer, Order> orders;
+	private String ordersPath = "";
 
-
-public class UsersDAO {
-
-	private HashMap<String, User> users;
-	private String usersPath = "";
-
-	public UsersDAO() {
+	public OrdersDAO() {
 		
 	}
 	
-	public UsersDAO(String usersPath) {
+	public OrdersDAO(String ordersPath) {
 
-		this.setUsers(new HashMap<String, User>());
-		this.setUsersPath(usersPath);
+		this.setOrders(new HashMap<Integer, Order>());
+		this.setOrdersPath(ordersPath);
 		
-		loadUsers(usersPath);
+		loadOrders(ordersPath);
 	}
 
-	public HashMap<String, User> getUsers() {
-		if(!users.isEmpty()) {
-			return users;
+	public HashMap<Integer, Order> getOrders() {
+		if(!orders.isEmpty()) {
+			return orders;
 		}
 		else {
 			return null;
 		}
 	}
 
-	public void setUsers(HashMap<String, User> users) {
-		this.users = users;
+	public String getOrdersPath() {
+		return ordersPath;
 	}
 
-	public String getUsersPath() {
-		return usersPath;
+	public void setOrdersPath(String ordersPath) {
+		this.ordersPath = ordersPath;
 	}
 
-	public void setUsersPath(String usersPath) {
-		this.usersPath = usersPath;
+	public void setOrders(HashMap<Integer, Order> orders) {
+		this.orders = orders;
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadUsers(String contextPath) {
+	private void loadOrders(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/users.txt");
+			file = new File(contextPath + "/data/orders.txt");
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.setVisibilityChecker(
 						VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 			TypeFactory factory = TypeFactory.defaultInstance();
-			MapType type = factory.constructMapType(HashMap.class, String.class, User.class);
+			MapType type = factory.constructMapType(HashMap.class, String.class, Order.class);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			users = ((HashMap<String, User>) objectMapper.readValue(file, type));
+			orders = ((HashMap<Integer, Order>) objectMapper.readValue(file, type));
 		} catch (FileNotFoundException fnfe) {
 			try {
 				file.createNewFile();
@@ -82,8 +81,8 @@ public class UsersDAO {
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 				objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-				String stringUsers = objectMapper.writeValueAsString(users);
-				fileWriter.write(stringUsers);
+				String stringOrders = objectMapper.writeValueAsString(orders);
+				fileWriter.write(stringOrders);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -110,16 +109,16 @@ public class UsersDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveUsers() {
-		File f = new File(usersPath + "/data/users.txt");
+	private void saveOrders() {
+		File f = new File(ordersPath + "/data/orders.txt");
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			String stringUsers = objectMapper.writeValueAsString(users);
-			fileWriter.write(stringUsers);
+			String stringOrders = objectMapper.writeValueAsString(orders);
+			fileWriter.write(stringOrders);
 			fileWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,26 +132,25 @@ public class UsersDAO {
 			}
 		}
 	}
-	
-	// Ucitavanje test podataka korisnika
 	private void loadTestData() {
-		
-		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
-				"3/3/1946", "admin", 0, 0, null, null);
+		//Order(Integer id, List<Integer> articles, String restaurant, String dateTime, double price, String customer,
+		//String status) {
+			Order admin = new Order(1, new ArrayList<Integer>(), "zorinakrcma1", "3/7/2021 12:00",
+					1000.0, "Jesse", "processing");
 
-		User customer = new User("Jesse", "1234", "Jesse", "Pinkman", "M",
-				"3/3/1988", "customer", 0, 0, new CustomerType("gold"), null);
-		
-		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "delieveryGuy", 0, 0, null, null);
-		
-		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
-				"3/3/1955", "manager", 0, 0, null, null);
+			Order customer = new Order(2, new ArrayList<Integer>(), "savoca1", "3/7/2021 12:00",
+					1000.0, "Jesse", "preparing");
+			
+			Order delieveryGuy = new Order(3, new ArrayList<Integer>(), "girosmaster1", "3/7/2021 12:00",
+					1000.0, "Jesse", "waiting");
+			
+			Order manager = new Order(4, new ArrayList<Integer>(), "crepes", "3/7/2021 12:00",
+					1000.0, "Jesse", "transporting");
 
-		users.put(admin.getUsername(), admin);
-		users.put(customer.getUsername(), customer);
-		users.put(delieveryGuy.getUsername(), delieveryGuy);
-		users.put(manager.getUsername(), manager);
-	}
+			orders.put(admin.getId(), admin);
+			orders.put(customer.getId(), customer);
+			orders.put(delieveryGuy.getId(), delieveryGuy);
+			orders.put(manager.getId(), manager);
+		}
 
 }

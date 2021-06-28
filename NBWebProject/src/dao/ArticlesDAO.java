@@ -1,5 +1,6 @@
 package dao;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,66 +17,66 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-
+import model.Article;
 import model.CustomerType;
 import model.User;
 
 
-public class UsersDAO {
+public class ArticlesDAO {
 
-	private HashMap<String, User> users;
-	private String usersPath = "";
+	private HashMap<Integer, Article> articles;
+	private String articlesPath = "";
 
-	public UsersDAO() {
+	public ArticlesDAO() {
 		
 	}
 	
-	public UsersDAO(String usersPath) {
+	public ArticlesDAO(String articlesPath) {
 
-		this.setUsers(new HashMap<String, User>());
-		this.setUsersPath(usersPath);
+		this.setArticles(new HashMap<Integer, Article>());
+		this.setArticlesPath(articlesPath);
 		
-		loadUsers(usersPath);
+		loadArticles(articlesPath);
 	}
 
-	public HashMap<String, User> getUsers() {
-		if(!users.isEmpty()) {
-			return users;
+	public HashMap<Integer, Article> getArticles() {
+		if(!articles.isEmpty()) {
+			return articles;
 		}
 		else {
 			return null;
 		}
 	}
 
-	public void setUsers(HashMap<String, User> users) {
-		this.users = users;
+	public String getArticlesPath() {
+		return articlesPath;
 	}
 
-	public String getUsersPath() {
-		return usersPath;
+	public void setArticlesPath(String articlesPath) {
+		this.articlesPath = articlesPath;
 	}
 
-	public void setUsersPath(String usersPath) {
-		this.usersPath = usersPath;
+	public void setArticles(HashMap<Integer, Article> articles) {
+		this.articles = articles;
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadUsers(String contextPath) {
+	private void loadArticles(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/users.txt");
+			file = new File(contextPath + "/data/articles.txt");
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.setVisibilityChecker(
 						VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 			TypeFactory factory = TypeFactory.defaultInstance();
-			MapType type = factory.constructMapType(HashMap.class, String.class, User.class);
+			MapType type = factory.constructMapType(HashMap.class, String.class, Article.class);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			users = ((HashMap<String, User>) objectMapper.readValue(file, type));
+			articles = ((HashMap<Integer, Article>) objectMapper.readValue(file, type));
 		} catch (FileNotFoundException fnfe) {
 			try {
 				file.createNewFile();
@@ -82,8 +84,8 @@ public class UsersDAO {
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 				objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-				String stringUsers = objectMapper.writeValueAsString(users);
-				fileWriter.write(stringUsers);
+				String stringArticles = objectMapper.writeValueAsString(articles);
+				fileWriter.write(stringArticles);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -110,16 +112,16 @@ public class UsersDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveUsers() {
-		File f = new File(usersPath + "/data/users.txt");
+	private void saveArticles() {
+		File f = new File(articlesPath + "/data/articles.txt");
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			String stringUsers = objectMapper.writeValueAsString(users);
-			fileWriter.write(stringUsers);
+			String stringArticles = objectMapper.writeValueAsString(articles);
+			fileWriter.write(stringArticles);
 			fileWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,26 +135,26 @@ public class UsersDAO {
 			}
 		}
 	}
-	
-	// Ucitavanje test podataka korisnika
 	private void loadTestData() {
-		
-		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
-				"3/3/1946", "admin", 0, 0, null, null);
-
-		User customer = new User("Jesse", "1234", "Jesse", "Pinkman", "M",
-				"3/3/1988", "customer", 0, 0, new CustomerType("gold"), null);
-		
-		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "delieveryGuy", 0, 0, null, null);
-		
-		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
-				"3/3/1955", "manager", 0, 0, null, null);
-
-		users.put(admin.getUsername(), admin);
-		users.put(customer.getUsername(), customer);
-		users.put(delieveryGuy.getUsername(), delieveryGuy);
-		users.put(manager.getUsername(), manager);
+		//(String name, double price, String type, String restaurant, double amount, String description,
+				//Image picture, Integer id) {
+			Article admin = new Article("Komplet lepinja", 250.0, "hrana", "zorinakrcma1", 400.0,
+					"Lepinja sa kajmakom jajima i ovcijim pretopom", null, 1);
+	
+			Article customer = new Article("Margarita", 1200.0, "hrana", "savoca1", 1500.0,
+					"Pica sa sirevima i paradajz sosom", null, 2);
+			
+			Article delieveryGuy = new Article("Giros mali", 250.0, "hrana", "girosmaster1", 200.0,
+					"Mali giros mesano meso", null, 3);
+			
+			Article manager = new Article("Francuski sendvic", 330, "hrana", "crepes1", 250.0,
+					"Sendvic sa jajetom kackavaljem i sunkom", null, 4);
+	
+			articles.put(admin.getId(), admin);
+			articles.put(customer.getId(), customer);
+			articles.put(delieveryGuy.getId(), delieveryGuy);
+			articles.put(manager.getId(), manager);
 	}
+
 
 }
