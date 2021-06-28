@@ -64,7 +64,7 @@ function showGreeceRestaurants() {
 		
         e.preventDefault();
         
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=greece';
+        window.location.replace='http://localhost:3665/NBWebProject/restaurants.html?type=greece';
 	});
 }
 //klik na prikaz restorana kineske kuhinje

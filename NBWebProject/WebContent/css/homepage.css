@@ -74,7 +74,10 @@ nav ul li a.active {
     color: #fff;
     border-radius: 6px;
 }
-
+heading {
+	width: 50rem;
+	background: #d3d3d3d3;
+}
 section.sec1 {
     width: 100%;
     height: 100vh;
