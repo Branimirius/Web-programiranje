@@ -12,21 +12,21 @@ function showSerbianRestaurants() {
 		type : 'GET',
 		url : 'rest/restaurant/restaurants',
 		
-		success : function(restorani) {
+		success : function(restaurants) {
 			
 			$('#showAll-serbian-restaurants').empty();
 			
-			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "picerija") {
+			for(var r of restaurants) { 
+				if(r.type == "Serbian") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="picerija-restoran-id-' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-picerija-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="serbian-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-serbian-restaurants').append(newR);
 
-					$('#picerija-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#serbian-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -48,16 +48,16 @@ function showItalianRestaurants() {
 			$('#showAll-italian-restaurants').empty();
 			
 			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "poslastičarnica") {
+				if(r.type == "Italian") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/15_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="poslasticarnica-restoran-id-' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-poslasticarnica-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/15_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="italian-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-italian-restaurants').append(newR);
 
-					$('#poslasticarnica-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#italian-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -70,25 +70,25 @@ function showItalianRestaurants() {
 
 function showGreekRestaurants() {
     
-    $.ajax ({
+	$.ajax ({
 		type : 'GET',
 		url : 'rest/restaurant/restaurants',
 		
-		success : function(restorani) {
+		success : function(restaurants) {
 			
 			$('#showAll-greek-restaurants').empty();
 			
-			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "indijski restoran") {
+			for(var r of restaurants) { 
+				if(r.type == "Greek") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/ind.png"alt="Card image cap"><div class="card-body"><a href="#" id="indijska-hrana-restoran-id' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-indijska-hrana-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="greek-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-greek-restaurants').append(newR);
 
-					$('#indijska-hrana-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#greek-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -101,25 +101,25 @@ function showGreekRestaurants() {
 
 function showFrenchRestaurants() {
     
-    $.ajax ({
+	$.ajax ({
 		type : 'GET',
 		url : 'rest/restaurant/restaurants',
 		
-		success : function(restorani) {
+		success : function(restaurants) {
 			
 			$('#showAll-french-restaurants').empty();
 			
-			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "kineski restoran") {
+			for(var r of restaurants) { 
+				if(r.type == "French") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/kina.png"alt="Card image cap"><div class="card-body"><a href="#" id="kineska-hrana-restoran-id-' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-kineska-hrana-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="french-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-french-restaurants').append(newR);
 
-					$('#kineska-hrana-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#french-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -132,25 +132,25 @@ function showFrenchRestaurants() {
 
 function showMexicanRestaurants() {
     
-    $.ajax ({
+	$.ajax ({
 		type : 'GET',
 		url : 'rest/restaurant/restaurants',
 		
-		success : function(restorani) {
+		success : function(restaurants) {
 			
 			$('#showAll-mexican-restaurants').empty();
 			
-			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "roštilj") {
+			for(var r of restaurants) { 
+				if(r.type == "Mexican") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/4_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="rostilj-restoran-id-' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-rostilj-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="mexican-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-mexican-restaurants').append(newR);
 
-					$('#rostilj-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#mexican-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -163,25 +163,25 @@ function showMexicanRestaurants() {
 
 function showChineseRestaurants() {
     
-    $.ajax ({
+	$.ajax ({
 		type : 'GET',
 		url : 'rest/restaurant/restaurants',
 		
-		success : function(restorani) {
+		success : function(restaurants) {
 			
 			$('#showAll-chinese-restaurants').empty();
 			
-			for(var r of restorani) { 
-				if(r.obrisan == false && r.kategorijaRestorana == "domaća kuhinja") {
+			for(var r of restaurants) { 
+				if(r.type == "Chinese") {
 					
-					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/domaca.png"alt="Card image cap"><div class="card-body"><a href="#" id="domaci-restoran-id-' + r.id + '"><h5 class="card-title">' + r.naziv + '</h5></a><p class="card-text">' + r.adresa + '</p><button id="dodaj-u-omiljene-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
-					$('#restorani-domaca-hrana-prikaz-svi').append(newR);
+					var newR = $('<div class="col-sm-3"><br><div class="card text-center" style="width: 15rem;"><img class="card-img-top" src="pictures/2_0.png"alt="Card image cap"><div class="card-body"><a href="#" id="chinese-restaurant-id-' + r.id + '"><h5 class="card-title">' + r.name + '</h5></a><p class="card-text">' + r.location.adress + '</p><button id="add-to-favourites-id-' + r.id + '" class="btn btn-primary">OMILJEN</button></div></div></div>');
+					$('#showAll-chinese-restaurants').append(newR);
 
-					$('#domaci-restoran-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
-					var buttonId = "dodaj-u-omiljene-id-" + r.id;
+					$('#chinese-restaurant-id-'+ r.id).click(showAllArticlesFromRestaturant(r));
+					var buttonId = "add-to-favourites-id-" + r.id;
 					checkUserKindFavourite(buttonId);
 
-					$("#dodaj-u-omiljene-id-" + r.id).click(addRestaurantToFavourite(r.id));
+					$("#add-to-favourites-id-" + r.id).click(addRestaurantToFavourite(r.id));
 				}
 			}
 		},
@@ -305,163 +305,168 @@ function addToCart(artikl) {
 function showChosenOption() {
 
 	hideRestaurantsAndTitles();
-	$('#tabela-artikala-svi').hide();
+	$('#all-articles').hide();
 
 	// klik na restorane domace hrane iz restaurants.html
-    $('#domaca-hrana-prikaz-restorana').click(function(e) {
+    $('#serbia-restaurant').click(function(e) {
 		
 		e.preventDefault();
 
-		$('#tabela-artikala-svi').hide();
+		$('#all-articles').hide();
 
-		$("#restorani-domaca-hrana-prikaz-svi").delay(250).fadeIn(250);
-		$('#restorani-rostilj-prikaz-svi').hide();
-		$('#restorani-kineska-hrana-prikaz-svi').hide();
-		$('#restorani-indijska-hrana-prikaz-svi').hide();
-		$('#restorani-poslasticarnica-prikaz-svi').hide();
-		$('#restorani-picerija-prikaz-svi').hide();
+		$("#showAll-serbian-restaurants").delay(250).fadeIn(250);
+		$('#showAll-italian-restaurants').hide();
+		$('#showAll-greek-restaurants').hide();
+		$('#showAll-french-restaurants').hide();
+		$('#showAll-mexican-restaurants').hide();
+		$('#showAll-chinese-restaurants').hide();
 
-		$('#naslov-restorani-domaca-hrana').delay(250).fadeIn(250);
-		$('#naslov-restorani-rostilj').hide();
-		$('#naslov-restorani-kineska-hrana').hide();
-		$('#naslov-restorani-indijska-hrana').hide();
-		$('#naslov-restorani-poslasticarnica').hide();
-		$('#naslov-restorani-picerija').hide();
+		$('#title-serbian').delay(250).fadeIn(250);
+		$('#title-italian').hide();
+		$('#title-greek').hide();
+		$('#title-french').hide();
+		$('#title-mexican').hide();
+		$('#title-chinese').hide();
 		
-		showDomesticFoodRestaurants();
+		showSerbianRestaurants();
 	});
 	// klik na rostilj restorane iz restaurants.html
-	$('#rostilj-prikaz-restorana').click(function(e) {
+	$('#italy-restaurant').click(function(e) {
 		
 		e.preventDefault();
 
-		$('#tabela-artikala-svi').hide();
+		$('#all-articles').hide();
 
-		$('#naslov-restorani-domaca-hrana').hide();
-		$('#restorani-rostilj-prikaz-svi').delay(250).fadeIn(250);
-		$('#restorani-kineska-hrana-prikaz-svi').hide();
-		$('#restorani-indijska-hrana-prikaz-svi').hide();
-		$('#restorani-poslasticarnica-prikaz-svi').hide();
-		$('#restorani-picerija-prikaz-svi').hide();
+		$("#showAll-serbian-restaurants").hide();
+		$('#showAll-italian-restaurants').delay(250).fadeIn(250);
+		$('#showAll-greek-restaurants').hide();
+		$('#showAll-french-restaurants').hide();
+		$('#showAll-mexican-restaurants').hide();
+		$('#showAll-chinese-restaurants').hide();
 
-		$("#restorani-domaca-hrana-prikaz-svi").hide();
-		$('#naslov-restorani-rostilj').delay(250).fadeIn(250);
-		$('#naslov-restorani-kineska-hrana').hide();
-		$('#naslov-restorani-indijska-hrana').hide();
-		$('#naslov-restorani-poslasticarnica').hide();
-		$('#naslov-restorani-picerija').hide();
+		$('#title-serbian').hide();
+		$('#title-italian').delay(250).fadeIn(250);
+		$('#title-greek').hide();
+		$('#title-french').hide();
+		$('#title-mexican').hide();
+		$('#title-chinese').hide();
 		
-		showGrillRestaurants();
+		
+		showItalianRestaurants();
 	});
 	// klik na kineske restorane iz restaurants.html
-	$('#kineska-hrana-prikaz-restorana').click(function(e) {
+	$('#greece-restaurant').click(function(e) {
 		
 		e.preventDefault();
 
-		$('#tabela-artikala-svi').hide();
+		$('#all-articles').hide();
 
-		$('#naslov-restorani-domaca-hrana').hide();
-		$('#restorani-rostilj-prikaz-svi').hide();
-		$('#restorani-kineska-hrana-prikaz-svi').delay(250).fadeIn(250);
-		$('#restorani-indijska-hrana-prikaz-svi').hide();
-		$('#restorani-poslasticarnica-prikaz-svi').hide();
-		$('#restorani-picerija-prikaz-svi').hide();
+		$("#showAll-serbian-restaurants").hide();
+		$('#showAll-italian-restaurants').hide();
+		$('#showAll-greek-restaurants').delay(250).fadeIn(250);
+		$('#showAll-french-restaurants').hide();
+		$('#showAll-mexican-restaurants').hide();
+		$('#showAll-chinese-restaurants').hide();
 
-		$("#restorani-domaca-hrana-prikaz-svi").hide();
-		$('#naslov-restorani-rostilj').hide();
-		$('#naslov-restorani-kineska-hrana').delay(250).fadeIn(250);
-		$('#naslov-restorani-indijska-hrana').hide();
-		$('#naslov-restorani-poslasticarnica').hide();
-		$('#naslov-restorani-picerija').hide();
+		$('#title-serbian').hide();
+		$('#title-italian').hide();
+		$('#title-greek').delay(250).fadeIn(250);
+		$('#title-french').hide();
+		$('#title-mexican').hide();
+		$('#title-chinese').hide();
 		
-		showChineseFoodRestaurants();
+		
+		showGreekRestaurants();
 	});
 	// klik na indijske restorane iz restaurants.html
-	$('#indijska-hrana-prikaz-restorana').click(function(e) {
-		
+	$('#french-restaurant').click(function(e) {
+	
 		e.preventDefault();
-
-		$('#tabela-artikala-svi').hide();
-
-		$('#naslov-restorani-domaca-hrana').hide();
-		$('#restorani-rostilj-prikaz-svi').hide();
-		$('#restorani-kineska-hrana-prikaz-svi').hide();
-		$('#restorani-indijska-hrana-prikaz-svi').delay(250).fadeIn(250);
-		$('#restorani-poslasticarnica-prikaz-svi').hide();
-		$('#restorani-picerija-prikaz-svi').hide();
-
-		$("#restorani-domaca-hrana-prikaz-svi").hide();
-		$('#naslov-restorani-rostilj').hide();
-		$('#naslov-restorani-kineska-hrana').hide();
-		$('#naslov-restorani-indijska-hrana').delay(250).fadeIn(250);
-		$('#naslov-restorani-poslasticarnica').hide();
-		$('#naslov-restorani-picerija').hide();
+	
+		$('#all-articles').hide();
+	
+		$("#showAll-serbian-restaurants").hide();
+		$('#showAll-italian-restaurants').hide();
+		$('#showAll-greek-restaurants').hide();
+		$('#showAll-french-restaurants').delay(250).fadeIn(250);
+		$('#showAll-mexican-restaurants').hide();
+		$('#showAll-chinese-restaurants').hide();
+	
+		$('#title-serbian').hide();
+		$('#title-italian').hide();
+		$('#title-greek').hide();
+		$('#title-french').delay(250).fadeIn(250);
+		$('#title-mexican').hide();
+		$('#title-chinese').hide();
 		
-		showIndianFoodRestaurants();
+		
+		showFrenchRestaurants();
 	});
 	// klik na poslasticarnice iz restaurants.html
-	$('#poslasticarnica-prikaz-restorana').click(function(e) {
+	$('#french-restaurant').click(function(e) {
 		
 		e.preventDefault();
-
-		$('#tabela-artikala-svi').hide();
-
-		$('#naslov-restorani-domaca-hrana').hide();
-		$('#restorani-rostilj-prikaz-svi').hide();
-		$('#restorani-kineska-hrana-prikaz-svi').hide();
-		$('#restorani-indijska-hrana-prikaz-svi').hide();
-		$('#restorani-poslasticarnica-prikaz-svi').delay(250).fadeIn(250);
-		$('#restorani-picerija-prikaz-svi').hide();
-
-		$("#restorani-domaca-hrana-prikaz-svi").hide();
-		$('#naslov-restorani-rostilj').hide();
-		$('#naslov-restorani-kineska-hrana').hide();
-		$('#naslov-restorani-indijska-hrana').hide();
-		$('#naslov-restorani-poslasticarnica').delay(250).fadeIn(250);
-		$('#naslov-restorani-picerija').hide();
+	
+		$('#all-articles').hide();
+	
+		$("#showAll-serbian-restaurants").hide();
+		$('#showAll-italian-restaurants').hide();
+		$('#showAll-greek-restaurants').hide();
+		$('#showAll-french-restaurants').delay(250).fadeIn(250);
+		$('#showAll-mexican-restaurants').hide();
+		$('#showAll-chinese-restaurants').hide();
+	
+		$('#title-serbian').hide();
+		$('#title-italian').hide();
+		$('#title-greek').hide();
+		$('#title-french').delay(250).fadeIn(250);
+		$('#title-mexican').hide();
+		$('#title-chinese').hide();
 		
-		showConfectioneryRestaurants();
+		
+		showFrenchRestaurants();
 	});
 	// klik na picerije iz restaurants.html
-	$('#picerija-prikaz-restorana').click(function(e) {
+	$('#mexican-restaurant').click(function(e) {
 		
 		e.preventDefault();
 
-		$('#tabela-artikala-svi').hide();
+		$('#all-articles').hide();
 
-		$('#naslov-restorani-domaca-hrana').hide();
-		$('#restorani-rostilj-prikaz-svi').hide();
-		$('#restorani-kineska-hrana-prikaz-svi').hide();
-		$('#restorani-indijska-hrana-prikaz-svi').hide();
-		$('#restorani-poslasticarnica-prikaz-svi').hide();
-		$('#restorani-picerija-prikaz-svi').delay(250).fadeIn(250);
+		$("#showAll-serbian-restaurants").hide();
+		$('#showAll-italian-restaurants').hide();
+		$('#showAll-greek-restaurants').hide();
+		$('#showAll-french-restaurants').hide();
+		$('#showAll-mexican-restaurants').delay(250).fadeIn(250);
+		$('#showAll-chinese-restaurants').hide();
 
-		$("#restorani-domaca-hrana-prikaz-svi").hide();
-		$('#naslov-restorani-rostilj').hide();
-		$('#naslov-restorani-kineska-hrana').hide();
-		$('#naslov-restorani-indijska-hrana').hide();
-		$('#naslov-restorani-poslasticarnica').hide();
-		$('#naslov-restorani-picerija').delay(250).fadeIn(250);
+		$('#title-serbian').hide();
+		$('#title-italian').hide();
+		$('#title-greek').hide();
+		$('#title-french').hide();
+		$('#title-mexican').delay(250).fadeIn(250);
+		$('#title-chinese').hide();
 		
-		showPizzaRestaurants();
+		
+		showMexicanRestaurants();
 	});
 }
 
 function hideRestaurantsAndTitles() {
 
-	$('#naslov-restorani-domaca-hrana').hide();
-	$('#naslov-restorani-rostilj').hide();
-	$('#naslov-restorani-kineska-hrana').hide();
-	$('#naslov-restorani-indijska-hrana').hide();
-	$('#naslov-restorani-poslasticarnica').hide();
-	$('#naslov-restorani-picerija').hide();
+	$("#showAll-serbian-restaurants").hide();
+	$('#showAll-italian-restaurants').hide();
+	$('#showAll-greek-restaurants').hide();
+	$('#showAll-french-restaurants').hide();
+	$('#showAll-mexican-restaurants').hide();
+	$('#showAll-chinese-restaurants').hide();
 
-	$('#restorani-domaca-hrana-prikaz-svi').hide();
-	$('#restorani-rostilj-prikaz-svi').hide();
-	$('#restorani-kineska-hrana-prikaz-svi').hide();
-	$('#restorani-indijska-hrana-prikaz-svi').hide();
-	$('#restorani-poslasticarnica-prikaz-svi').hide();
-	$('#restorani-picerija-prikaz-svi').hide();
+	$('#title-serbian').hide();
+	$('#title-italian').hide();
+	$('#title-greek').hide();
+	$('#title-french').hide();
+	$('#title-mexican').hide();
+	$('#title-chinese').hide();
 }
 
 function showRecivedOption() {
@@ -469,41 +474,41 @@ function showRecivedOption() {
 	var parseOpt = option.split("=");
 	var restType = parseOpt[1];
 
-	if(restType == "domaca") {
+	if(restType == "serbia") {
 		
-		$('#naslov-restorani-domaca-hrana').delay(250).fadeIn(250);
-		$("#restorani-domaca-hrana-prikaz-svi").delay(250).fadeIn(250);
-		showDomesticFoodRestaurants();
+		$('#title-serbian').delay(250).fadeIn(250);
+		$("#showAll-serbian-restaurants").delay(250).fadeIn(250);
+		showSerbianFoodRestaurants();
 
-	} else if (restType == "rostilj") {
+	} else if (restType == "italy") {
 		
-		$('#naslov-restorani-rostilj').delay(250).fadeIn(250);
-		$("#restorani-rostilj-prikaz-svi").delay(250).fadeIn(250);
-		showGrillRestaurants();
+		$('#title-italian').delay(250).fadeIn(250);
+		$("#showAll-italian-restaurants").delay(250).fadeIn(250);
+		showItalianRestaurants();
 
-	} else if (restType == "kineska") {
+	} else if (restType == "greece") {
 		
-		$('#naslov-restorani-kineska-hrana').delay(250).fadeIn(250);
-		$("#restorani-kineska-hrana-prikaz-svi").delay(250).fadeIn(250);
-		showChineseFoodRestaurants();
+		$('#title-greek').delay(250).fadeIn(250);
+		$("#showAll-greek-restaurants").delay(250).fadeIn(250);
+		showGreekRestaurants();
 
-	} else if (restType == "indijska") {
+	} else if (restType == "france") {
 		
-		$('#naslov-restorani-indijska-hrana').delay(250).fadeIn(250);
-		$("#restorani-indijska-hrana-prikaz-svi").delay(250).fadeIn(250);
-		showIndianFoodRestaurants();
+		$('#title-french').delay(250).fadeIn(250);
+		$("#showAll-french-restaurants").delay(250).fadeIn(250);
+		showFrenchRestaurants();
 
-	} else if (restType == "poslasticarnica") {
+	} else if (restType == "mexico") {
 		
-		$('#naslov-restorani-poslasticarnica').delay(250).fadeIn(250);
-		$("#restorani-poslasticarnica-prikaz-svi").delay(250).fadeIn(250);
-		showConfectioneryRestaurants();
+		$('#title-mexican').delay(250).fadeIn(250);
+		$("#showAll-mexican-restaurants").delay(250).fadeIn(250);
+		showMexicanRestaurants();
 
-	} else if (restType == "picerija") {
+	} else if (restType == "china") {
 		
-		$('#naslov-restorani-picerija').delay(250).fadeIn(250);
-		$("#restorani-picerija-prikaz-svi").delay(250).fadeIn(250);
-		showPizzaRestaurants();
+		$('#title-chinese').delay(250).fadeIn(250);
+		$("#showAll-chinese-restaurants").delay(250).fadeIn(250);
+		showChineseRestaurants();
 	}
 }
 

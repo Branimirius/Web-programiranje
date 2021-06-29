@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -46,6 +47,12 @@ public class RestaurantsDAO {
 			return null;
 		}
 	}
+	public Collection<Restaurant> getRestaurantsCollection() {
+		if (!restaurants.isEmpty()) {
+			return restaurants.values();
+		}
+		return null;
+	}
 
 	public String getRestaurantsPath() {
 		return restaurantsPath;
@@ -58,8 +65,7 @@ public class RestaurantsDAO {
 	public void setRestaurants(HashMap<String, Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
-	
-	// Ucitavanje korisnika iza fajla korisnici.txt
+	 
 	@SuppressWarnings("unchecked")
 	private void loadRestaurants(String contextPath) {
 		FileWriter fileWriter = null;
@@ -143,7 +149,7 @@ public class RestaurantsDAO {
 			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(), null,
 					"savoca1");
 			
-			Restaurant delieveryGuy = new Restaurant("Giros master", "Greece", false, new Location(), null,
+			Restaurant delieveryGuy = new Restaurant("Giros master", "Greek", false, new Location(), null,
 					"girosmaster1");
 			
 			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(), null,

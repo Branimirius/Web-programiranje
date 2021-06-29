@@ -18,9 +18,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import beans.Restoran;
 import dao.RestaurantsDAO;
-import data.RestoraniDAO;
 import model.Restaurant;
 
 @Path("/restaurant")
@@ -41,16 +39,16 @@ public class RestaurantsService {
 	@Path("/restaurants")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Restaurant> getRestaurants() {
-		RestaurantsDAO restoraniDao = (RestaurantsDAO) context.getAttribute("restaurants");
-		return restoraniDao.getRestoraniKolekcija();
+		RestaurantsDAO restaurantsDao = (RestaurantsDAO) context.getAttribute("restaurants");
+		return restaurantsDao.getRestaurantsCollection();
 	}
 
 	@PostConstruct
 	public void init() {
 		if (context.getAttribute("restaurants") == null) {
 			String contextPath = context.getRealPath("");
-			RestaurantsDAO restoraniDao = new RestaurantsDAO(contextPath);
-			context.setAttribute("restaurants", restoraniDao);
+			RestaurantsDAO restaurantsDao = new RestaurantsDAO(contextPath);
+			context.setAttribute("restaurants", restaurantsDao);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     showChosenRestaurantOption();
-    showMostBoughtItems();
+    
 
 });
 
@@ -45,8 +45,7 @@ function showSerbianRestaurants() {
     $('#serbia-restaurant').click(function(e) {
 		
         e.preventDefault();
-        
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=serbia';
+        window.location = 'http://localhost:3665/NBWebProject/restaurants.html?type=serbia';
 	});
 }
 //klik na prikaz restorana italijanske kuhinje
@@ -55,7 +54,7 @@ function showItalianRestaurants() {
 		
         e.preventDefault();
         
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=italy';
+        window.location = 'http://localhost:3665/NBWebProject/restaurants.html?type=italy';
 	});
 }
 //klik na prikaz restorana grcke kuhinje
@@ -73,7 +72,7 @@ function showChineseRestaurants() {
 		
         e.preventDefault();
         
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=chinese';
+        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=china';
 	});
 }
 //klik na prikaz restorana francuske kuhinje
@@ -82,7 +81,7 @@ function showFrenchRestaurants() {
 		
         e.preventDefault();
         
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=serbian';
+        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=france';
 	});
 }
 // klik na prikaz restorana meksicke kuhinje
@@ -91,6 +90,6 @@ function showMexicanRestaurants() {
 		
         e.preventDefault();
         
-        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=mexican';
+        window.location.href='http://localhost:3665/NBWebProject/restaurants.html?type=mexico';
 	});
 }
