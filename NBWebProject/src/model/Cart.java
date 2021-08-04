@@ -18,7 +18,9 @@ public class Cart {
 		this.price = price;
 		this.id = id;
 	}
-
+	
+	public Cart() {}
+	
 	public HashMap<Integer, Integer> getArticles() {
 		return articles;
 	}

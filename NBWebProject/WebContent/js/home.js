@@ -45,7 +45,7 @@ function showSerbianRestaurants() {
     $('#serbia-restaurant').click(function(e) {
 		
         e.preventDefault();
-        window.location = 'http://localhost:3665/NBWebProject/restaurants.html?type=serbia';
+        window.location.href = 'http://localhost:3665/NBWebProject/restaurants.html?type=serbia';
 	});
 }
 //klik na prikaz restorana italijanske kuhinje

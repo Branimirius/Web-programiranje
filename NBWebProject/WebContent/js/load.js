@@ -25,7 +25,7 @@ function checkLoginStatus() {
 			$('#profilePanel').show();
 			$('#logout').show();
 			
-			if (user.uloga == "kupac") {
+			if (user.role == "customer") {
 				$('#cartPanel').show();
 			}
 		}

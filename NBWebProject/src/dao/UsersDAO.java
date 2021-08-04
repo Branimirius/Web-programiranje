@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -14,7 +15,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-
 
 import model.CustomerType;
 import model.User;
@@ -56,6 +56,22 @@ public class UsersDAO {
 
 	public void setUsersPath(String usersPath) {
 		this.usersPath = usersPath;
+	}
+	
+	public User searchUser(String username) {
+		if (getUsers() != null) {
+			for (User k : getUsers().values()) {
+				if (k.getUsername().equals(username)) {
+					return k;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void addUser(User k) {
+		getUsers().put(k.getUsername(), k);
+		saveUsers();
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
@@ -153,6 +169,13 @@ public class UsersDAO {
 		users.put(customer.getUsername(), customer);
 		users.put(delieveryGuy.getUsername(), delieveryGuy);
 		users.put(manager.getUsername(), manager);
+	}
+	public Collection<User> getUsersCollection() {
+		if (!users.isEmpty()) {
+			return users.values();
+		}
+
+		return null;
 	}
 
 }
