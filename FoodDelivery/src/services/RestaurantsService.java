@@ -36,7 +36,7 @@ public class RestaurantsService {
 
 	
 	@GET
-	@Path("/restaurants")
+	@Path("/getRestaurants")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Restaurant> getRestaurants() {
 		System.out.println("a tuj si");
