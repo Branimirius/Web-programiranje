@@ -1,0 +1,58 @@
+{
+  "zorinakrcma1" : {
+    "name" : "Zorina krcma",
+    "type" : "Serbian",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logo" : null,
+    "id" : "zorinakrcma1",
+    "status" : true
+  },
+  "savoca1" : {
+    "name" : "Savoca",
+    "type" : "Italian",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logo" : null,
+    "id" : "savoca1",
+    "status" : true
+  },
+  "crepes1" : {
+    "name" : "Crepes",
+    "type" : "French",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logo" : null,
+    "id" : "crepes1",
+    "status" : true
+  },
+  "girosmaster1" : {
+    "name" : "Giros master",
+    "type" : "Greek",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logo" : null,
+    "id" : "girosmaster1",
+    "status" : false
+  }
+}
