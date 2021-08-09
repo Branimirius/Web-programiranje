@@ -1,0 +1,62 @@
+{
+  "zorinakrcma1" : {
+    "name" : "Zlatiborska Komplet Lepinja",
+    "type" : "Serbian",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logoPath" : "pictures/zorinaKrcma.png",
+    "id" : "zorinakrcma1",
+    "title" : "Komplet Lepinja & kiselo mleko",
+    "status" : true
+  },
+  "savoca1" : {
+    "name" : "Savoca",
+    "type" : "Italian",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logoPath" : "pictures/savocaLogo.png",
+    "id" : "savoca1",
+    "title" : "Pizza",
+    "status" : true
+  },
+  "crepes1" : {
+    "name" : "Crepes",
+    "type" : "French",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logoPath" : "pictures/crepesLogo.png",
+    "id" : "crepes1",
+    "title" : "Francuske palacinke",
+    "status" : true
+  },
+  "girosmaster1" : {
+    "name" : "Gyros master",
+    "type" : "Greek",
+    "articles" : [ ],
+    "location" : {
+      "geoLength" : 0.0,
+      "geoWidth" : 0.0,
+      "adress" : null,
+      "zipCode" : null
+    },
+    "logoPath" : "pictures/gyrosMaster.png",
+    "id" : "girosmaster1",
+    "title" : "Giros",
+    "status" : false
+  }
+}

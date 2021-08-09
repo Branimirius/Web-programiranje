@@ -1,8 +1,13 @@
 package model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Restaurant {
 	private String name;
@@ -10,21 +15,35 @@ public class Restaurant {
 	private ArrayList<Integer> articles;
 	private Boolean working;
 	private Location location;
-	private Image logo;
+	//private Image logo;
+	private String logoPath;
 	private String id;
+	private String title;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
-	public Restaurant(String name, String type, Boolean status, Location location, Image logo,
-			String id) {
+	public Restaurant(String name, String type, Boolean status, Location location, String logoPath,
+			String id, String title) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.articles = new ArrayList<Integer>();
 		this.working = status;
 		this.location = location;
-		this.logo = logo;
+		//this.logo = logo;
+		this.logoPath = logoPath;
 		this.id = id;
+		this.title = title;
+		/*constructing Logo:
+		InputStream imgStream = getClass().getResourceAsStream(logoPath);
+		try {
+			BufferedImage img = ImageIO.read(imgStream);
+			this.logo = img;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 
 	public String getName() {
@@ -67,16 +86,23 @@ public class Restaurant {
 		this.location = location;
 	}
 
-	public Image getLogo() {
-		return logo;
+	public String getLogoPath() {
+		return logoPath;
 	}
 
-	public void setLogo(Image logo) {
-		this.logo = logo;
+	public void setLogoPath(String logoPath) {
+		this.logoPath = logoPath;
 	}
 
 	public String getId() {
 		return id;
+	}
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	

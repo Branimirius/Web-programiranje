@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>NB WEB PROJECT</title>
     
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -52,32 +53,42 @@
 			</div>
 		</ul>
 	</div>
-	<div id="webShop" >
-		<table class = "center">
-		<caption>{{ title }}</caption>
-			<tr bgcolor="lightgrey">
-				<th>Naziv</th>
-				<th>Tip</th>
-				
-			</tr>
-			
-			<tr v-for="s in restaurants">
-				<td>{{s.name }}</td>
-				<td>{{s.type }}</td>
-				
-			</tr>
-		</table>
-	</div>
+	
+	
+	 
+	<div  id="webShop" class = "restaurants"> 
+		  <!-- PRE RUTERA       
+          <div v-for="s in restaurants">            
+             <div class="card-content" >
+                <img class="card-img-top" v-bind:src="'pictures/' + s.type + '.png'"
+                    alt="Card image cap" style="width: 5rem; z-index: 500;" >
+                <img class="card-img-top" v-bind:src="s.logoPath"
+                    alt="Card image cap" style="width: 20rem; height: 10rem; opacity: 1; float: right;" >
+	                                        
+                <div >
+	                  <div class="card-body" >
+	                    <a href="#" >
+	                        <h5 class="card-title">{{ s.name }}</h5>
+	                    </a>
+	                    <p class="card-text"> {{ s.title }} </p>
+	                    <button id="serbia-restaurant" class="btn btn-primary">Saznaj više...</button>	                    
+	                  </div>	                  
+	            </div>
+             </div>                                       
+          </div> 
+          -->  
+          <router-view></router-view>  
+    </div>
+    
 
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="js/jquery.min.js"></script>
-	<script src="js/toast.js"></script>
+	<script src="js/toast.js"></script>	
 	<script src="app/webShop.js"></script>
-	<script src="app/shoppingCart.js"></script>
+	<script src="app/learnMore.js"></script>
 	<script src="app/app.js"></script>
-		
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+		   
 </body>
 </html>

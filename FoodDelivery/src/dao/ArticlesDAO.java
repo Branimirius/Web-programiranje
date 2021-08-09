@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -19,24 +20,25 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import model.Article;
 import model.CustomerType;
+import model.Restaurant;
 import model.User;
 
 
 public class ArticlesDAO {
 
 	private HashMap<Integer, Article> articles;
-	private String articlesPath = "";
-
-	public ArticlesDAO() {
-		
-	}
+	private String articlesPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
 	
-	public ArticlesDAO(String articlesPath) {
+
+	
+	
+	public ArticlesDAO() {
 
 		this.setArticles(new HashMap<Integer, Article>());
-		this.setArticlesPath(articlesPath);
-		
-		loadArticles(articlesPath);
+		//this.setArticlesPath(this.articlesPath);
+		this.loadTestData();
+		this.saveArticles();
+		//loadArticles(articlesPath);
 	}
 
 	public HashMap<Integer, Article> getArticles() {
@@ -46,6 +48,12 @@ public class ArticlesDAO {
 		else {
 			return null;
 		}
+	}
+	public Collection<Article> getArticlesCollection() {
+		if (!articles.isEmpty()) {
+			return articles.values();
+		}
+		return null;
 	}
 
 	public String getArticlesPath() {
@@ -134,6 +142,7 @@ public class ArticlesDAO {
 				}
 			}
 		}
+		System.out.println("saved test data (articles)");
 	}
 	private void loadTestData() {
 		//(String name, double price, String type, String restaurant, double amount, String description,

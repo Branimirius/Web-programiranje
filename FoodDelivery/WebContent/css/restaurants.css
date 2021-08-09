@@ -104,3 +104,20 @@ table.center {
     background: rgba(0,0,0,0.8);
     margin:450px;
   }
+div.restaurants{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-20%, -20%);	
+	padding: 10px;
+}
+.card-content{
+	background: #d3d3d3d3;
+	width: 30rem;
+	opacity: 0.9; 
+	content-align: left;
+}
+    
+  
+}
+

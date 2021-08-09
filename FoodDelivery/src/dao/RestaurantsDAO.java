@@ -7,8 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
+
+import javax.swing.ImageIcon;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -25,18 +29,14 @@ import model.Restaurant;
 
 public class RestaurantsDAO {
 	private HashMap<String, Restaurant> restaurants;
-	private String restaurantsPath = "";
-
-	public RestaurantsDAO() {
-		this.loadTestData();
-		this.saveRestaurants();
-		this.restaurantsPath = "";
-	}
+	private String restaurantsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
 	
-	public RestaurantsDAO(String restaurantsPath) {
-
+	
+	
+	public RestaurantsDAO() {
+		
 		this.setRestaurants(new HashMap<String, Restaurant>());
-		this.setRestaurantsPath(restaurantsPath);
+		//this.setRestaurantsPath(restaurantsPath);
 		this.loadTestData();
 		this.saveRestaurants();
 		//loadRestaurants(restaurantsPath);
@@ -142,22 +142,23 @@ public class RestaurantsDAO {
 				}
 			}
 		}
-		System.out.println("saved test data");
+		System.out.println("saved test data (restaurants)");
+		
 	}
 	public void loadTestData() {
 		//(String name, String type, String status, Location location, Image logo,
 		//String id) {
-			Restaurant admin = new Restaurant("Zorina krcma", "Serbian", true, new Location(), null,
-					"zorinakrcma1");
+			Restaurant admin = new Restaurant("Zlatiborska Komplet Lepinja", "Serbian", true, new Location(), "pictures/zorinaKrcma.png",
+					"zorinakrcma1", "Komplet Lepinja & kiselo mleko");
 
-			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(), null,
-					"savoca1");
+			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(), "pictures/savocaLogo.png",
+					"savoca1", "Pizza");
 			
-			Restaurant delieveryGuy = new Restaurant("Giros master", "Greek", false, new Location(), null,
-					"girosmaster1");
+			Restaurant delieveryGuy = new Restaurant("Gyros master", "Greek", false, new Location(), "pictures/gyrosMaster.png",
+					"girosmaster1", "Giros");
 			
-			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(), null,
-					"crepes1");
+			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(), "pictures/crepesLogo.png",
+					"crepes1", "Francuske palacinke");
 
 			restaurants.put(admin.getId(), admin);
 			restaurants.put(customer.getId(), customer);

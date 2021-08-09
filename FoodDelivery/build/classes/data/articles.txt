@@ -1,0 +1,42 @@
+{
+  "1" : {
+    "name" : "Komplet lepinja",
+    "price" : 250.0,
+    "type" : "hrana",
+    "restaurant" : "zorinakrcma1",
+    "amount" : 400.0,
+    "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+    "picture" : null,
+    "id" : 1
+  },
+  "2" : {
+    "name" : "Margarita",
+    "price" : 1200.0,
+    "type" : "hrana",
+    "restaurant" : "savoca1",
+    "amount" : 1500.0,
+    "description" : "Pica sa sirevima i paradajz sosom",
+    "picture" : null,
+    "id" : 2
+  },
+  "3" : {
+    "name" : "Giros mali",
+    "price" : 250.0,
+    "type" : "hrana",
+    "restaurant" : "girosmaster1",
+    "amount" : 200.0,
+    "description" : "Mali giros mesano meso",
+    "picture" : null,
+    "id" : 3
+  },
+  "4" : {
+    "name" : "Francuski sendvic",
+    "price" : 330.0,
+    "type" : "hrana",
+    "restaurant" : "crepes1",
+    "amount" : 250.0,
+    "description" : "Sendvic sa jajetom kackavaljem i sunkom",
+    "picture" : null,
+    "id" : 4
+  }
+}
