@@ -1,6 +1,6 @@
 {
   "zorinakrcma1" : {
-    "name" : "Zorina krcma",
+    "name" : "Zlatiborska Komplet Lepinja",
     "type" : "Serbian",
     "articles" : [ ],
     "location" : {
@@ -9,8 +9,9 @@
       "adress" : null,
       "zipCode" : null
     },
-    "logo" : null,
+    "logoPath" : "pictures/zorinaKrcma.png",
     "id" : "zorinakrcma1",
+    "title" : "Komplet Lepinja & kiselo mleko",
     "status" : true
   },
   "savoca1" : {
@@ -23,8 +24,9 @@
       "adress" : null,
       "zipCode" : null
     },
-    "logo" : null,
+    "logoPath" : "pictures/savocaLogo.png",
     "id" : "savoca1",
+    "title" : "Pizza",
     "status" : true
   },
   "crepes1" : {
@@ -37,12 +39,13 @@
       "adress" : null,
       "zipCode" : null
     },
-    "logo" : null,
+    "logoPath" : "pictures/crepesLogo.png",
     "id" : "crepes1",
+    "title" : "Francuske palacinke",
     "status" : true
   },
   "girosmaster1" : {
-    "name" : "Giros master",
+    "name" : "Gyros master",
     "type" : "Greek",
     "articles" : [ ],
     "location" : {
@@ -51,8 +54,9 @@
       "adress" : null,
       "zipCode" : null
     },
-    "logo" : null,
+    "logoPath" : "pictures/gyrosMaster.png",
     "id" : "girosmaster1",
+    "title" : "Giros",
     "status" : false
   }
 }
