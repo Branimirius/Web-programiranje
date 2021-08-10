@@ -1,8 +1,12 @@
 Vue.component("log-in", {	
 	data: function () {
 		    return {
-		      articles: null,
-		      
+		    	logged : null,
+		    	error:'',
+		    	username: '',		    			    	
+			    password:'',
+				errorMessage:'',
+				
 		    }
 	},
 		
@@ -25,21 +29,21 @@ Vue.component("log-in", {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" method="post" role="form" style="display: block;">
-									<div class="form-group">
-										<input type="text" name="username-log" id="username-log" tabindex="1" class="form-control" placeholder="Username" value="" required>
-									</div>
-									<div class="form-group">
-										<input type="password" name="password-log" id="password-log" tabindex="2" class="form-control" placeholder="Password" required>
-									</div>
-									<div class="form-group" >
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-											</div>
+								<div class="form-group">
+									<input type="text" name="username" tabindex="1" class="form-control" v-on:change="signalChange" v-model="username" placeholder="Username" value="" required>
+								</div>
+								<div class="form-group">
+									<input type="password" name="password" tabindex="2" class="form-control" v-on:change="signalChange" v-model="password" placeholder="Password" required>
+								</div>
+								<div class="form-group" >
+									<div class="row">
+										<div class="col-sm-6 col-sm-offset-3">
+											<p style="color:red;text-transform:none;">{{errorMessage}}</p>
+											<button class="submit-login" v-on:click="tryToLogin"> Prijavi se </button>
 										</div>
 									</div>
-								</form>
+								</div>
+								
 								
 							</div>
 						</div>
@@ -51,11 +55,93 @@ Vue.component("log-in", {
 `
 	, 
 	methods : {
-//		addToCart : function (product) {
-//			axios
-//			.post('rest/proizvodi/add', {"id":''+product.id, "count":parseInt(product.count)})
-//			.then(response => (toast('Product ' + product.name + " added to the Shopping Cart")))
-//		}
-	}
-	
+		tryToLogin : function() {
+			toast(" uslo je ovde ");
+			if(this.username=='' || this.password=='')
+			{
+				this.errorMessage="Morate popuniti sva polja.";
+			}
+			else
+			{
+
+				let loginParameters = {
+    				username : this.username,
+    				password : this.password
+    		};
+    		
+    		axios 
+    			.post('rest/user/login', JSON.stringify(loginParameters),{
+    		        headers: {
+    		            'Content-Type': 'application/json',
+    		        }
+    		    })
+    			.then(response => {
+    				if (response.data == "Pogresan password!") {
+						this.errorMessage="Neispravno korisničko ime ili lozinka.";
+					} 
+					else if (response.data == "Logovanje nije uspesno!") {
+						this.errorMessage="Ne znam sto.";
+					} 
+					
+					else {
+						window.location.href = "http://localhost:3665/FoodDelivery";
+    				}
+				})
+			}
+			
+    		
+    		
+    	}, 
+    	registerUser : function() {
+			let flag=true;
+			
+			if(this.nameRegister=="" ||this.surnameRegister=="" ||this.usernameRegister=="" ||this.passwordRegister=="" || this.genderRegister=="")
+			{
+				registrationError="Morate popuniti sva polja u formi.";
+				flag=false;
+			}
+			else if(this.passwordRegister!=this.passwordRepeat)
+			{
+				registrationError="Lozinke se ne slažu.";
+				flag=false;
+			}
+			if(flag)
+			{
+				let genderReg;
+				if (this.genderRegister == 'Musko') {
+					genderReg = 'Male';
+				} else if(this.genderRegister == 'Zensko'){
+					genderReg = 'Female';
+				} else {
+					genderReg = 'Other';
+				}
+				this.roleRegister = "Guest";
+				let registrationParameters = {
+    				name : this.nameRegister,
+    				surname : this.surnameRegister,
+    				username : this.usernameRegister,
+    				password : this.passwordRegister,
+    				role : this.roleRegister,
+    				gender : genderReg
+    		};
+
+    		axios 
+    			.post('/user/register', JSON.stringify(registrationParameters))
+    			.then(response => {
+    				if (response.data == null) {
+    					window.location.href = "#/login";
+    				} else {
+						window.location.href = "http://localhost:8088";
+    				}
+    			})
+			}
+    		
+		},
+		signalChange : function()
+		{
+			this.errorMessage="";
+		}
+		
+		
+    }
 });

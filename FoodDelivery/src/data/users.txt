@@ -1,0 +1,62 @@
+{
+  "Mike" : {
+    "username" : "Mike",
+    "password" : "1234",
+    "name" : "Mike",
+    "surname" : "Ehrmantraut",
+    "gender" : "M",
+    "dateOfBirth" : "3/3/1946",
+    "role" : "admin",
+    "orderList" : null,
+    "cart" : null,
+    "type" : null,
+    "demandList" : null,
+    "restaurant" : null
+  },
+  "Gus" : {
+    "username" : "Gus",
+    "password" : "1234",
+    "name" : "Gustavo",
+    "surname" : "Fring",
+    "gender" : "M",
+    "dateOfBirth" : "3/3/1966",
+    "role" : "delieveryGuy",
+    "orderList" : null,
+    "cart" : null,
+    "type" : null,
+    "demandList" : [ ],
+    "restaurant" : null
+  },
+  "Jesse" : {
+    "username" : "Jesse",
+    "password" : "1234",
+    "name" : "Jesse",
+    "surname" : "Pinkman",
+    "gender" : "M",
+    "dateOfBirth" : "3/3/1988",
+    "role" : "customer",
+    "orderList" : [ ],
+    "cart" : 0,
+    "type" : {
+      "name" : "gold",
+      "discount" : 10.0,
+      "requiredPoints" : 1500.0
+    },
+    "demandList" : null,
+    "restaurant" : null
+  },
+  "Heisenberg" : {
+    "username" : "Heisenberg",
+    "password" : "1234",
+    "name" : "Walter",
+    "surname" : "White",
+    "gender" : "M",
+    "dateOfBirth" : "3/3/1955",
+    "role" : "manager",
+    "orderList" : null,
+    "cart" : null,
+    "type" : null,
+    "demandList" : null,
+    "restaurant" : null
+  }
+}

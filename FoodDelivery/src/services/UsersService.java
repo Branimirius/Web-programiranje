@@ -22,6 +22,8 @@ import javax.ws.rs.core.Response;
 
 import model.Cart;
 import model.User;
+import model.UserToLog;
+import dao.UsersDAO;
 import dao.UsersDAO;
 
 
@@ -106,8 +108,8 @@ public class UsersService {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login(User userToLogIn) {
-
+	public Response login(UserToLog userToLogIn) {
+		System.out.println("Backend for log in is established.");
 		HttpSession session = request.getSession();
 
 		if (userToLogIn.getUsername() == null || userToLogIn.getPassword() == null
@@ -116,7 +118,7 @@ public class UsersService {
 
 		}
 		
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 
 		if (usersDao.searchUser(userToLogIn.getUsername()) != null) {
 
@@ -139,24 +141,16 @@ public class UsersService {
 	}
 
 	
-	@PostConstruct
-	public void init() {
-		
-		if (context.getAttribute("users") == null) {
-			String contextPath = context.getRealPath("");
-			UsersDAO usersDao = new UsersDAO(contextPath);
-			context.setAttribute("users", usersDao);
-		}
-		
-		HttpSession session = request.getSession();
-		if (session.getAttribute("cart") == null) {
-			Cart cart = new Cart();
-			session.setAttribute("cart", cart);
-		}
-		if (session.getAttribute("cartadmin") == null) {
-			Cart cart = new Cart();
-			session.setAttribute("cartadmin", cart);
-		}
+	
+	private UsersDAO getUsersDAO() {
+		System.out.println("making users dao");
+		UsersDAO users = (UsersDAO) context.getAttribute("users");
+		if (users == null) {
+			users = new UsersDAO();
+			
+			context.setAttribute("users", users);
+		} 
+		return users;
 	}
 
 }

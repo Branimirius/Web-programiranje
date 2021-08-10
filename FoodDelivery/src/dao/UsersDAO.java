@@ -23,18 +23,16 @@ import model.User;
 public class UsersDAO {
 
 	private HashMap<String, User> users;
-	private String usersPath = "";
-
-	public UsersDAO() {
-		
-	}
+	private String usersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
 	
-	public UsersDAO(String usersPath) {
+	
+	
+	public UsersDAO() {
 
 		this.setUsers(new HashMap<String, User>());
-		this.setUsersPath(usersPath);
-		
-		loadUsers(usersPath);
+		this.loadTestData();
+		this.saveUsers();
+		//loadUsers(usersPath);
 	}
 
 	public HashMap<String, User> getUsers() {
@@ -148,6 +146,7 @@ public class UsersDAO {
 				}
 			}
 		}
+		System.out.println("Saved users");
 	}
 	
 	// Ucitavanje test podataka korisnika
@@ -169,6 +168,8 @@ public class UsersDAO {
 		users.put(customer.getUsername(), customer);
 		users.put(delieveryGuy.getUsername(), delieveryGuy);
 		users.put(manager.getUsername(), manager);
+		
+		System.out.println("loaded user test data");
 	}
 	public Collection<User> getUsersCollection() {
 		if (!users.isEmpty()) {
