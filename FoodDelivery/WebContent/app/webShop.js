@@ -10,7 +10,7 @@ Vue.component("web-shop", {
 			 <div v-for="s in restaurants">            
 	             <div class="card-content" >
 	                <img class="card-img-top" v-bind:src="'pictures/' + s.type + '.png'"
-	                    alt="Card image cap" style="float: right; width: 5rem; z-index: 500;" >
+	                    alt="Card image cap" style="width: 5rem; z-index: 500;" >
 	                <img class="card-img-top" v-bind:src="s.logoPath"
 	                    alt="Card image cap" style="width: 20rem; height: 10rem; opacity: 1; float: right;" >
 		                                        

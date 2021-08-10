@@ -1,17 +1,17 @@
-const ArticlesShow = { template: '<articles-show></articles-show>' }
-//const LogIn = { template: '<log-in></log-in>' }
+const LogIn = { template: '<log-in></log-in>' }
+const Register = { template: '<register-show></register-show>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
-	    { path: '/', component: ArticlesShow}
-	    //{ path: '/log-in', component: LogIn}
+	    { path: '/', component: LogIn },
+	    { path: '/register', component: Register}
 	  ]
 });
 
 var app = new Vue({ 
 	router,
-    el: '#articlesShow'
+    el: '#loginRegister'
     /*
     data: {
         restaurants: null,
