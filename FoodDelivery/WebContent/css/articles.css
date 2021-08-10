@@ -1,0 +1,37 @@
+* {margin: 0; padding: 0;}
+ 
+
+ 
+ul.articles {
+  background: #d3d3d3d3;
+  list-style-type: none;
+  width: 500px;
+  
+}
+ 
+h3.articles {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+ 
+li img.articles {
+  float: right;
+  
+}
+ 
+li p.articles {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+ 
+li.articles {
+  background: #d3d3d3d3;
+  padding: 10px;  
+}
+ 
+li.articles:hover {
+  background: #eee;
+  cursor: pointer;
+}
+tbody.articles {
+	overflow: scroll;
+}
+

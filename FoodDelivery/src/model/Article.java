@@ -9,13 +9,13 @@ public class Article {
 	private String restaurant;
 	private double amount;
 	private String description;
-	private Image picture;
+	private String picturePath;
 	private Integer id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
 	public Article(String name, double price, String type, String restaurant, double amount, String description,
-			Image picture, Integer id) {
+			String picture, Integer id) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -23,7 +23,7 @@ public class Article {
 		this.restaurant = restaurant;
 		this.amount = amount;
 		this.description = description;
-		this.picture = picture;
+		this.picturePath = picture;
 		this.id = id;
 	}
 
@@ -75,12 +75,12 @@ public class Article {
 		this.description = description;
 	}
 
-	public Image getPicture() {
-		return picture;
+	public String getPicture() {
+		return picturePath;
 	}
 
-	public void setPicture(Image picture) {
-		this.picture = picture;
+	public void setPicture(String picture) {
+		this.picturePath = picture;
 	}
 
 	public Integer getId() {

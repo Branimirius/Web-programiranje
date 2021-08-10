@@ -106,3 +106,18 @@ section.sec1 {
     font-size: 20px;
     line-height: 30px;
 }
+div.articles{
+	height: 70%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-20%, -20%);	
+	padding: 10px;
+	overflow: scroll;
+}
+div.orange-title{
+	font-size: 20px;
+	background: #E2472F;
+	color: #fff;
+	opacity: 0.9;
+}

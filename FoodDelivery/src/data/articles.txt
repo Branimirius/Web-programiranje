@@ -6,8 +6,8 @@
     "restaurant" : "zorinakrcma1",
     "amount" : 400.0,
     "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
-    "picture" : null,
-    "id" : 1
+    "id" : 1,
+    "picture" : "pictures/kompletLepinja.jpg"
   },
   "2" : {
     "name" : "Margarita",
@@ -16,8 +16,8 @@
     "restaurant" : "savoca1",
     "amount" : 1500.0,
     "description" : "Pica sa sirevima i paradajz sosom",
-    "picture" : null,
-    "id" : 2
+    "id" : 2,
+    "picture" : "pictures/margarita.jpg"
   },
   "3" : {
     "name" : "Giros mali",
@@ -26,8 +26,8 @@
     "restaurant" : "girosmaster1",
     "amount" : 200.0,
     "description" : "Mali giros mesano meso",
-    "picture" : null,
-    "id" : 3
+    "id" : 3,
+    "picture" : "pictures/giros.jpg"
   },
   "4" : {
     "name" : "Francuski sendvic",
@@ -36,7 +36,7 @@
     "restaurant" : "crepes1",
     "amount" : 250.0,
     "description" : "Sendvic sa jajetom kackavaljem i sunkom",
-    "picture" : null,
-    "id" : 4
+    "id" : 4,
+    "picture" : "pictures/francuskiSendvic.jpg"
   }
 }

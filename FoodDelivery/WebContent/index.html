@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/homepage.css">
     <link rel="stylesheet" type="text/css" href="css/restaurants.css">
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css">
+	<link rel="stylesheet" type="text/css" href="css/articles.css">
     
   	
     
@@ -30,8 +31,8 @@
                     <li><a id="pretragaPanel" href="pretraga.html">Pretraga</a></li>
                     <li><a id="korpaPanel" href="korpa.html">Korpa</a></li>
                     <li><a id="profilPanel" href="profil.html">Profil</a></li>
-                    <li><a class="active" id="login" href="login.html">Log In</a></li>
-                    <li><a class="active" id="logout" href="#">Log Out</a></li>
+                    <li ><a style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
+                    <li><a style="background : #E2472F;" class="active" id="logout" href="#">Log Out</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,18 +40,19 @@
 			<div id="sidebar-wrapper">
 				<ul class="sidebar-nav">
 					<div id="kategorije-restorana">
-						<li><a href="#" id="pice-prikaz">Srpsko</a></li>
-						<li><a href="#" id="rostilj-prikaz-restorana">Italijansko</a></li>
-						<li><a href="#" id="kineska-hrana-prikaz-restorana">Grcko</a></li>
-						<li><a href="#" id="indijska-hrana-prikaz-restorana">Francusko</a></li>
-						<li><a href="#" id="poslasticarnica-prikaz-restorana">Meksicko</a></li>
-						<li><a href="#" id="picerija-prikaz-restorana">Kinesko</a></li>
+						<li class="sidebar"><a href="#" id="pice-prikaz">Srpsko</a></li>
+						<li class="sidebar"><a href="#" id="rostilj-prikaz-restorana">Italijansko</a></li>
+						<li class="sidebar"><a href="#" id="kineska-hrana-prikaz-restorana">Grcko</a></li>
+						<li class="sidebar"><a href="#" id="indijska-hrana-prikaz-restorana">Francusko</a></li>
+						<li class="sidebar"><a href="#" id="poslasticarnica-prikaz-restorana">Meksicko</a></li>
+						<li class="sidebar"><a href="#" id="picerija-prikaz-restorana">Kinesko</a></li>
 					</div>
 				</ul>
 			</div>
         <section class="sec1"></section>
-        
-        <div id="all-articles">
+          
+        <div id="articlesShow" class="articles">
+        		<!--
 				<div class="col-lg-8 col-lg-offset-2">
 					<h3 id="restaurant-menu-title"></h3>
 				</div>
@@ -68,8 +70,12 @@
 					<tbody id="artikli-tbody-id">
 					</tbody>
 				</table>
+				--> 
+				<div class = "orange-title">Izdvajamo iz ponude:</div>
+				<router-view></router-view>  
 			</div>
-            
+         
+       	  
         <section class="content">
           <div class="container">
             <div class="row">
@@ -88,7 +94,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/italy.jpg"
+                  <img class="card-img-top" src="pictures/Italian.png"
                     alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <h5 class="card-title">Italijansko</h5>
@@ -99,7 +105,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/greece.jpg"
+                  <img class="card-img-top" src="pictures/Greek.png"
                     alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <h5 class="card-title">Grcko</h5>
@@ -116,7 +122,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/france.png"
+                  <img class="card-img-top" src="pictures/French.png"
                     alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <a href="#" >
@@ -129,7 +135,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/mexico.jpg"
+                  <img class="card-img-top" src="pictures/Mexican.png"
                     alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <h5 class="card-title">Meksicko</h5>
@@ -140,7 +146,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="card text-center" style="width: 18rem;">
-                  <img class="card-img-top" src="pictures/china.png"
+                  <img class="card-img-top" src="pictures/Chinese.png"
                     alt="Card image cap" style="width: 5rem; ">
                   <div class="card-body">
                     <h5 class="card-title">Kinesko</h5>
@@ -154,6 +160,13 @@
       </section>
     </div>
     
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/toast.js"></script>	
+	<script src="app/articlesShow.js"></script>
+	<script src="app/homeVue.js"></script>
 </body>
 </html>

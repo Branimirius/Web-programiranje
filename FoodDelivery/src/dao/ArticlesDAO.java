@@ -148,16 +148,16 @@ public class ArticlesDAO {
 		//(String name, double price, String type, String restaurant, double amount, String description,
 				//Image picture, Integer id) {
 			Article admin = new Article("Komplet lepinja", 250.0, "hrana", "zorinakrcma1", 400.0,
-					"Lepinja sa kajmakom jajima i ovcijim pretopom", null, 1);
+					"Lepinja sa kajmakom jajima i ovcijim pretopom", "pictures/kompletLepinja.jpg", 1);
 	
 			Article customer = new Article("Margarita", 1200.0, "hrana", "savoca1", 1500.0,
-					"Pica sa sirevima i paradajz sosom", null, 2);
+					"Pica sa sirevima i paradajz sosom", "pictures/margarita.jpg", 2);
 			
 			Article delieveryGuy = new Article("Giros mali", 250.0, "hrana", "girosmaster1", 200.0,
-					"Mali giros mesano meso", null, 3);
+					"Mali giros mesano meso", "pictures/giros.jpg", 3);
 			
 			Article manager = new Article("Francuski sendvic", 330, "hrana", "crepes1", 250.0,
-					"Sendvic sa jajetom kackavaljem i sunkom", null, 4);
+					"Sendvic sa jajetom kackavaljem i sunkom", "pictures/francuskiSendvic.jpg", 4);
 	
 			articles.put(admin.getId(), admin);
 			articles.put(customer.getId(), customer);
