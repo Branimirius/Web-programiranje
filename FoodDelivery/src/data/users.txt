@@ -36,7 +36,7 @@
     "dateOfBirth" : "3/3/1988",
     "role" : "customer",
     "orderList" : [ ],
-    "cart" : 0,
+    "cart" : 1,
     "type" : {
       "name" : "gold",
       "discount" : 10.0,

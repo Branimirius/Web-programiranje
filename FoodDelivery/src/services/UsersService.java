@@ -20,9 +20,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import model.Article;
 import model.Cart;
 import model.User;
 import model.UserToLog;
+import dao.CartsDAO;
 import dao.UsersDAO;
 import dao.UsersDAO;
 
@@ -157,18 +159,23 @@ public class UsersService {
 		return u;
 		
 	}
-//	@GET
-//	@Path("/activeCart")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Cart activeCart() {
-//
-//		UsersDAO usersDao = getUsersDAO();
-//		User u = usersDao.getLoggedUser();
-//		Cart cart = 
-//		System.out.println("Ulogovani lik je: " + u.getName());
-//		return u;
-//		
-//	}
+	@GET
+	@Path("/activeCart")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Cart activeCart() {
+
+		Cart cart = getActiveCart();
+		return cart;
+		
+	}
+	@GET
+	@Path("/justArticles")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Article> justArticles() {
+				
+		return getActiveCart().getArticles().values();
+		
+	}	
 
 	
 	
@@ -181,6 +188,27 @@ public class UsersService {
 			context.setAttribute("users", users);
 		} 
 		return users;
+	}
+	private CartsDAO getCartsDAO() {
+		System.out.println("making carts dao");
+		CartsDAO carts = (CartsDAO) context.getAttribute("carts");
+		if (carts == null) {
+			carts = new CartsDAO();
+			
+			context.setAttribute("carts", carts);
+		} 
+		return carts;
+	}
+	
+	public Cart getActiveCart() {
+
+		UsersDAO usersDao = getUsersDAO();
+		CartsDAO cartsDao = getCartsDAO();
+		User u = usersDao.getLoggedUser();
+		Cart cart = cartsDao.getCarts().get(u.getCart());
+		System.out.println("Ulogovani lik je: " + u.getName());
+		return cart;
+		
 	}
 
 }

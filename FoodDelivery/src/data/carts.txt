@@ -1,0 +1,19 @@
+{
+  "1" : {
+    "articles" : {
+      "2" : {
+        "name" : "test",
+        "price" : 250.0,
+        "type" : "test",
+        "restaurant" : "test1",
+        "amount" : 200.0,
+        "description" : "tttesstt",
+        "id" : 3,
+        "picture" : "pictures/giros.jpg"
+      }
+    },
+    "user" : "Jesse",
+    "price" : 0.0,
+    "id" : 1
+  }
+}

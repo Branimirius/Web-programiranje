@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Cart {
-	private HashMap<Integer, Integer> articles; //artikal i njegova kolicina
+	private HashMap<Integer, Article> articles; //artikal i njegova kolicina
 	private String user;
 	private double price;
 	private Integer id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
-	public Cart(HashMap<Integer, Integer> articles, String user, double price, Integer id) {
+	public Cart(HashMap<Integer, Article> articles, String user, double price, Integer id) {
 		super();
 		this.articles = articles;
 		this.user = user;
@@ -21,12 +21,12 @@ public class Cart {
 	
 	public Cart() {}
 	
-	public HashMap<Integer, Integer> getArticles() {
+	public HashMap<Integer, Article> getArticles() {
 		return articles;
 	}
 
-	public void addArticles(Integer article, Integer amount) {
-		this.articles.put(article, amount);
+	public void addArticles(Article article, Integer amount) {
+		this.articles.put(amount, article);
 	}
 
 	public String getUser() {

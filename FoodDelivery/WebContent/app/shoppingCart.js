@@ -3,21 +3,21 @@ Vue.component("shopping-cart", {
 		    return {
 		      user: null,
 		      sc: null,
+		      articles: [],
 		      total: 0
 		    }
 	},
 	template: ` 
 	<tbody class = "articles">
 		<div>
-				Proizvodi u korpi:
+				Proizvodi u korpi {{ sc.user.name }}:
 				<table border="1">
 				<tr bgcolor="lightgrey">
 					<th>Naziv</th><th>Jedinicna cena</th><th>Komada</th><th>Ukupna cena</th></tr>
-					<tr v-for="i in sc">
-					<td> {{i.product.name}}</td>
-					<td> {{i.product.price}}</td>
-					<td> {{i.count}} </td>
-					<td> {{i.total}} </td>
+					<tr v-for="a in articles">
+					<td> {{a.name}}</td>
+					<td> {{a.price}}</td>
+					
 					</tr>
 				</table>
 				<br /> 
@@ -36,6 +36,7 @@ Vue.component("shopping-cart", {
 	methods : {
 		init : function() {
 			this.sc = {};
+			this.articles = [];
 			this.total = 0.0;
 		}, 
 		clearSc : function () {
@@ -48,8 +49,10 @@ Vue.component("shopping-cart", {
 	},
 	mounted () {
         axios
-          .get('rest/user/loggedUser')
-          .then(response => (this.user = response.data));
-        this.sc = this.user.shoppingCart
+          .get('rest/user/activeCart')
+          .then(response => (this.sc = response.data));
+        axios
+        .get('rest/user/justArticles')
+        .then(response => (this.articles = response.data));
     }
 });

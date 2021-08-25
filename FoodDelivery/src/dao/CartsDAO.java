@@ -1,5 +1,6 @@
 package dao;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,79 +18,74 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import model.Article;
+import model.Cart;
 import model.CustomerType;
+import model.Restaurant;
 import model.User;
 
 
-public class UsersDAO {
+public class CartsDAO {
 
-	private HashMap<String, User> users;
-	private String usersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
-	private User loggedUser;
+	private HashMap<Integer, Cart> carts;
+	private String cartsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
+	
+
 	
 	
-	public UsersDAO() {
+	public CartsDAO() {
 
-		this.setUsers(new HashMap<String, User>());
+		this.setCarts(new HashMap<Integer, Cart>());
+		//this.setCartsPath(this.cartsPath);
 		this.loadTestData();
-		this.saveUsers();
-		//loadUsers(usersPath);
+		this.saveCarts();
+		//loadCarts(cartsPath);
 	}
 
-	public HashMap<String, User> getUsers() {
-		if(!users.isEmpty()) {
-			return users;
+	public HashMap<Integer, Cart> getCarts() {
+		if(!carts.isEmpty()) {
+			return carts;
 		}
 		else {
 			return null;
 		}
 	}
-
-	public void setUsers(HashMap<String, User> users) {
-		this.users = users;
-	}
-
-	public String getUsersPath() {
-		return usersPath;
-	}
-
-	public void setUsersPath(String usersPath) {
-		this.usersPath = usersPath;
-	}
-	
-	public User searchUser(String username) {
-		if (getUsers() != null) {
-			for (User k : getUsers().values()) {
-				if (k.getUsername().equals(username)) {
-					return k;
-				}
-			}
+	public Collection<Cart> getCartsCollection() {
+		if (!carts.isEmpty()) {
+			return carts.values();
 		}
 		return null;
 	}
-	
-	public void addUser(User k) {
-		getUsers().put(k.getUsername(), k);
-		saveUsers();
+
+	public String getCartsPath() {
+		return cartsPath;
+	}
+
+	public void setCartsPath(String cartsPath) {
+		this.cartsPath = cartsPath;
+	}
+
+	public void setCarts(HashMap<Integer, Cart> carts) {
+		this.carts = carts;
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadUsers(String contextPath) {
+	private void loadCarts(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/users.txt");
+			file = new File(contextPath + "/data/carts.txt");
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.setVisibilityChecker(
 						VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 			TypeFactory factory = TypeFactory.defaultInstance();
-			MapType type = factory.constructMapType(HashMap.class, String.class, User.class);
+			MapType type = factory.constructMapType(HashMap.class, String.class, Cart.class);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			users = ((HashMap<String, User>) objectMapper.readValue(file, type));
+			carts = ((HashMap<Integer, Cart>) objectMapper.readValue(file, type));
 		} catch (FileNotFoundException fnfe) {
 			try {
 				file.createNewFile();
@@ -96,8 +93,8 @@ public class UsersDAO {
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 				objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-				String stringUsers = objectMapper.writeValueAsString(users);
-				fileWriter.write(stringUsers);
+				String stringCarts = objectMapper.writeValueAsString(carts);
+				fileWriter.write(stringCarts);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -124,16 +121,16 @@ public class UsersDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveUsers() {
-		File f = new File(usersPath + "/data/users.txt");
+	private void saveCarts() {
+		File f = new File(cartsPath + "/data/carts.txt");
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-			String stringUsers = objectMapper.writeValueAsString(users);
-			fileWriter.write(stringUsers);
+			String stringCarts = objectMapper.writeValueAsString(carts);
+			fileWriter.write(stringCarts);
 			fileWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -146,46 +143,21 @@ public class UsersDAO {
 				}
 			}
 		}
-		System.out.println("Saved users");
+		System.out.println("saved test data (carts)");
 	}
-	
-	// Ucitavanje test podataka korisnika
 	private void loadTestData() {
 		
-		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
-				"3/3/1946", "admin", 0, 0, null, null);
-
-		User customer = new User("Jesse", "1234", "Jesse", "Pinkman", "M",
-				"3/3/1988", "customer", 1, 0, new CustomerType("gold"), null);
-		
-		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "delieveryGuy", 0, 0, null, null);
-		
-		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
-				"3/3/1955", "manager", 0, 0, null, null);
-
-		users.put(admin.getUsername(), admin);
-		users.put(customer.getUsername(), customer);
-		users.put(delieveryGuy.getUsername(), delieveryGuy);
-		users.put(manager.getUsername(), manager);
-		
-		System.out.println("loaded user test data");
-	}
-	public Collection<User> getUsersCollection() {
-		if (!users.isEmpty()) {
-			return users.values();
-		}
-
-		return null;
-	}
-
-	public User getLoggedUser() {
-		return loggedUser;
-	}
-
-	public void setLoggedUser(User loggedUser) {
-		this.loggedUser = loggedUser;
-	}
+			HashMap<Integer, Article> articles1 = new HashMap<Integer, Article>();
+			Article a1 = new Article("test", 250.0, "test", "test1", 200.0,
+					"tttesstt", "pictures/giros.jpg", 3);
+			articles1.put(2, a1);
+			Cart c1 = new Cart(articles1, "Jesse", 0.0, 1);
 	
+			
+	
+			carts.put(c1.getId(), c1);
+			
+	}
+
 
 }
