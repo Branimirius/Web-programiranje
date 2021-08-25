@@ -1,6 +1,7 @@
 Vue.component("log-in", {	
 	data: function () {
 		    return {
+		    	loggedUser : null,
 		    	logged : null,
 		    	error:'',
 		    	username: '',		    			    	
@@ -11,7 +12,7 @@ Vue.component("log-in", {
 	},
 		
 	template: ` 
-
+		
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -83,9 +84,9 @@ Vue.component("log-in", {
 						this.errorMessage="Ne znam sto.";
 					} 
 					
-					else {
-						window.location.href = "http://localhost:3665/FoodDelivery";
-    				}
+					else {						
+						window.location.href = "http://localhost:3665/FoodDelivery/home.html";				
+					}
 				})
 			}
 			
@@ -140,7 +141,13 @@ Vue.component("log-in", {
 		signalChange : function()
 		{
 			this.errorMessage="";
-		}
+		},
+//		getLoggedUser : function(){
+//			axios
+//	          .get('rest/user/loggedUser')
+//	          .then(response => (this.loggedUser = response.data));
+//	        
+//		}
 		
 		
     }

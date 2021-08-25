@@ -98,10 +98,15 @@ public class UsersService {
 		User user = (User) session.getAttribute("user");
 
 		if (user != null) {
+			System.out.println("ulogovani lik je: " + user.getName());
 			return user;
+			
 		} else {
+			System.out.println("ulogovani lik je: " + user.getName());
 			return null;
+			
 		}
+		
 	}
 
 	@POST
@@ -127,6 +132,7 @@ public class UsersService {
 			if (user.getPassword().equals(userToLogIn.getPassword()) == true) {
 				session.setAttribute("user", user);
 				session.setAttribute("cart", new Cart());
+				usersDao.setLoggedUser(user);
 				return Response.status(200).build();
 			} else {
 				return Response.status(400).entity("Pogresan password!").build();
@@ -139,6 +145,30 @@ public class UsersService {
 			return Response.status(400).entity("Logovanje nije uspesno!").build();
 		}
 	}
+	
+	@GET
+	@Path("/loggedUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User loggedUser() {
+
+		UsersDAO usersDao = getUsersDAO();
+		User u = usersDao.getLoggedUser();
+		System.out.println("Ulogovani lik je: " + u.getName());
+		return u;
+		
+	}
+//	@GET
+//	@Path("/activeCart")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Cart activeCart() {
+//
+//		UsersDAO usersDao = getUsersDAO();
+//		User u = usersDao.getLoggedUser();
+//		Cart cart = 
+//		System.out.println("Ulogovani lik je: " + u.getName());
+//		return u;
+//		
+//	}
 
 	
 	

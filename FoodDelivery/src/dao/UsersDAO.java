@@ -24,7 +24,7 @@ public class UsersDAO {
 
 	private HashMap<String, User> users;
 	private String usersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
-	
+	private User loggedUser;
 	
 	
 	public UsersDAO() {
@@ -178,5 +178,14 @@ public class UsersDAO {
 
 		return null;
 	}
+
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(User loggedUser) {
+		this.loggedUser = loggedUser;
+	}
+	
 
 }
