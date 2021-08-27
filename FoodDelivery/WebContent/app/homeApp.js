@@ -11,7 +11,48 @@ const router = new VueRouter({
 
 var app = new Vue({ 
 	router,
-    el: '#homeApp'
+    el: '#homeApp',
+    data: {
+        mode : 'plsWork',
+        user : {
+        username : "xxxxxxxxxxxxx"
+        }
+    },
+    mounted() {
+    	axios
+	    	.get('/user/loggedUser')
+	    	.then(response => {
+	    		if (response.data == null) {
+	    			this.mode = 'notLogged';
+	    		} else 
+	    		{
+	    			if (response.data.role == "customer") {
+	    				this.mode = 'customer';
+	    			} else if (response.data.role == "deliveryGuy") {
+		    			this.mode = 'deliveryGuy';
+		    		} else if (response.data.role == "manager") {
+		    			this.mode = 'manager';
+		    		} else {
+		    			this.mode = 'notLogged';
+		    		}
+	    			this.user = response.data;
+	    		}
+	    	})
+	    	
+	    	
+    },
+    methods : {
+    	logOut : function() {
+    		axios 
+    			.get('/user/logout')
+    			.then(response => {
+    				this.mode = 'notLogged';
+    				console.log(this.mode);
+    				window.location.href = "login.html";
+    			})
+    		
+    	}
+    }
     /*
     data: {
         restaurants: null,

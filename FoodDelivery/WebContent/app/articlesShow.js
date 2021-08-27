@@ -14,6 +14,7 @@ Vue.component("articles-show", {
 		      <h3> {{ a.name }} </h3>
 		      <p> {{ a.description }} </p>
 		      {{ a.price }}din
+		      <button v-on:click="addToCart" style="float: right;" >Dodaj u korpu</button>
 		    </li>
 		      
 		    
@@ -38,7 +39,12 @@ Vue.component("articles-show", {
     	},
     	getFlagIcon : function(index){
     		return 'pictures/' + this.restaurants[index].type + '.png';
-    	}
+    	},
+    	addToCart : function(article) {
+    		axios
+			.post('rest/user/addToCart', {"id": article.id, "count": 1})
+			.then(response => (toast('Article ' + article.name + " added to the Shopping Cart")))
+		}
     		
     
     }

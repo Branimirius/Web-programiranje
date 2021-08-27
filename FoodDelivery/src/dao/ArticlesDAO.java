@@ -36,9 +36,9 @@ public class ArticlesDAO {
 
 		this.setArticles(new HashMap<Integer, Article>());
 		//this.setArticlesPath(this.articlesPath);
-		this.loadTestData();
-		this.saveArticles();
-		//loadArticles(articlesPath);
+		//this.loadTestData();
+		//this.saveArticles();
+		loadArticles(articlesPath);
 	}
 
 	public HashMap<Integer, Article> getArticles() {
@@ -68,9 +68,18 @@ public class ArticlesDAO {
 		this.articles = articles;
 	}
 	
+	public Article getArticle(Integer id) {
+		for(Article a : articles.values()) {
+			if(a.getId() == id) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadArticles(String contextPath) {
+	public void loadArticles(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
@@ -120,7 +129,7 @@ public class ArticlesDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveArticles() {
+	public void saveArticles() {
 		File f = new File(articlesPath + "/data/articles.txt");
 		FileWriter fileWriter = null;
 		try {

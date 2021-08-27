@@ -1,17 +1,18 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 public class Cart {
-	private HashMap<Integer, Article> articles; //artikal i njegova kolicina
+	private Collection<ArticleInCart> articles; //artikal i njegova kolicina
 	private String user;
 	private double price;
 	private Integer id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
-	public Cart(HashMap<Integer, Article> articles, String user, double price, Integer id) {
+	public Cart(Collection<ArticleInCart> articles, String user, double price, Integer id) {
 		super();
 		this.articles = articles;
 		this.user = user;
@@ -21,12 +22,13 @@ public class Cart {
 	
 	public Cart() {}
 	
-	public HashMap<Integer, Article> getArticles() {
+	public Collection<ArticleInCart> getArticles() {
 		return articles;
 	}
 
-	public void addArticles(Article article, Integer amount) {
-		this.articles.put(amount, article);
+	public void addArticle(Article article, Integer count) {
+		
+		this.articles.add(new ArticleInCart(article, count));
 	}
 
 	public String getUser() {
@@ -47,6 +49,8 @@ public class Cart {
 	public Integer getId() {
 		return id;
 	}
-	 
+	private Integer generateId() {
+		return this.articles.size() + 1;
+	}
 	
 }

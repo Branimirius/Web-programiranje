@@ -8,12 +8,14 @@ Vue.component("articles-show-home", {
 	template: ` 
 		
 		<tbody class = "articles">
+		  <div class = "orange-title">Izdvajamo iz ponude:</div>
 		  <ul class = "articles" v-for="a in articles">
 		    <li class = "articles">
 		      <img class = "articles" v-bind:src="a.picturePath" style="width: 5rem; height: 5rem; opacity: 1; float: right;" />
 		      <h3> {{ a.name }} </h3>
 		      <p> {{ a.description }} </p>
 		      {{ a.price }}din
+		      <button v-on:click="addToCart(a)" style="float: right;" >Dodaj u korpu</button>
 		    </li>
 		      
 		    
@@ -38,7 +40,13 @@ Vue.component("articles-show-home", {
     	},
     	getFlagIcon : function(index){
     		return 'pictures/' + this.restaurants[index].type + '.png';
-    	}
+    	},
+    	addToCart : function(article) {
+    		axios
+			.post('rest/user/addToCart', {"id": article.id, "count": 1})
+			.then(response => (toast('Article ' + article.name + " added to the Shopping Cart")))
+		}
+    	
     		
     
     }

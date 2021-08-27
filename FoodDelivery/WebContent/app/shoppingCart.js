@@ -8,20 +8,23 @@ Vue.component("shopping-cart", {
 		    }
 	},
 	template: ` 
+	
 	<tbody class = "articles">
-		<div>
-				Proizvodi u korpi {{ sc.user.name }}:
-				<table border="1">
-				<tr bgcolor="lightgrey">
-					<th>Naziv</th><th>Jedinicna cena</th><th>Komada</th><th>Ukupna cena</th></tr>
-					<tr v-for="a in articles">
-					<td> {{a.name}}</td>
-					<td> {{a.price}}</td>
-					
-					</tr>
-				</table>
-				<br /> 
+		<div class = "orange-title">Pregled vase korpe: </div>		
+		<ul class = "articles" v-for="a in articles">
+		    <li class = "articles">
+		      <img class = "articles" v-bind:src="a.article.picturePath" style="width: 5rem; height: 5rem; opacity: 1; float: right;" />
+		      <h3> {{ a.article.name }} </h3>
+		      <p> {{ a.article.description }} </p>
+		      {{ a.article.price }}din
+		    </li>
+		      
+		    
+		 </ul>
+		 <div>
+				
 				<button v-on:click="clearSc" >Obriši korpu</button>
+				<button v-on:click="calculateTotal" >Izracunaj cenu</button>
 				<p>
 				Ukupno: {{total}} dinara.
 				</p>
@@ -29,7 +32,7 @@ Vue.component("shopping-cart", {
 				<a href="#/">Proizvodi</a>
 			</p>
 			
-		</div>
+		 </div>
 	</tbody>		  
 `
 	, 
@@ -42,17 +45,27 @@ Vue.component("shopping-cart", {
 		clearSc : function () {
 			if (confirm('Da li ste sigurni?') == true) {
 				axios
-		          .post('rest/proizvodi/clearSc')
+		          .post('rest/user/clearSc')
 		          .then(response => (this.init()))
 			}
-		} 
+		},
+		calculateTotal : function () {
+			for(let i = 0; i < this.articles.length; i++){
+				this.total += this.articles[i].article.price; 
+			}						
+		}
 	},
 	mounted () {
+		this.calculateTotal();
         axios
           .get('rest/user/activeCart')
           .then(response => (this.sc = response.data));
         axios
         .get('rest/user/justArticles')
         .then(response => (this.articles = response.data));
+        
+        
+        
+        
     }
 });

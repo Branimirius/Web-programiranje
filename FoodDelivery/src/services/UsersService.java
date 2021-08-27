@@ -21,9 +21,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.Article;
+import model.ArticleInCart;
+import model.ArticleToAdd;
 import model.Cart;
 import model.User;
 import model.UserToLog;
+import sun.security.action.GetLongAction;
+import dao.ArticlesDAO;
 import dao.CartsDAO;
 import dao.UsersDAO;
 import dao.UsersDAO;
@@ -81,9 +85,11 @@ public class UsersService {
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
+		UsersDAO usersDao = getUsersDAO();
 		
-		if(user != null) {
+		if(usersDao.getLoggedUser() != null) {
 			session.invalidate();
+			usersDao.setLoggedUser(null);
 			return Response.status(200).build();
 		}
 		else {
@@ -171,14 +177,43 @@ public class UsersService {
 	@GET
 	@Path("/justArticles")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Article> justArticles() {
-				
-		return getActiveCart().getArticles().values();
-		
+	public Collection<ArticleInCart> justArticles() {
+		if(getActiveCart() != null) {		
+			return getActiveCart().getArticles();
+		}
+		System.out.println("nije napunio");
+		return null;
 	}	
-
+	@POST
+	@Path("/clearSc")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String clearSc() {
+		getActiveCart().getArticles().clear();
+		return "OK";
+	}
 	
+	@POST
+	@Path("/addToCart")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String add(ArticleToAdd a) {
+		getActiveCart().addArticle(getArticlesDAO().getArticle(a.id), a.count);
+		getCartsDAO().saveCarts();
+		System.out.println("Product " + getArticlesDAO().getArticle(a.id)
+				+ " added with count: " + a.count);
+		return "OK";
+	}
 	
+	private ArticlesDAO getArticlesDAO() {
+		System.out.println("making articles dao");
+		ArticlesDAO articles = (ArticlesDAO) context.getAttribute("articles");
+		if (articles == null) {
+			articles = new ArticlesDAO();
+			
+			context.setAttribute("articles", articles);
+		} 
+		return articles;
+	}
 	private UsersDAO getUsersDAO() {
 		System.out.println("making users dao");
 		UsersDAO users = (UsersDAO) context.getAttribute("users");
@@ -205,7 +240,14 @@ public class UsersService {
 		UsersDAO usersDao = getUsersDAO();
 		CartsDAO cartsDao = getCartsDAO();
 		User u = usersDao.getLoggedUser();
-		Cart cart = cartsDao.getCarts().get(u.getCart());
+		Cart cart = cartsDao.getCartByUser(u.getCart());
+		System.out.println("KONTROLA 1: sve korpe: " );
+		for(Cart c : cartsDao.getCarts().values()) {
+			System.out.println("iz prve kontrole: " + c.getUser() + " " + c.getId());
+		}
+		
+		System.out.println("---------------");
+		System.out.println("KONTROLA 2: dzesijeva korpa: " + cart.getUser() + " " + cart.getId());
 		System.out.println("Ulogovani lik je: " + u.getName());
 		return cart;
 		

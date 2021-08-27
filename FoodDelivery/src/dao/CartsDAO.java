@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import model.Article;
+import model.ArticleInCart;
 import model.Cart;
 import model.CustomerType;
 import model.Restaurant;
@@ -36,10 +38,14 @@ public class CartsDAO {
 	public CartsDAO() {
 
 		this.setCarts(new HashMap<Integer, Cart>());
-		//this.setCartsPath(this.cartsPath);
-		this.loadTestData();
+		//this.setCartsPath(this.cartsPath);	
+		loadTestData();
 		this.saveCarts();
 		//loadCarts(cartsPath);
+		System.out.println("made carts dao: " + carts.values().toString());
+		for(Cart c : carts.values()) {
+			System.out.println("prva korpa: " + c.getUser() + " " + c.getId());
+		}
 	}
 
 	public HashMap<Integer, Cart> getCarts() {
@@ -56,7 +62,15 @@ public class CartsDAO {
 		}
 		return null;
 	}
-
+	public Cart getCartByUser(Integer userCartId) {
+		for(Cart c : carts.values()) {
+			if(c.getId() == userCartId) {
+				return c;
+			}				
+		}
+		return null;
+	}
+	
 	public String getCartsPath() {
 		return cartsPath;
 	}
@@ -71,14 +85,15 @@ public class CartsDAO {
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadCarts(String contextPath) {
+	public void loadCarts(String contextPath) {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
 		try {
 			file = new File(contextPath + "/data/carts.txt");
 			in = new BufferedReader(new FileReader(file));
-
+			System.out.println("nasao fajl");
+			
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.setVisibilityChecker(
 						VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
@@ -86,10 +101,14 @@ public class CartsDAO {
 			MapType type = factory.constructMapType(HashMap.class, String.class, Cart.class);
 			objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
 			carts = ((HashMap<Integer, Cart>) objectMapper.readValue(file, type));
+			System.out.println("prosao mapiranje: " + carts.values().toString());
+			//System.out.println(carts.toString());
 		} catch (FileNotFoundException fnfe) {
 			try {
 				file.createNewFile();
 				fileWriter = new FileWriter(file);
+				System.out.println("nije nasao fajl");
+				
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 				objectMapper.getFactory().configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
@@ -106,6 +125,7 @@ public class CartsDAO {
 						e.printStackTrace();
 					}
 				}
+				System.out.println("nista nije uradio");
 			}
 
 		} catch (Exception ex) {
@@ -121,7 +141,7 @@ public class CartsDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveCarts() {
+	public void saveCarts() {
 		File f = new File(cartsPath + "/data/carts.txt");
 		FileWriter fileWriter = null;
 		try {
@@ -147,15 +167,17 @@ public class CartsDAO {
 	}
 	private void loadTestData() {
 		
-			HashMap<Integer, Article> articles1 = new HashMap<Integer, Article>();
+			Collection<ArticleInCart> articles1 = new ArrayList<ArticleInCart>();
 			Article a1 = new Article("test", 250.0, "test", "test1", 200.0,
 					"tttesstt", "pictures/giros.jpg", 3);
-			articles1.put(2, a1);
+			ArticleInCart ac1 = new ArticleInCart(a1, 1);
+			articles1.add(ac1);
 			Cart c1 = new Cart(articles1, "Jesse", 0.0, 1);
 	
 			
 	
 			carts.put(c1.getId(), c1);
+			System.out.println(carts.values().toString());
 			
 	}
 

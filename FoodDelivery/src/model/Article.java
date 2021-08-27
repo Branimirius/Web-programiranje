@@ -13,6 +13,9 @@ public class Article {
 	private Integer id;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
+	public Article() {
+		
+	}
 	
 	public Article(String name, double price, String type, String restaurant, double amount, String description,
 			String picture, Integer id) {

@@ -1,7 +1,7 @@
 {
   "1" : {
-    "articles" : {
-      "2" : {
+    "articles" : [ {
+      "article" : {
         "name" : "test",
         "price" : 250.0,
         "type" : "test",
@@ -10,8 +10,21 @@
         "description" : "tttesstt",
         "id" : 3,
         "picture" : "pictures/giros.jpg"
-      }
-    },
+      },
+      "count" : 1
+    }, {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
     "user" : "Jesse",
     "price" : 0.0,
     "id" : 1
