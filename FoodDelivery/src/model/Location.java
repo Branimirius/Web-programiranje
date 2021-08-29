@@ -7,7 +7,7 @@ public class Location {
 	private String zipCode;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
-	
+		
 	public Location(double geoLength, double geoWidth, String adress, String zipCode) {
 		super();
 		this.geoLength = geoLength;

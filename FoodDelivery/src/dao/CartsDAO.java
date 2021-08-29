@@ -67,7 +67,7 @@ public class CartsDAO {
 			if(c.getId() == userCartId) {
 				return c;
 			}				
-		}
+		}		
 		return null;
 	}
 	
@@ -81,6 +81,10 @@ public class CartsDAO {
 
 	public void setCarts(HashMap<Integer, Cart> carts) {
 		this.carts = carts;
+	}
+	public void addCart(Cart c) {
+		getCarts().put(c.getId(), c);
+		saveCarts();
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
@@ -179,6 +183,9 @@ public class CartsDAO {
 			carts.put(c1.getId(), c1);
 			System.out.println(carts.values().toString());
 			
+	}
+	public Integer generateId() {
+		return this.carts.size() + 1;
 	}
 
 

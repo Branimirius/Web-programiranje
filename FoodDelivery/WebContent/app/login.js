@@ -93,51 +93,7 @@ Vue.component("log-in", {
     		
     		
     	}, 
-    	registerUser : function() {
-			let flag=true;
-			
-			if(this.nameRegister=="" ||this.surnameRegister=="" ||this.usernameRegister=="" ||this.passwordRegister=="" || this.genderRegister=="")
-			{
-				registrationError="Morate popuniti sva polja u formi.";
-				flag=false;
-			}
-			else if(this.passwordRegister!=this.passwordRepeat)
-			{
-				registrationError="Lozinke se ne slažu.";
-				flag=false;
-			}
-			if(flag)
-			{
-				let genderReg;
-				if (this.genderRegister == 'Musko') {
-					genderReg = 'Male';
-				} else if(this.genderRegister == 'Zensko'){
-					genderReg = 'Female';
-				} else {
-					genderReg = 'Other';
-				}
-				this.roleRegister = "Guest";
-				let registrationParameters = {
-    				name : this.nameRegister,
-    				surname : this.surnameRegister,
-    				username : this.usernameRegister,
-    				password : this.passwordRegister,
-    				role : this.roleRegister,
-    				gender : genderReg
-    		};
-
-    		axios 
-    			.post('/user/register', JSON.stringify(registrationParameters))
-    			.then(response => {
-    				if (response.data == null) {
-    					window.location.href = "#/login";
-    				} else {
-						window.location.href = "http://localhost:8088";
-    				}
-    			})
-			}
-    		
-		},
+    	
 		signalChange : function()
 		{
 			this.errorMessage="";

@@ -24,8 +24,10 @@ import model.Article;
 import model.ArticleInCart;
 import model.ArticleToAdd;
 import model.Cart;
+import model.CustomerType;
 import model.User;
 import model.UserToLog;
+import model.UserToRegister;
 import sun.security.action.GetLongAction;
 import dao.ArticlesDAO;
 import dao.CartsDAO;
@@ -60,20 +62,25 @@ public class UsersService {
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response register(User userToRegister) {
-
+	public Response register(UserToRegister userToRegister) {
+		System.out.println("Backend for registration is established.");
 		if (userToRegister.getUsername() == null || userToRegister.getPassword() == null
 				|| userToRegister.getUsername().equals("")
 				|| userToRegister.getPassword().equals("")) {
+			System.out.println("Prazna polja" + userToRegister.getUsername() + userToRegister.getPassword());
 			return Response.status(400).entity("Username, password i email su obavezna polja.").build();
 		}
 		
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 
 		if (usersDao.searchUser(userToRegister.getUsername()) != null) {
+			System.out.println("vec je registrovan lik");
 			return Response.status(400).entity("Username koji ste uneli vec je zauzet.").build();
 		} else {
-			usersDao.addUser(userToRegister);
+			System.out.println("dodaje lika....");
+			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
+					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("gold"), null));
+			System.out.println("dodao lika uspesno");
 			return Response.status(200).build();
 		}
 	}
@@ -241,14 +248,10 @@ public class UsersService {
 		CartsDAO cartsDao = getCartsDAO();
 		User u = usersDao.getLoggedUser();
 		Cart cart = cartsDao.getCartByUser(u.getCart());
-		System.out.println("KONTROLA 1: sve korpe: " );
-		for(Cart c : cartsDao.getCarts().values()) {
-			System.out.println("iz prve kontrole: " + c.getUser() + " " + c.getId());
-		}
-		
-		System.out.println("---------------");
-		System.out.println("KONTROLA 2: dzesijeva korpa: " + cart.getUser() + " " + cart.getId());
-		System.out.println("Ulogovani lik je: " + u.getName());
+		if(cart == null) {
+			cart = new Cart(new ArrayList<ArticleInCart>(), u.getName(), 0.0, u.getCart());
+			cartsDao.addCart(cart);
+		}				
 		return cart;
 		
 	}

@@ -3,6 +3,7 @@ package model;
 public class UserToLog {
 	public String username;
 	public String password;
+	public UserToLog() {}
 	public String getUsername() {
 		return username;
 	}

@@ -12,7 +12,7 @@ public class Order {
 	private String status;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
-	
+	public Order() {}
 	public Order(Integer id, List<Integer> articles, String restaurant, String dateTime, double price, String customer,
 			String status) {
 		super();

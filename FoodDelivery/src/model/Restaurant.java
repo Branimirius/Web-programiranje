@@ -21,7 +21,7 @@ public class Restaurant {
 	private String title;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
-	
+	public Restaurant() {}
 	public Restaurant(String name, String type, Boolean status, Location location, String logoPath,
 			String id, String title) {
 		super();

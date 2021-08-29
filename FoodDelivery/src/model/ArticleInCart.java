@@ -8,4 +8,5 @@ public class ArticleInCart {
 		this.article = article;
 		this.count = count;
 	}
+	public ArticleInCart() {}
 }

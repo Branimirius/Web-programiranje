@@ -23,6 +23,10 @@ public class User {
 	private String restaurant;
 	
 	//konstruktor
+	public User() {
+		
+	}
+	
 	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
 			String role,Integer cart, Integer bonusPoints, CustomerType type,
 			String restaurant) {

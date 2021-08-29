@@ -9,6 +9,7 @@ public class Comment {
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
+	public Comment() {}
 	
 	public Comment(String customer, String restaurant, String text, Integer grade, Integer id) {
 		super();

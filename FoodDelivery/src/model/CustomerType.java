@@ -6,6 +6,7 @@ public class CustomerType {
 	private double requiredPoints;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
+	public CustomerType() {}
 	
 	public CustomerType(String name) {
 		super();

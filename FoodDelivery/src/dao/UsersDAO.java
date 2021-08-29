@@ -30,9 +30,9 @@ public class UsersDAO {
 	public UsersDAO() {
 
 		this.setUsers(new HashMap<String, User>());
-		this.loadTestData();
-		this.saveUsers();
-		//loadUsers(usersPath);
+		//this.loadTestData();
+		//this.saveUsers();
+		loadUsers(usersPath);
 	}
 
 	public HashMap<String, User> getUsers() {
