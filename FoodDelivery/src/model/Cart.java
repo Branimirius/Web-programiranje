@@ -29,6 +29,7 @@ public class Cart {
 	public void addArticle(Article article, Integer count) {
 		
 		this.articles.add(new ArticleInCart(article, count));
+		calculatePrice();
 	}
 
 	public String getUser() {
@@ -48,6 +49,13 @@ public class Cart {
 	}
 	public Integer getId() {
 		return id;
+	}
+	public void calculatePrice() {
+		double value = 0.0;
+		for(ArticleInCart a : this.articles) {
+			value += (a.count * a.article.getPrice());
+		}
+		setPrice(value);
 	}
 	private Integer generateId() {
 		return this.articles.size() + 1;

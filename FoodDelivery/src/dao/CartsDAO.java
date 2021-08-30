@@ -39,9 +39,9 @@ public class CartsDAO {
 
 		this.setCarts(new HashMap<Integer, Cart>());
 		//this.setCartsPath(this.cartsPath);	
-		loadTestData();
-		this.saveCarts();
-		//loadCarts(cartsPath);
+		//loadTestData();
+		//this.saveCarts();
+		loadCarts(cartsPath);
 		System.out.println("made carts dao: " + carts.values().toString());
 		for(Cart c : carts.values()) {
 			System.out.println("prva korpa: " + c.getUser() + " " + c.getId());

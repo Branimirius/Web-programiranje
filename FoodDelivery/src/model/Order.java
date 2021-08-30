@@ -1,10 +1,11 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 	private Integer id;
-	private List<Integer> articles;
+	private ArrayList<ArticleInCart> articles;
 	private String restaurant;
 	private String dateTime;
 	private double price;
@@ -13,7 +14,7 @@ public class Order {
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	public Order() {}
-	public Order(Integer id, List<Integer> articles, String restaurant, String dateTime, double price, String customer,
+	public Order(Integer id, ArrayList<ArticleInCart> articles, String restaurant, String dateTime, double price, String customer,
 			String status) {
 		super();
 		this.id = id;
@@ -25,11 +26,11 @@ public class Order {
 		this.status = status;
 	}
 
-	public List<Integer> getArticles() {
+	public ArrayList<ArticleInCart> getArticles() {
 		return articles;
 	}
 
-	public void setArticles(List<Integer> articles) {
+	public void setArticles(ArrayList<ArticleInCart> articles) {
 		this.articles = articles;
 	}
 

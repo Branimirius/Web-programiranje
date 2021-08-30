@@ -1,0 +1,80 @@
+{
+  "1" : {
+    "id" : 1,
+    "articles" : [ ],
+    "restaurant" : "zorinakrcma1",
+    "dateTime" : "3/7/2021 12:00",
+    "price" : 1000.0,
+    "customer" : "Jesse",
+    "status" : "processing"
+  },
+  "2" : {
+    "id" : 2,
+    "articles" : [ ],
+    "restaurant" : "savoca1",
+    "dateTime" : "3/7/2021 12:00",
+    "price" : 1000.0,
+    "customer" : "Jesse",
+    "status" : "preparing"
+  },
+  "3" : {
+    "id" : 3,
+    "articles" : [ ],
+    "restaurant" : "girosmaster1",
+    "dateTime" : "3/7/2021 12:00",
+    "price" : 1000.0,
+    "customer" : "Jesse",
+    "status" : "waiting"
+  },
+  "4" : {
+    "id" : 4,
+    "articles" : [ ],
+    "restaurant" : "crepes",
+    "dateTime" : "3/7/2021 12:00",
+    "price" : 1000.0,
+    "customer" : "Jesse",
+    "status" : "transporting"
+  },
+  "5" : {
+    "id" : 5,
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
+    "restaurant" : "zorinakrcma1",
+    "dateTime" : "30-08-2021 17:42:10",
+    "price" : 250.0,
+    "customer" : "Peter",
+    "status" : "preparing"
+  },
+  "6" : {
+    "id" : 6,
+    "articles" : [ {
+      "article" : {
+        "name" : "Margarita",
+        "price" : 1200.0,
+        "type" : "hrana",
+        "restaurant" : "savoca1",
+        "amount" : 1500.0,
+        "description" : "Pica sa sirevima i paradajz sosom",
+        "id" : 2,
+        "picture" : "pictures/margarita.jpg"
+      },
+      "count" : 1
+    } ],
+    "restaurant" : "savoca1",
+    "dateTime" : "30-08-2021 17:42:10",
+    "price" : 1200.0,
+    "customer" : "Peter",
+    "status" : "preparing"
+  }
+}

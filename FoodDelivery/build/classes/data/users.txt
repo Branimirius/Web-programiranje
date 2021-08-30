@@ -58,5 +58,23 @@
     "type" : null,
     "demandList" : null,
     "restaurant" : null
+  },
+  "Skinny" : {
+    "username" : "Skinny",
+    "password" : "1234",
+    "name" : "Peter",
+    "surname" : "Skinny",
+    "gender" : "M",
+    "dateOfBirth" : "2/2/1989",
+    "role" : "customer",
+    "orderList" : [ ],
+    "cart" : 2,
+    "type" : {
+      "name" : "gold",
+      "discount" : 10.0,
+      "requiredPoints" : 1500.0
+    },
+    "demandList" : null,
+    "restaurant" : null
   }
 }

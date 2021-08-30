@@ -23,10 +23,10 @@ Vue.component("shopping-cart", {
 		 </ul>
 		 <div>
 				
-				<button v-on:click="clearSc" >Obriši korpu</button>
-				<button v-on:click="calculateTotal" >Izracunaj cenu</button>
+				<button v-on:click="clearSc" >Obriši korpu</button>				
+				<button v-on:click="placeOrder" >Naruci</button>
 				<p>
-				Ukupno: {{total}} dinara.
+				Ukupno: {{sc.price}} dinara.
 				</p>
 			<p>
 				<a href="#/">Proizvodi</a>
@@ -49,14 +49,18 @@ Vue.component("shopping-cart", {
 		          .then(response => (this.init()))
 			}
 		},
-		calculateTotal : function () {
-			for(let i = 0; i < this.articles.length; i++){
-				this.total += this.articles[i].article.price; 
-			}						
+		
+		placeOrder : function () {
+			if (confirm('Da li ste sigurni?') == true) {
+				
+				
+				axios
+		          .post('rest/user/placeOrder')
+		          .then(response => (this.clearSc()))
+			}
 		}
 	},
-	mounted () {
-		this.calculateTotal();
+	mounted () {		
         axios
           .get('rest/user/activeCart')
           .then(response => (this.sc = response.data));

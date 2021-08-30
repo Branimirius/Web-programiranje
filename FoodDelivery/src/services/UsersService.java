@@ -1,7 +1,9 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,12 +27,14 @@ import model.ArticleInCart;
 import model.ArticleToAdd;
 import model.Cart;
 import model.CustomerType;
+import model.Order;
 import model.User;
 import model.UserToLog;
 import model.UserToRegister;
 import sun.security.action.GetLongAction;
 import dao.ArticlesDAO;
 import dao.CartsDAO;
+import dao.OrdersDAO;
 import dao.UsersDAO;
 import dao.UsersDAO;
 
@@ -210,6 +214,16 @@ public class UsersService {
 				+ " added with count: " + a.count);
 		return "OK";
 	}
+	@POST
+	@Path("/placeOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String placeOrder() {
+		OrdersDAO orda = getOrdersDAO();
+		orda.processCartOrder(getActiveCart());		
+		
+		return "OK";
+	}
 	
 	private ArticlesDAO getArticlesDAO() {
 		System.out.println("making articles dao");
@@ -240,6 +254,16 @@ public class UsersService {
 			context.setAttribute("carts", carts);
 		} 
 		return carts;
+	}
+	private OrdersDAO getOrdersDAO() {
+		System.out.println("making orders dao");
+		OrdersDAO orders = (OrdersDAO) context.getAttribute("orders");
+		if (orders == null) {
+			orders = new OrdersDAO();
+			
+			context.setAttribute("orders", orders);
+		} 
+		return orders;
 	}
 	
 	public Cart getActiveCart() {

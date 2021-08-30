@@ -16,5 +16,35 @@
     "user" : "Jesse",
     "price" : 0.0,
     "id" : 1
+  },
+  "2" : {
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    }, {
+      "article" : {
+        "name" : "Margarita",
+        "price" : 1200.0,
+        "type" : "hrana",
+        "restaurant" : "savoca1",
+        "amount" : 1500.0,
+        "description" : "Pica sa sirevima i paradajz sosom",
+        "id" : 2,
+        "picture" : "pictures/margarita.jpg"
+      },
+      "count" : 1
+    } ],
+    "user" : "Peter",
+    "price" : 1450.0,
+    "id" : 2
   }
 }

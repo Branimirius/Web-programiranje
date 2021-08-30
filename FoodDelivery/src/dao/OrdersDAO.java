@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,22 +21,25 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import model.ArticleInCart;
+import model.Cart;
 import model.Order;
 
 public class OrdersDAO {
 	private HashMap<Integer, Order> orders;
-	private String ordersPath = "";
-
-	public OrdersDAO() {
-		
-	}
+private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-programiranje\\FoodDelivery\\src";
 	
-	public OrdersDAO(String ordersPath) {
+
+	
+	
+	public OrdersDAO() {
 
 		this.setOrders(new HashMap<Integer, Order>());
-		this.setOrdersPath(ordersPath);
-		
+		//this.setCartsPath(this.cartsPath);	
+		//loadTestData();
+		//this.saveOrders();
 		loadOrders(ordersPath);
+		
 	}
 
 	public HashMap<Integer, Order> getOrders() {
@@ -44,7 +50,12 @@ public class OrdersDAO {
 			return null;
 		}
 	}
-
+	public Collection<Order> getOrdersCollection() {
+		if (!orders.isEmpty()) {
+			return orders.values();
+		}
+		return null;
+	}
 	public String getOrdersPath() {
 		return ordersPath;
 	}
@@ -135,22 +146,55 @@ public class OrdersDAO {
 	private void loadTestData() {
 		//Order(Integer id, List<Integer> articles, String restaurant, String dateTime, double price, String customer,
 		//String status) {
-			Order admin = new Order(1, new ArrayList<Integer>(), "zorinakrcma1", "3/7/2021 12:00",
+			Order admin = new Order(1, new ArrayList<ArticleInCart>(), "zorinakrcma1", "3/7/2021 12:00",
 					1000.0, "Jesse", "processing");
 
-			Order customer = new Order(2, new ArrayList<Integer>(), "savoca1", "3/7/2021 12:00",
+			Order customer = new Order(2, new ArrayList<ArticleInCart>(), "savoca1", "3/7/2021 12:00",
 					1000.0, "Jesse", "preparing");
 			
-			Order delieveryGuy = new Order(3, new ArrayList<Integer>(), "girosmaster1", "3/7/2021 12:00",
+			Order delieveryGuy = new Order(3, new ArrayList<ArticleInCart>(), "girosmaster1", "3/7/2021 12:00",
 					1000.0, "Jesse", "waiting");
 			
-			Order manager = new Order(4, new ArrayList<Integer>(), "crepes", "3/7/2021 12:00",
+			Order manager = new Order(4, new ArrayList<ArticleInCart>(), "crepes", "3/7/2021 12:00",
 					1000.0, "Jesse", "transporting");
 
 			orders.put(admin.getId(), admin);
 			orders.put(customer.getId(), customer);
 			orders.put(delieveryGuy.getId(), delieveryGuy);
 			orders.put(manager.getId(), manager);
+	}
+	
+	public void processCartOrder(Cart cart) {
+		ArrayList<String> requiredRestaurants = new ArrayList<String>();
+		for(ArticleInCart a : cart.getArticles()) {
+			if(!requiredRestaurants.contains(a.article.getRestaurant())) {
+				requiredRestaurants.add(a.article.getRestaurant());
+			}
 		}
+		placeOrdersFromCart(cart, requiredRestaurants);
+	}
+	
+	public void placeOrdersFromCart(Cart cart, ArrayList<String> restaurants) {
+		for(String r : restaurants) {
+			ArrayList<ArticleInCart> orderArticles = new ArrayList<ArticleInCart>();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			String currentDate = formatter.format(new Date());
+			double orderPrice = 0.0;
+			for(ArticleInCart a : cart.getArticles()) {
+				if(a.article.getRestaurant() == r) {
+					orderArticles.add(a);
+					orderPrice += (a.count * a.article.getPrice());
+				}
+			}
+			Order newOrder = new Order(generateId(), orderArticles, r, currentDate,
+					orderPrice, cart.getUser(), "preparing");
+			this.orders.put(newOrder.getId(), newOrder);
+			this.saveOrders();
+		}
+	}
+	
+	public Integer generateId() {
+		return this.orders.size() + 1;
+	}
 
 }

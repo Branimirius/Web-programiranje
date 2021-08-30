@@ -44,7 +44,7 @@
       "count" : 1
     } ],
     "user" : "Peter",
-    "price" : 0.0,
+    "price" : 1450.0,
     "id" : 2
   }
 }
