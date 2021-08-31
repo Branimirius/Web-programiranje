@@ -1,11 +1,15 @@
 const ArticlesShowHome = { template: '<articles-show-home></articles-show-home>' }
 const ShoppingCart = { template: '<shopping-cart></shopping-cart>' }
+const Profile = { template: '<profile></profile>' }
+const CustomerOrders = { template: '<customer-orders></customer-orders>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
 	    { path: '/', component: ArticlesShowHome},
-	    { path: '/shopping-cart', component: ShoppingCart}
+	    { path: '/shopping-cart', component: ShoppingCart},
+	    { path: '/profile', component: Profile},
+	    { path: '/customer-orders', component: CustomerOrders}
 	  ]
 });
 
@@ -20,7 +24,7 @@ var app = new Vue({
     },
     mounted() {
     	axios
-	    	.get('/user/loggedUser')
+	    	.get('rest/user/loggedUser')
 	    	.then(response => {
 	    		if (response.data == null) {
 	    			this.mode = 'notLogged';
@@ -44,7 +48,7 @@ var app = new Vue({
     methods : {
     	logOut : function() {
     		axios 
-    			.get('/user/logout')
+    			.get('rest/user/logout')
     			.then(response => {
     				this.mode = 'notLogged';
     				console.log(this.mode);

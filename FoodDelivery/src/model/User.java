@@ -12,6 +12,7 @@ public class User {
 	private String gender;
 	private String dateOfBirth;
 	private String role;
+	private String imagePath;
 	// polja za kupca
 	private ArrayList<Integer> orderList;
 	private Integer cart;
@@ -75,6 +76,14 @@ public class User {
 		
 	}
 	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	//get set
 	public String getUsername() {
 		return username;

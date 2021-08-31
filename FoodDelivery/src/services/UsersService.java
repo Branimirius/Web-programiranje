@@ -83,7 +83,7 @@ public class UsersService {
 		} else {
 			System.out.println("dodaje lika....");
 			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
-					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("gold"), null));
+					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("bronze"), null));
 			System.out.println("dodao lika uspesno");
 			return Response.status(200).build();
 		}
@@ -172,7 +172,12 @@ public class UsersService {
 
 		UsersDAO usersDao = getUsersDAO();
 		User u = usersDao.getLoggedUser();
+		if(u == null) {
+			System.out.println("Niko nije ulogovan. ");
+			return null;
+		}
 		System.out.println("Ulogovani lik je: " + u.getName());
+		
 		return u;
 		
 	}
@@ -200,6 +205,8 @@ public class UsersService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String clearSc() {
 		getActiveCart().getArticles().clear();
+		getActiveCart().calculatePrice();
+		
 		return "OK";
 	}
 	
@@ -208,10 +215,16 @@ public class UsersService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String add(ArticleToAdd a) {
-		getActiveCart().addArticle(getArticlesDAO().getArticle(a.id), a.count);
-		getCartsDAO().saveCarts();
-		System.out.println("Product " + getArticlesDAO().getArticle(a.id)
-				+ " added with count: " + a.count);
+		if(getActiveCart() == null) {
+			System.out.println("Korisnik nije ulogovan.");
+			
+		}
+		else {
+			getActiveCart().addArticle(getArticlesDAO().getArticle(a.id), a.count);
+			getCartsDAO().saveCarts();
+			System.out.println("Product " + getArticlesDAO().getArticle(a.id)
+					+ " added with count: " + a.count);
+		}
 		return "OK";
 	}
 	@POST
@@ -223,6 +236,15 @@ public class UsersService {
 		orda.processCartOrder(getActiveCart());		
 		
 		return "OK";
+	}
+	
+	@GET
+	@Path("/activeOrders")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Order> activeOrders() {
+		
+		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());
+		
 	}
 	
 	private ArticlesDAO getArticlesDAO() {
@@ -271,6 +293,9 @@ public class UsersService {
 		UsersDAO usersDao = getUsersDAO();
 		CartsDAO cartsDao = getCartsDAO();
 		User u = usersDao.getLoggedUser();
+		if(u == null) {
+			return null;
+		}
 		Cart cart = cartsDao.getCartByUser(u.getCart());
 		if(cart == null) {
 			cart = new Cart(new ArrayList<ArticleInCart>(), u.getName(), 0.0, u.getCart());

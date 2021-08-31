@@ -124,7 +124,7 @@ public class UsersDAO {
 		}
 	}
 	// Serijalizacija
-	private void saveUsers() {
+	public void saveUsers() {
 		File f = new File(usersPath + "/data/users.txt");
 		FileWriter fileWriter = null;
 		try {
@@ -180,6 +180,9 @@ public class UsersDAO {
 	}
 
 	public User getLoggedUser() {
+		if(loggedUser == null) {
+			return null;
+		}
 		return loggedUser;
 	}
 

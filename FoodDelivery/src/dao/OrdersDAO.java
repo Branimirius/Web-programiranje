@@ -193,6 +193,16 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		}
 	}
 	
+	public ArrayList<Order> getOrdersByUser(String user){
+		ArrayList<Order> retVal = new ArrayList<Order>();
+		for(Order o : this.orders.values()) {
+			if(o.getCustomer() == user) {
+				retVal.add(o);
+			}
+		}
+		return retVal;
+	}
+	
 	public Integer generateId() {
 		return this.orders.size() + 1;
 	}
