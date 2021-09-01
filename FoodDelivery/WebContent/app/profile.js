@@ -1,14 +1,14 @@
 Vue.component("profile", {
 	data: function () {
 		    return {
-		      user: null,
+		      user: null
 		      
 		    }
 	},
 	template: ` 
 	
 	
-<div class="container emp-profile">
+<div class="container emp-profile" v-if="user">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
@@ -148,17 +148,10 @@ Vue.component("profile", {
 		
 	},
 
-	beforeCreate() {
+	mounted () {		
 		axios
         .get('rest/user/loggedUser')
         .then(response => (this.user = response.data));
-	    
-	},
-	    
-	mounted () {		
-        
-        
-        
         
     }
 });

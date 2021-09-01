@@ -28,6 +28,7 @@ import model.ArticleToAdd;
 import model.Cart;
 import model.CustomerType;
 import model.Order;
+import model.OrderToCancel;
 import model.User;
 import model.UserToLog;
 import model.UserToRegister;
@@ -241,10 +242,20 @@ public class UsersService {
 	@GET
 	@Path("/activeOrders")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Order> activeOrders() {
-		
+	public Collection<Order> activeOrders() {
 		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());
 		
+	}
+	
+	@POST
+	@Path("/cancelOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String cancelOrder(OrderToCancel order) {
+		OrdersDAO orda = getOrdersDAO();
+		System.out.println("stigao na backend za cancel");
+		orda.cancelOrder(order); 
+		return "OK";
 	}
 	
 	private ArticlesDAO getArticlesDAO() {
@@ -298,7 +309,7 @@ public class UsersService {
 		}
 		Cart cart = cartsDao.getCartByUser(u.getCart());
 		if(cart == null) {
-			cart = new Cart(new ArrayList<ArticleInCart>(), u.getName(), 0.0, u.getCart());
+			cart = new Cart(new ArrayList<ArticleInCart>(), u.getUsername(), 0.0, u.getCart());
 			cartsDao.addCart(cart);
 		}				
 		return cart;

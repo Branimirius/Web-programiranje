@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import model.ArticleInCart;
 import model.Cart;
 import model.Order;
+import model.OrderToCancel;
 
 public class OrdersDAO {
 	private HashMap<Integer, Order> orders;
@@ -187,20 +188,32 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 				}
 			}
 			Order newOrder = new Order(generateId(), orderArticles, r, currentDate,
-					orderPrice, cart.getUser(), "preparing");
+					orderPrice, cart.getUser(), "processing");
 			this.orders.put(newOrder.getId(), newOrder);
 			this.saveOrders();
 		}
 	}
 	
-	public ArrayList<Order> getOrdersByUser(String user){
+	public Collection<Order> getOrdersByUser(String user){
 		ArrayList<Order> retVal = new ArrayList<Order>();
 		for(Order o : this.orders.values()) {
-			if(o.getCustomer() == user) {
-				retVal.add(o);
+			if(o.getCustomer().equals(user)) {
+				retVal.add(o);				
 			}
 		}
 		return retVal;
+	}
+	
+	public void cancelOrder(OrderToCancel order) {
+		System.out.println("usao u cancel");
+		for(Order o : this.orders.values()) {
+			System.out.println("Provera orders: " + o.getId() + " " + order.id);
+			if(o.getId() == order.id) {
+				o.setStatus("cancelled");
+				System.out.println("cancelled order");
+			}
+		}
+		saveOrders();
 	}
 	
 	public Integer generateId() {

@@ -8,7 +8,7 @@ Vue.component("customer-orders", {
 	template: ` 
 	
 	
-<div class="container emp-profile">
+<div class="container emp-profile" v-if="user">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
@@ -54,8 +54,9 @@ Vue.component("customer-orders", {
 										  <li class="list-group-item">
 										  		<label> {{ o.restaurant }}</label>
 										  		<p>{{ o.status }}</p>
-										  		<p>{{ o.price }}</p>
+										  		<p>{{ o.price }}din</p>
 										  		<p>{{ o.date }}</p>
+										  		<button v-bind:hidden="o.status!='processing'" v-on:click="cancelOrder(o)" style="float: right;" >Cancel order</button>
 										  </li>
 										  
 										</ul>
@@ -68,18 +69,20 @@ Vue.component("customer-orders", {
 `
 	, 
 	methods : {
-		
+		cancelOrder : function(order){
+			
+			axios
+	        .post('rest/user/cancelOrder',{"id": order.id})
+			.then(response => (alert("Order from" + order.restaurant + " sucessfully cancelled")));
+		    
+		}
 	},
-	
-	beforeCreate() {
+		    
+	mounted () {		
 		axios
         .get('rest/user/loggedUser')
         .then(response => (this.user = response.data));
 	    
-	},
-	    
-	mounted () {		
-        
         axios
         .get('rest/user/activeOrders')
         .then(response => (this.orders = response.data));

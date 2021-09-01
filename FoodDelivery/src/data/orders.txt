@@ -6,7 +6,7 @@
     "dateTime" : "3/7/2021 12:00",
     "price" : 1000.0,
     "customer" : "Jesse",
-    "status" : "processing"
+    "status" : "cancelled"
   },
   "2" : {
     "id" : 2,
@@ -53,7 +53,7 @@
     "restaurant" : "zorinakrcma1",
     "dateTime" : "30-08-2021 17:42:10",
     "price" : 250.0,
-    "customer" : "Peter",
+    "customer" : "Skinny",
     "status" : "preparing"
   },
   "6" : {
@@ -74,7 +74,7 @@
     "restaurant" : "savoca1",
     "dateTime" : "30-08-2021 17:42:10",
     "price" : 1200.0,
-    "customer" : "Peter",
+    "customer" : "Skinny",
     "status" : "preparing"
   }
 }
