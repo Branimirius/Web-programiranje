@@ -24,15 +24,17 @@
 	    <div class="wrapper">
 	        <nav>
 	            <div class="home">
-	                <a href="home.html">POČETNA</a>
+	                <a href="home.html">HOME</a>
 	            </div>
 	
 	            <div class="menu">
 	                <ul>
-	                    <li><a id="restaurantsPanel" href="restaurants.html">Restorani</a></li>
-	                    <li><a v-bind:hidden="mode=='notLogged'" id="korpaPanel" href="#/shopping-cart" >Korpa</a></li>
-	                    <li><a v-bind:hidden="mode=='notLogged'" id="profilPanel" href="#/profile">Profil</a></li>
-	                    <li ><a style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
+	                    <li><a id="restaurantsPanel" href="restaurants.html">Restaurants</a></li>
+	                    <li><a v-bind:hidden="mode!='customer'" id="korpaPanel" href="#/shopping-cart" >Your Cart</a></li>
+	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="deliveryPanel" href="#/deliveries" >Deliveries</a></li>
+	                    <li><a v-bind:hidden="mode!='customer'" id="profilPanel" href="#/profile">Profile</a></li>
+	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="devGuyProfile" href="#/delivery-profile">Profile</a></li>
+	                    <li><a v-bind:hidden="mode!='notLogged'" style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
 	                    <li><a v-bind:hidden="mode=='notLogged'" style="background : #E2472F;" class="active" id="logout" v-on:click = "logOut" href="login.html">Log Out</a></li>
 	                </ul>
 	            </div>
@@ -41,37 +43,16 @@
 				<div id="sidebar-wrapper">
 					<ul class="sidebar-nav">
 						<div id="kategorije-restorana">
-							<li class="sidebar"><a href="#" id="pice-prikaz">Srpsko</a></li>
-							<li class="sidebar"><a href="#" id="rostilj-prikaz-restorana">Italijansko</a></li>
-							<li class="sidebar"><a href="#" id="kineska-hrana-prikaz-restorana">Grcko</a></li>
-							<li class="sidebar"><a href="#" id="indijska-hrana-prikaz-restorana">Francusko</a></li>
-							<li class="sidebar"><a href="#" id="poslasticarnica-prikaz-restorana">Meksicko</a></li>
-							<li class="sidebar"><a href="#" id="picerija-prikaz-restorana">Kinesko</a></li>
+							<li class="sidebar"><a href="#" id="pice-prikaz">Serbian</a></li>
+							<li class="sidebar"><a href="#" id="rostilj-prikaz-restorana">Italian</a></li>
+							<li class="sidebar"><a href="#" id="kineska-hrana-prikaz-restorana">Greek</a></li>
+							<li class="sidebar"><a href="#" id="indijska-hrana-prikaz-restorana">French</a></li>
+							<li class="sidebar"><a href="#" id="poslasticarnica-prikaz-restorana">Mexican</a></li>
+							<li class="sidebar"><a href="#" id="picerija-prikaz-restorana">Chinese</a></li>
 						</div>
 					</ul>
 				</div>
 	        <section class="sec1"></section>
-	          
-	        
-	        		<!--
-					<div class="col-lg-8 col-lg-offset-2">
-						<h3 id="restaurant-menu-title"></h3>
-					</div>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">NAZIV</th>
-								<th scope="col">KOLIČINA</th>
-								<th scope="col">OPIS</th>
-								<th scope="col">CENA</th>
-								<th colspan="2">PORUČI</th>
-							</tr>
-						</thead>
-						<tbody id="artikli-tbody-id">
-						</tbody>
-					</table>
-					--> 
 					<div class="articles">
 						<router-view></router-view>  
 					</div>
@@ -86,6 +67,9 @@
 	<script src="js/axios.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/toast.js"></script>	
+	<script src="app/deliveryOrders.js"></script>
+	<script src="app/deliveryProfile.js"></script>
+	<script src="app/deliveries.js"></script>
 	<script src="app/customerOrders.js"></script>
 	<script src="app/profile.js"></script>
 	<script src="app/shoppingCart.js"></script>

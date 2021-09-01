@@ -1,4 +1,4 @@
-Vue.component("customer-orders", {
+Vue.component("delivery-orders", {
 	data: function () {
 		    return {
 		      user: null,
@@ -10,7 +10,7 @@ Vue.component("customer-orders", {
 	
 <div class="container emp-profile" v-if="user">
             <form method="post">
-                <div class="row">
+                     <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img v-bind:src="user.imagePath" alt=""/>
@@ -22,19 +22,18 @@ Vue.component("customer-orders", {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        {{ user.name }}
-                                    </h5>
-                                    <h6>
-                                        {{ user.role }}
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span> {{ user.type.name }} </span></p>
+                            <h5>
+                                {{ user.name }}
+                            </h5>
+                            <h6>
+                                {{ user.role }}
+                            </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#/profile" role="tab" aria-controls="profile" aria-selected="false">About</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#/delivery-profile" role="tab" aria-controls="profile" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#/customer-orders" role="tab" aria-controls="customer-orders" aria-selected="true">Orders</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#/delivery-orders" role="tab" aria-controls="delivery-orders" aria-selected="false">Deliveries</a>
                                 </li>
                             </ul>
                         </div>
@@ -73,7 +72,7 @@ Vue.component("customer-orders", {
 			
 			axios
 	        .post('rest/user/cancelOrder',{"id": order.id})
-			.then(response => (alert("Order from" + order.restaurant + " sucessfully cancelled")));
+			.then(response => (alert("Order from " + order.restaurant + " sucessfully cancelled")));
 		    
 		}
 	},
@@ -84,7 +83,7 @@ Vue.component("customer-orders", {
         .then(response => (this.user = response.data));
 	    
     	axios
-        .get('rest/user/activeOrders')
+        .get('rest/user/activeDemands')
         .then(response => (this.orders = response.data));
     }
 });

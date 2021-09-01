@@ -159,7 +159,7 @@ public class UsersDAO {
 				"3/3/1988", "customer", 1, 0, new CustomerType("gold"), null);
 		
 		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "delieveryGuy", 0, 0, null, null);
+				"3/3/1966", "deliveryGuy", 0, 0, null, null);
 		
 		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
 				"3/3/1955", "manager", 0, 0, null, null);

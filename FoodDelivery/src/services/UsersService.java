@@ -28,7 +28,7 @@ import model.ArticleToAdd;
 import model.Cart;
 import model.CustomerType;
 import model.Order;
-import model.OrderToCancel;
+import model.OrderToSend;
 import model.User;
 import model.UserToLog;
 import model.UserToRegister;
@@ -247,14 +247,43 @@ public class UsersService {
 		
 	}
 	
+	@GET
+	@Path("/activeDemands")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Order> activeDemands() {
+		return getOrdersDAO().getOrdersByDeliverer(getUsersDAO().getLoggedUser().getDemandList());
+		
+	}
+	
+	@GET
+	@Path("/waitingOrders")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Order> waitingOrders() {
+		return getOrdersDAO().getWaitingOrders();
+		
+	}
+	
 	@POST
 	@Path("/cancelOrder")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String cancelOrder(OrderToCancel order) {
+	public String cancelOrder(OrderToSend order) {
 		OrdersDAO orda = getOrdersDAO();
 		System.out.println("stigao na backend za cancel");
 		orda.cancelOrder(order); 
+		return "OK";
+	}
+	
+	@POST
+	@Path("/takeOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String takeOrder(OrderToSend order) {		
+		System.out.println("stigao na backend za dostavu");
+		UsersDAO users = getUsersDAO();
+		getOrdersDAO().takeOrder(order.id);
+		users.getLoggedUser().addDemand(order.id);
+		users.saveUsers();
 		return "OK";
 	}
 	

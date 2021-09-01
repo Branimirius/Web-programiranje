@@ -1,4 +1,4 @@
-Vue.component("profile", {
+Vue.component("delivery-profile", {
 	data: function () {
 		    return {
 		      user: null
@@ -22,19 +22,18 @@ Vue.component("profile", {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
-                                        {{ user.name }}
-                                    </h5>
-                                    <h6>
-                                        {{ user.role }}
-                                    </h6>
-                                    <p class="proile-rating">RANKINGS : <span> {{ user.type.name }} </span></p>
+                            <h5>
+                                {{ user.name }}
+                            </h5>
+                            <h6>
+                                {{ user.role }}
+                            </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#/profile" role="tab" aria-controls="profile" aria-selected="true">About</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#/delivery-profile" role="tab" aria-controls="profile" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#/customer-orders" role="tab" aria-controls="customer-orders" aria-selected="false">Orders</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#/delivery-orders" role="tab" aria-controls="delivery-orders" aria-selected="false">Deliveries</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,14 +77,6 @@ Vue.component("profile", {
                                     </div>
                                     <div class="col-md-6">
                                         <p>{{ user.gender }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Broj poena</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ user.Bonuspoints }}</p>
                                     </div>
                                 </div>
                             </div>

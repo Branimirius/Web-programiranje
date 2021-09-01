@@ -21,12 +21,12 @@
     "surname" : "Fring",
     "gender" : "M",
     "dateOfBirth" : "3/3/1966",
-    "role" : "delieveryGuy",
+    "role" : "deliveryGuy",
     "imagePath" : null,
     "orderList" : null,
     "cart" : null,
     "type" : null,
-    "demandList" : [ ],
+    "demandList" : [ 3, 4 ],
     "restaurant" : null
   },
   "Jesse" : {

@@ -24,7 +24,7 @@
     "dateTime" : "3/7/2021 12:00",
     "price" : 1000.0,
     "customer" : "Jesse",
-    "status" : "waiting"
+    "status" : "transporting"
   },
   "4" : {
     "id" : 4,

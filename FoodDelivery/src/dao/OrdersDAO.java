@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import model.ArticleInCart;
 import model.Cart;
 import model.Order;
-import model.OrderToCancel;
+import model.OrderToSend;
 
 public class OrdersDAO {
 	private HashMap<Integer, Order> orders;
@@ -204,13 +204,41 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		return retVal;
 	}
 	
-	public void cancelOrder(OrderToCancel order) {
+	public Collection<Order> getOrdersByDeliverer(List<Integer> demandList){
+		ArrayList<Order> retVal = new ArrayList<Order>();
+		for(Integer i : demandList) {
+			retVal.add(this.orders.get(i));
+		}
+		return retVal;
+	}
+	
+	public Collection<Order> getWaitingOrders(){
+		ArrayList<Order> retVal = new ArrayList<Order>();
+		for(Order o : this.orders.values()) {
+			if(o.getStatus().equals("waiting")) {
+				retVal.add(o);				
+			}
+		}
+		return retVal;
+	}
+	
+	public void cancelOrder(OrderToSend order) {
 		System.out.println("usao u cancel");
 		for(Order o : this.orders.values()) {
-			System.out.println("Provera orders: " + o.getId() + " " + order.id);
 			if(o.getId() == order.id) {
 				o.setStatus("cancelled");
 				System.out.println("cancelled order");
+			}
+		}
+		saveOrders();
+	}
+	
+	public void takeOrder(Integer order) {
+		System.out.println("usao u takeOrder");
+		for(Order o : this.orders.values()) {
+			if(o.getId() == order) {
+				o.setStatus("transporting");
+				System.out.println("transporting order");
 			}
 		}
 		saveOrders();
