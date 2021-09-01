@@ -207,7 +207,12 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 	public Collection<Order> getOrdersByDeliverer(List<Integer> demandList){
 		ArrayList<Order> retVal = new ArrayList<Order>();
 		for(Integer i : demandList) {
-			retVal.add(this.orders.get(i));
+			for(Order o : this.orders.values()) {
+				if(o.getId().equals(i)) {
+					retVal.add(o);
+					System.out.println("Delivery item: " + o.getId());
+				}
+			}
 		}
 		return retVal;
 	}
