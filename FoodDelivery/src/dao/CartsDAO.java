@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -94,7 +95,8 @@ public class CartsDAO {
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/carts.txt");
+			URL url = getClass().getResource("/data/carts.txt");
+			file = new File(url.getPath());
 			in = new BufferedReader(new FileReader(file));
 			System.out.println("nasao fajl");
 			
@@ -146,7 +148,8 @@ public class CartsDAO {
 	}
 	// Serijalizacija
 	public void saveCarts() {
-		File f = new File(cartsPath + "/data/carts.txt");
+		URL url = getClass().getResource("/data/carts.txt");		
+		File f = new File(url.getPath());
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);

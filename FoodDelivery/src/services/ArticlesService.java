@@ -1,5 +1,6 @@
 package services;
 
+import java.io.File;
 import java.util.Collection;
 
 import javax.servlet.ServletContext;
@@ -33,6 +34,9 @@ public class ArticlesService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Article> getArticles() {
 		System.out.println("a tuj si (articles)");
+		
+
+		System.out.println(System.getProperty("user.dir"));
 		return getArticlesDAO().getArticlesCollection();
 	}
 
