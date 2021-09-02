@@ -53,6 +53,9 @@ Vue.component("delivery-orders", {
 								  		<p>{{ o.status }}</p>
 								  		<p>{{ o.price }}din</p>
 								  		<p>{{ o.date }}</p>
+								  		<button v-bind:hidden="o.status!='transporting'" v-on:click="deliverOrder(o)" style="float: right;" >Mark as delivered</button>
+								  		<button v-bind:hidden="o.status=='transporting'" v-on:click="deleteOrder(o)" style="float: right;" >Remove from list</button>
+								  
 								  </li>
 								</ul>
                             </div>
@@ -64,13 +67,20 @@ Vue.component("delivery-orders", {
 `
 	, 
 	methods : {
-		cancelOrder : function(order){
+		deliverOrder : function(order){
 			
 			axios
-	        .post('rest/user/cancelOrder',{"id": order.id})
-			.then(response => (alert("Order from " + order.restaurant + " sucessfully cancelled")));
+	        .post('rest/user/deliverOrder',{"id": order.id})
+			.then(response => (alert("Order from " + order.restaurant + " sucessfully delivered")));
 		    
-		}
+		},
+	deleteOrder : function(order){
+		
+		axios
+        .post('rest/user/deleteOrder',{"id": order.id})
+		.then(response => (alert("Order sucessfully deleted")));
+	    
+	}
 	},
 		    
 	mounted () {		

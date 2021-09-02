@@ -29,7 +29,7 @@
 	
 	            <div class="menu">
 	                <ul>
-	                    <li><a id="restaurantsPanel" href="restaurants.html">Restaurants</a></li>
+	                    <li><a id="restaurantsPanel" href="#/restaurants">Restaurants</a></li>
 	                    <li><a v-bind:hidden="mode!='customer'" id="korpaPanel" href="#/shopping-cart" >Your Cart</a></li>
 	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="deliveryPanel" href="#/deliveries" >Deliveries</a></li>
 	                    <li><a v-bind:hidden="mode!='customer'" id="profilPanel" href="#/profile">Profile</a></li>
@@ -66,7 +66,9 @@
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="js/jquery.min.js"></script>
-	<script src="js/toast.js"></script>	
+	<script src="js/toast.js"></script>
+	<script src="app/restaurantDetails.js"></script>	
+	<script src="app/restaurants.js"></script>
 	<script src="app/deliveryOrders.js"></script>
 	<script src="app/deliveryProfile.js"></script>
 	<script src="app/deliveries.js"></script>

@@ -237,6 +237,16 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		}
 		saveOrders();
 	}
+	public void deliverOrder(OrderToSend order) {
+		System.out.println("usao u deliver");
+		for(Order o : this.orders.values()) {
+			if(o.getId() == order.id) {
+				o.setStatus("delivered");
+				System.out.println("delivered order");
+			}
+		}
+		saveOrders();
+	}
 	
 	public void takeOrder(Integer order) {
 		System.out.println("usao u takeOrder");

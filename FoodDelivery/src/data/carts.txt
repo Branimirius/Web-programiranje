@@ -1,0 +1,44 @@
+{
+  "1" : {
+    "articles" : [ ],
+    "user" : "Jesse",
+    "price" : 0.0,
+    "id" : 1
+  },
+  "2" : {
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
+    "user" : "Skinny",
+    "price" : 250.0,
+    "id" : 2
+  },
+  "3" : {
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
+    "user" : "Cone",
+    "price" : 250.0,
+    "id" : 3
+  }
+}

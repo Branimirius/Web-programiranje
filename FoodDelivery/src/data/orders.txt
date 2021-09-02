@@ -24,7 +24,7 @@
     "dateTime" : "3/7/2021 12:00",
     "price" : 1000.0,
     "customer" : "Jesse",
-    "status" : "transporting"
+    "status" : "delivered"
   },
   "4" : {
     "id" : 4,
@@ -33,7 +33,7 @@
     "dateTime" : "3/7/2021 12:00",
     "price" : 1000.0,
     "customer" : "Jesse",
-    "status" : "transporting"
+    "status" : "delivered"
   },
   "5" : {
     "id" : 5,
@@ -76,5 +76,68 @@
     "price" : 1200.0,
     "customer" : "Skinny",
     "status" : "preparing"
+  },
+  "7" : {
+    "id" : 7,
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
+    "restaurant" : "zorinakrcma1",
+    "dateTime" : "02-09-2021 10:43:52",
+    "price" : 250.0,
+    "customer" : "Skinny",
+    "status" : "cancelled"
+  },
+  "8" : {
+    "id" : 8,
+    "articles" : [ {
+      "article" : {
+        "name" : "Francuski sendvic",
+        "price" : 330.0,
+        "type" : "hrana",
+        "restaurant" : "crepes1",
+        "amount" : 250.0,
+        "description" : "Sendvic sa jajetom kackavaljem i sunkom",
+        "id" : 4,
+        "picture" : "pictures/francuskiSendvic.jpg"
+      },
+      "count" : 1
+    } ],
+    "restaurant" : "crepes1",
+    "dateTime" : "02-09-2021 10:59:04",
+    "price" : 330.0,
+    "customer" : "Jesse",
+    "status" : "cancelled"
+  },
+  "9" : {
+    "id" : 9,
+    "articles" : [ {
+      "article" : {
+        "name" : "Komplet lepinja",
+        "price" : 250.0,
+        "type" : "hrana",
+        "restaurant" : "zorinakrcma1",
+        "amount" : 400.0,
+        "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
+        "id" : 1,
+        "picture" : "pictures/kompletLepinja.jpg"
+      },
+      "count" : 1
+    } ],
+    "restaurant" : "zorinakrcma1",
+    "dateTime" : "02-09-2021 11:03:59",
+    "price" : 250.0,
+    "customer" : "Cone",
+    "status" : "cancelled"
   }
 }

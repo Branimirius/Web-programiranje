@@ -275,6 +275,30 @@ public class UsersService {
 	}
 	
 	@POST
+	@Path("/deliverOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String deliverOrder(OrderToSend order) {
+		OrdersDAO orda = getOrdersDAO();
+		System.out.println("stigao na backend za deliver");
+		orda.deliverOrder(order); 
+		return "OK";
+	}
+	
+	@POST
+	@Path("/deleteOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String deleteOrder(OrderToSend order) {
+		UsersDAO usersDao = getUsersDAO();
+		System.out.println("stigao na backend za delete");
+		usersDao.getLoggedUser().removeDemand(order.id);
+		usersDao.saveUsers();
+		return "OK";
+	}
+	
+	
+	@POST
 	@Path("/takeOrder")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
