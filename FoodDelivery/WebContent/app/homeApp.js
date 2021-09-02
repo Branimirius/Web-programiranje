@@ -6,6 +6,7 @@ const CustomerOrders = { template: '<customer-orders></customer-orders>' }
 const DeliveryOrders = { template: '<delivery-orders></delivery-orders>' }
 const Deliveries = { template: '<deliveries></deliveries>' }
 const Restaurants = { template: '<restaurants></restaurants>' }
+const Users = { template: '<users></users>' }
 const RestaurantDetails = { props: ['id'], template: '<restaurant-details></restaurant-details>' }
 
 const router = new VueRouter({
@@ -18,6 +19,7 @@ const router = new VueRouter({
 	    { path: '/customer-orders', component: CustomerOrders},
 	    { path: '/delivery-orders', component: DeliveryOrders},
 	    { path: '/restaurants', component: Restaurants},
+		{ path: '/users', component: Users},
 	    { path: '/restaurant-details/:id', component: RestaurantDetails, props: true},
 	    { path: '/deliveries', component: Deliveries}
 	  ]
@@ -46,6 +48,8 @@ var app = new Vue({
 		    			this.mode = 'deliveryGuy';
 		    		} else if (response.data.role == "manager") {
 		    			this.mode = 'manager';
+					} else if (response.data.role == "admin") {
+		    			this.mode = 'admin';
 		    		} else {
 		    			this.mode = 'notLogged';
 		    		}
