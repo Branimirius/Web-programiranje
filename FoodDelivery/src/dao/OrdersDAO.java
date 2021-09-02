@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -76,7 +77,8 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/orders.txt");
+			URL url = getClass().getResource("/data/orders.txt");
+			file = new File(url.getPath());
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -122,7 +124,8 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 	}
 	// Serijalizacija
 	private void saveOrders() {
-		File f = new File(ordersPath + "/data/orders.txt");
+		URL url = getClass().getResource("/data/orders.txt");		
+		File f = new File(url.getPath());
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);

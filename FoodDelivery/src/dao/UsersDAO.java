@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -79,7 +80,8 @@ public class UsersDAO {
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/users.txt");
+			URL url = getClass().getResource("/data/users.txt");
+			file = new File(url.getPath());
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -125,7 +127,8 @@ public class UsersDAO {
 	}
 	// Serijalizacija
 	public void saveUsers() {
-		File f = new File(usersPath + "/data/users.txt");
+		URL url = getClass().getResource("/data/users.txt");		
+		File f = new File(url.getPath());
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);

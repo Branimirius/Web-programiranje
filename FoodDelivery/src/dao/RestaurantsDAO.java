@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
@@ -75,7 +76,8 @@ public class RestaurantsDAO {
 		BufferedReader in = null;
 		File file = null;
 		try {
-			file = new File(contextPath + "/data/restaurants.txt");
+			URL url = getClass().getResource("/data/restaurants.txt");
+			file = new File(url.getPath());
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -121,7 +123,8 @@ public class RestaurantsDAO {
 	}
 	// Serijalizacija
 	private void saveRestaurants() {
-		File f = new File(restaurantsPath + "/data/restaurants.txt");
+		URL url = getClass().getResource("/data/restaurants.txt");		
+		File f = new File(url.getPath());
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);
