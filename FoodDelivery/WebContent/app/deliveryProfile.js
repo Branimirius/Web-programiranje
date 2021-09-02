@@ -16,7 +16,7 @@ Vue.component("delivery-profile", {
                             <img v-bind:src="user.imagePath" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="file"/>
+                                <input type="file" accept=".jpg, .jpeg, .png" name="file"/>
                             </div>
                         </div>
                     </div>

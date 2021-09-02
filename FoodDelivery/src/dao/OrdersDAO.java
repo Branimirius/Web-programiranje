@@ -207,7 +207,12 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 	public Collection<Order> getOrdersByDeliverer(List<Integer> demandList){
 		ArrayList<Order> retVal = new ArrayList<Order>();
 		for(Integer i : demandList) {
-			retVal.add(this.orders.get(i));
+			for(Order o : this.orders.values()) {
+				if(o.getId().equals(i)) {
+					retVal.add(o);
+					System.out.println("Delivery item: " + o.getId());
+				}
+			}
 		}
 		return retVal;
 	}
@@ -228,6 +233,16 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 			if(o.getId() == order.id) {
 				o.setStatus("cancelled");
 				System.out.println("cancelled order");
+			}
+		}
+		saveOrders();
+	}
+	public void deliverOrder(OrderToSend order) {
+		System.out.println("usao u deliver");
+		for(Order o : this.orders.values()) {
+			if(o.getId() == order.id) {
+				o.setStatus("delivered");
+				System.out.println("delivered order");
 			}
 		}
 		saveOrders();

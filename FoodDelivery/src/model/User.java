@@ -151,6 +151,9 @@ public class User {
 	public void addDemand(Integer demand) {
 		this.demandList.add(demand);
 	}
+	public void removeDemand(Integer demand) {
+		this.demandList.remove(demand);
+	}
 	public String getRestaurant() {
 		return restaurant;
 	}

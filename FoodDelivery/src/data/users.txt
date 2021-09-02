@@ -14,6 +14,25 @@
     "demandList" : null,
     "restaurant" : null
   },
+  "Cone" : {
+    "username" : "Cone",
+    "password" : "1234",
+    "name" : "Nemanja",
+    "surname" : "Radojcic",
+    "gender" : "Male",
+    "dateOfBirth" : "14/7/1999",
+    "role" : "customer",
+    "imagePath" : null,
+    "orderList" : [ ],
+    "cart" : 3,
+    "type" : {
+      "name" : "bronze",
+      "discount" : 5.0,
+      "requiredPoints" : 500.0
+    },
+    "demandList" : null,
+    "restaurant" : null
+  },
   "Gus" : {
     "username" : "Gus",
     "password" : "1234",
@@ -26,7 +45,7 @@
     "orderList" : null,
     "cart" : null,
     "type" : null,
-    "demandList" : [ 3, 4 ],
+    "demandList" : [ 4 ],
     "restaurant" : null
   },
   "Jesse" : {
