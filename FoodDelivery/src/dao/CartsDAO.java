@@ -84,6 +84,9 @@ public class CartsDAO {
 		this.carts = carts;
 	}
 	public void addCart(Cart c) {
+		if(getCarts() == null) {
+			this.setCarts(new HashMap<Integer, Cart>());
+		}
 		getCarts().put(c.getId(), c);
 		saveCarts();
 	}

@@ -10,13 +10,13 @@ Vue.component("delivery-orders", {
 	
 <div class="container emp-profile" v-if="user">
             <form method="post">
-                     <div class="row">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img v-bind:src="user.imagePath" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="file"/>
+                                <input type="file" accept=".jpg, .jpeg, .png" name="file"/>
                             </div>
                         </div>
                     </div>
@@ -43,22 +43,21 @@ Vue.component("delivery-orders", {
                     </div>
                 </div>
                 <div class="row">
-                    
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
-                            
                             <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="profile-tab">
-                                        
-                                        <ul v-for="o in orders" class="list-group">
-										  <li class="list-group-item">
-										  		<label> {{ o.restaurant }}</label>
-										  		<p>{{ o.status }}</p>
-										  		<p>{{ o.price }}din</p>
-										  		<p>{{ o.date }}</p>
-										  		<button v-bind:hidden="o.status!='processing'" v-on:click="cancelOrder(o)" style="float: right;" >Cancel order</button>
-										  </li>
-										  
-										</ul>
+                                <ul v-for="o in orders" class="list-group">
+								  <li class="list-group-item">
+								  		<label> {{ o.restaurant }}</label>
+								  		<p>{{ o.customer }}</p>
+								  		<p>{{ o.status }}</p>
+								  		<p>{{ o.price }}din</p>
+								  		<p>{{ o.date }}</p>
+								  		<button v-bind:hidden="o.status!='transporting'" v-on:click="deliverOrder(o)" style="float: right;" >Mark as delivered</button>
+								  		<button v-bind:hidden="o.status=='transporting'" v-on:click="deleteOrder(o)" style="float: right;" >Remove from list</button>
+								  
+								  </li>
+								</ul>
                             </div>
                         </div>
                     </div>
@@ -68,13 +67,20 @@ Vue.component("delivery-orders", {
 `
 	, 
 	methods : {
-		cancelOrder : function(order){
+		deliverOrder : function(order){
 			
 			axios
-	        .post('rest/user/cancelOrder',{"id": order.id})
-			.then(response => (alert("Order from " + order.restaurant + " sucessfully cancelled")));
+	        .post('rest/user/deliverOrder',{"id": order.id})
+			.then(response => (alert("Order from " + order.restaurant + " sucessfully delivered")));
 		    
-		}
+		},
+	deleteOrder : function(order){
+		
+		axios
+        .post('rest/user/deleteOrder',{"id": order.id})
+		.then(response => (alert("Order sucessfully deleted")));
+	    
+	}
 	},
 		    
 	mounted () {		
