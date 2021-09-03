@@ -62,7 +62,7 @@ public class UsersService {
 		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
 		return usersDao.getUsersCollection();
 	}
-	
+
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -243,10 +243,9 @@ public class UsersService {
 	@Path("/activeOrders")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Order> activeOrders() {
-		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());
-		
+		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());	
 	}
-	
+
 	@GET
 	@Path("/activeDemands")
 	@Produces(MediaType.APPLICATION_JSON)

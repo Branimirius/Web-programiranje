@@ -6,28 +6,34 @@ Vue.component("users", {
 		    }
 	},
 	template: ` 
-        <tbody>
-            <div v-for="s in users">            
-                <div class="card-content" >
-                    <li class="list-group-item">
-                        <p>Username: {{ s.username }}</p>
-                        <p>Name: {{ s.name }}</p>
-                        <p>Surname: {{ s.surname }}</p>
-                    </li>
-                </div>                                       
-            </div>   
-        </tbody>	  
+        <table class="table table-hover" style="background-color:white">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Points</th>
+                    <th scope="col">Type</th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody  v-for="s in users">
+                <tr>
+                    <td>@{{ s.username }}</td>
+                    <td>{{ s.surname }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.role }}</td>
+                    <td>{{ s.bonusPoints }}</td>
+                    <td v-if="user.type">{{ s.type.name }}</td>
+                    <a class="btn btn-primary" v-bind:href="'#/user-details/'+ s.username" role="button">INFO</a>
+                </tr> 
+            </tbody>
+        </table>  
+            
+                
 `
-	, 
-	methods : {
-		takeOrder : function(order){
-			
-			axios
-	        .post('rest/user/takeOrder',{"id": order.id})
-			.then(response => (alert("Order for " + order.restaurant + " awaiting confirmation from manager.")));
-		    location.reload();
-		}
-	},
+	,
 		    
 	mounted () {		
 		axios
