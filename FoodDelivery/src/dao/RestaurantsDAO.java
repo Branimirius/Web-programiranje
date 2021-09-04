@@ -170,5 +170,15 @@ public class RestaurantsDAO {
 			
 			System.out.println("loaded test data");
 		}
-
+	
+	public Restaurant getActiveRestaurant(String restaurant) {
+		for(Restaurant r : this.restaurants.values()) {
+			System.out.println("TEST pairs: " + r.getId() + " " + restaurant);
+			if(r.getId().equals(restaurant)) {
+				System.out.println("returned: " + r.getId());
+				return r;
+			}
+		}
+		return null;
+	}
 }

@@ -12,7 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.OrdersDAO;
 import dao.RestaurantsDAO;
+import dao.UsersDAO;
+import model.Order;
+import model.OrderToSend;
 import model.Restaurant;
 
 @Path("/restaurants")
@@ -35,6 +39,42 @@ public class RestaurantsService {
 		System.out.println("a tuj si (restaurants)");
 		return getRestaurantsDAO().getRestaurantsCollection();
 	}
+	
+	@GET
+	@Path("/restaurantOrders")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Order> waitingOrders() {
+		return getOrdersDAO().getOrdersByRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
+	
+	@GET
+	@Path("/activeRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Restaurant activeRestaurant() {
+		return getRestaurantsDAO().getActiveRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
+	
+	@POST
+	@Path("/processOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String processOrder(OrderToSend order) {
+		OrdersDAO orda = getOrdersDAO();
+		System.out.println("stigao na backend za process");
+		orda.processOrder(order); 
+		return "OK";
+	}
+	
+	@POST
+	@Path("/prepareOrder")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String prepareOrder(OrderToSend order) {
+		OrdersDAO orda = getOrdersDAO();
+		System.out.println("stigao na backend za prepare");
+		orda.prepareOrder(order); 
+		return "OK";
+	}
 
 	/*
 	@PostConstruct
@@ -55,5 +95,27 @@ public class RestaurantsService {
 			context.setAttribute("restaurants", restaurants);
 		} 
 		return restaurants;
+	}
+	
+	private OrdersDAO getOrdersDAO() {
+		System.out.println("making orders dao");
+		OrdersDAO orders = (OrdersDAO) context.getAttribute("orders");
+		if (orders == null) {
+			orders = new OrdersDAO();
+			
+			context.setAttribute("orders", orders);
+		} 
+		return orders;
+	}
+	
+	private UsersDAO getUsersDAO() {
+		System.out.println("making users dao");
+		UsersDAO users = (UsersDAO) context.getAttribute("users");
+		if (users == null) {
+			users = new UsersDAO();
+			
+			context.setAttribute("users", users);
+		} 
+		return users;
 	}
 }

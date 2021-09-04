@@ -31,6 +31,17 @@ li.articles:hover {
   background: #eee;
   cursor: pointer;
 }
+
+a.articles {
+  background: #d3d3d3d3;
+  opacity: 0.9;
+  height: 5%;
+}
+
+a.articles:hover {
+  background: #eee;
+  cursor: pointer;
+}
 tbody.articles {
 	overflow: scroll;
 }

@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -78,6 +79,22 @@ public class ArticlesDAO {
 		return null;
 	}
 	
+	public Article searchArticle(String article) {
+		if (getArticles() != null) {
+			for (Article k : getArticles().values()) {
+				if (k.getName().equals(article)) {
+					return k;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void addArticle(Article k) {
+		getArticles().put(k.getId(), k);
+		saveArticles();
+	}
+	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
 	public void loadArticles(String contextPath) {
@@ -143,6 +160,7 @@ public class ArticlesDAO {
 			String stringArticles = objectMapper.writeValueAsString(articles);
 			fileWriter.write(stringArticles);
 			fileWriter.flush();
+			System.out.println("sacuvao artikle");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -176,6 +194,19 @@ public class ArticlesDAO {
 			articles.put(delieveryGuy.getId(), delieveryGuy);
 			articles.put(manager.getId(), manager);
 	}
-
+	
+	public Collection<Article> getArticlesByRestaurant(String restaurantId){
+		ArrayList<Article> articles = new ArrayList<Article>();
+		for(Article a : this.articles.values()) {
+			if(a.getRestaurant().equals(restaurantId)) {
+				articles.add(a);
+			}
+		}
+		return articles;
+	}
+	
+	public Integer generateId() {
+		return this.articles.size() + 1;
+	}
 
 }

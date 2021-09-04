@@ -7,7 +7,7 @@
     "amount" : 400.0,
     "description" : "Lepinja sa kajmakom jajima i ovcijim pretopom",
     "id" : 1,
-    "picture" : "pictures/kompletLepinja.jpg"
+    "picture" : "pictures/kompletLepinja.jpeg"
   },
   "2" : {
     "name" : "Margarita",
@@ -17,7 +17,7 @@
     "amount" : 1500.0,
     "description" : "Pica sa sirevima i paradajz sosom",
     "id" : 2,
-    "picture" : "pictures/margarita.jpg"
+    "picture" : "pictures/margarita.jpeg"
   },
   "3" : {
     "name" : "Giros mali",
@@ -27,7 +27,7 @@
     "amount" : 200.0,
     "description" : "Mali giros mesano meso",
     "id" : 3,
-    "picture" : "pictures/giros.jpg"
+    "picture" : "pictures/giros.jpeg"
   },
   "4" : {
     "name" : "Francuski sendvic",
@@ -37,6 +37,6 @@
     "amount" : 250.0,
     "description" : "Sendvic sa jajetom kackavaljem i sunkom",
     "id" : 4,
-    "picture" : "pictures/francuskiSendvic.jpg"
+    "picture" : "pictures/francuskiSendvic.jpeg"
   }
 }

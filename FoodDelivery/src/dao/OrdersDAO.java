@@ -230,6 +230,16 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		return retVal;
 	}
 	
+	public Collection<Order> getOrdersByRestaurant(String restaurant){
+		ArrayList<Order> retVal = new ArrayList<Order>();
+		for(Order o : this.orders.values()) {
+			if(o.getRestaurant().equals(restaurant)) {
+				retVal.add(o);				
+			}
+		}
+		return retVal;
+	}
+	
 	public void cancelOrder(OrderToSend order) {
 		System.out.println("usao u cancel");
 		for(Order o : this.orders.values()) {
@@ -246,6 +256,28 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 			if(o.getId() == order.id) {
 				o.setStatus("delivered");
 				System.out.println("delivered order");
+			}
+		}
+		saveOrders();
+	}
+	
+	public void processOrder(OrderToSend order) {
+		System.out.println("usao u process");
+		for(Order o : this.orders.values()) {
+			if(o.getId() == order.id) {
+				o.setStatus("preparing");
+				System.out.println("processed order");
+			}
+		}
+		saveOrders();
+	}
+	
+	public void prepareOrder(OrderToSend order) {
+		System.out.println("usao u process");
+		for(Order o : this.orders.values()) {
+			if(o.getId() == order.id) {
+				o.setStatus("waiting");
+				System.out.println("prepared order");
 			}
 		}
 		saveOrders();

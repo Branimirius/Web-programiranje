@@ -12,9 +12,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import dao.ArticlesDAO;
+import dao.UsersDAO;
 import model.Article;
+import model.ArticleDTO;
+import model.CustomerType;
+import model.User;
+import model.UserToRegister;
 
 @Path("/articles")
 public class ArticlesService {
@@ -34,12 +40,42 @@ public class ArticlesService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Article> getArticles() {
 		System.out.println("a tuj si (articles)");
-		
-
-		System.out.println(System.getProperty("user.dir"));
 		return getArticlesDAO().getArticlesCollection();
 	}
+	
+	@GET
+	@Path("/getArticlesByRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Article> getArticlesByRestaurant() {
+		return getArticlesDAO().getArticlesByRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
 
+	@POST
+	@Path("/addArticle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addArticle(ArticleDTO articleToAdd) {
+		System.out.println("Backend for adding article is established.");
+		if (articleToAdd.name == null || articleToAdd.description == null
+				|| articleToAdd.name.equals("")
+				|| articleToAdd.description.equals("")) {
+			System.out.println("Prazna polja" + articleToAdd.name + articleToAdd.price);
+			return Response.status(400).entity("Name i description su obavezna polja.").build();
+		}
+		
+		ArticlesDAO articlesDao = getArticlesDAO();
+
+		if (articlesDao.searchArticle(articleToAdd.name) != null) {
+			System.out.println("vec je dodat artikal");
+			return Response.status(400).entity("Name koji ste uneli vec je zauzet.").build();
+		} else {
+			System.out.println("dodaje artikal....");
+			articlesDao.addArticle(new Article(articleToAdd.name, articleToAdd.price, articleToAdd.type, getUsersDAO().getLoggedUser().getRestaurant(), articleToAdd.amount,
+					articleToAdd.description, articleToAdd.imagePath, articlesDao.generateId()));
+			System.out.println("dodao artikal uspesno");
+			return Response.status(200).build();
+		}
+	}
 	/*
 	@PostConstruct
 	public void init() {
@@ -59,5 +95,15 @@ public class ArticlesService {
 			context.setAttribute("articles", articles);
 		} 
 		return articles;
+	}
+	private UsersDAO getUsersDAO() {
+		System.out.println("making users dao");
+		UsersDAO users = (UsersDAO) context.getAttribute("users");
+		if (users == null) {
+			users = new UsersDAO();
+			
+			context.setAttribute("users", users);
+		} 
+		return users;
 	}
 }

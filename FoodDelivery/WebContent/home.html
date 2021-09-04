@@ -29,10 +29,12 @@
 	
 	            <div class="menu">
 	                <ul>
-	                    <li><a id="restaurantsPanel" href="#/restaurants">Restaurants</a></li>
+	                    <li><a v-bind:hidden="mode=='manager'" id="restaurantsPanel" href="#/restaurants">Restaurants</a></li>
 	                    <li><a v-bind:hidden="mode!='customer'" id="korpaPanel" href="#/shopping-cart" >Your Cart</a></li>
 	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="deliveryPanel" href="#/deliveries" >Deliveries</a></li>
-	                    <li><a v-bind:hidden="mode!='manager'" id="restaurantPanel" href="#/restaurant" >Restaurant</a></li>
+	                    <li><a v-bind:hidden="mode!='manager'" id="restaurantPanel" href="#/restaurant" >Restaurant orders</a></li>
+	                    <li><a v-bind:hidden="mode!='manager'" id="customersPanel" href="#/restaurant-customers" >Customers</a></li>
+	                    <li><a v-bind:hidden="mode!='manager'" id="articlesPanel" href="#/restaurant-articles" >Articles</a></li>
 	                    <li><a v-bind:hidden="mode!='customer'" id="profilPanel" href="#/profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="devGuyProfile" href="#/delivery-profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='notLogged'" style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
@@ -67,9 +69,11 @@
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="js/jquery.min.js"></script>
-	<script src="js/toast.js"></script>	
+	<script src="js/toast.js"></script>
+	<script src="app/addArticle.js"></script>	
 	<script src="app/restaurant.js"></script>
-	<script src="app/restaurantDetails.js"></script>	
+	<script src="app/restaurantDetails.js"></script>
+	<script src="app/restaurantArticles.js"></script>	
 	<script src="app/restaurants.js"></script>
 	<script src="app/deliveryOrders.js"></script>
 	<script src="app/deliveryProfile.js"></script>
