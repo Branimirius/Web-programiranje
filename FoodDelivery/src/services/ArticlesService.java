@@ -1,6 +1,7 @@
 package services;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletContext;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import dao.ArticlesDAO;
+import dao.OrdersDAO;
 import dao.UsersDAO;
 import model.Article;
 import model.ArticleDTO;
@@ -48,6 +50,15 @@ public class ArticlesService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Article> getArticlesByRestaurant() {
 		return getArticlesDAO().getArticlesByRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
+	
+	@GET
+	@Path("/getCustomersByRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getCustomersByRestaurant() {
+		UsersDAO users = getUsersDAO();
+		ArrayList<String> usernames = getOrdersDAO().getCustomersByRestaurant(users.getLoggedUser().getRestaurant());		
+		return users.getCustomersByUsernames(usernames);
 	}
 
 	@POST
@@ -105,5 +116,15 @@ public class ArticlesService {
 			context.setAttribute("users", users);
 		} 
 		return users;
+	}
+	private OrdersDAO getOrdersDAO() {
+		System.out.println("making orders dao");
+		OrdersDAO orders = (OrdersDAO) context.getAttribute("orders");
+		if (orders == null) {
+			orders = new OrdersDAO();
+			
+			context.setAttribute("orders", orders);
+		} 
+		return orders;
 	}
 }

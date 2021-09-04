@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -191,6 +192,17 @@ public class UsersDAO {
 
 	public void setLoggedUser(User loggedUser) {
 		this.loggedUser = loggedUser;
+	}
+	
+	public Collection<User> getCustomersByUsernames(ArrayList<String> usernames){
+		ArrayList<User> retVal = new ArrayList<User>();
+		for(User u : this.users.values()) {
+			if(usernames.contains(u.getUsername())) {
+				retVal.add(u);
+			}
+		}
+		return retVal;
+		
 	}
 	
 

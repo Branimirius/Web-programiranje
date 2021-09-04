@@ -46,7 +46,7 @@ Vue.component("restaurant", {
                 <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="profile-tab">
                     <ul v-for="o in orders" class="list-group">
 					  <li class="list-group-item">
-					  		<label> {{ o.restaurant }}</label>
+					  		<label> {{ o.customer }}</label>
 					  		<p>{{ o.status }}</p>
 					  		<p>{{ o.price }}din</p>
 					  		<p>{{ o.date }}</p>

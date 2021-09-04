@@ -12,9 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.CommentsDAO;
 import dao.OrdersDAO;
 import dao.RestaurantsDAO;
 import dao.UsersDAO;
+import model.Comment;
 import model.Order;
 import model.OrderToSend;
 import model.Restaurant;
@@ -45,6 +47,13 @@ public class RestaurantsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Order> waitingOrders() {
 		return getOrdersDAO().getOrdersByRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
+	
+	@GET
+	@Path("/restaurantComments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Comment> restaurantComments() {
+		return getCommentsDAO().getCommentsByRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
 	}
 	
 	@GET
@@ -117,5 +126,16 @@ public class RestaurantsService {
 			context.setAttribute("users", users);
 		} 
 		return users;
+	}
+	
+	private CommentsDAO getCommentsDAO() {
+		System.out.println("making comments dao");
+		CommentsDAO comments = (CommentsDAO) context.getAttribute("comments");
+		if (comments == null) {
+			comments = new CommentsDAO();
+			
+			context.setAttribute("comments", comments);
+		} 
+		return comments;
 	}
 }

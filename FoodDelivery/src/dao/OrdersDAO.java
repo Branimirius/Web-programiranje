@@ -294,6 +294,17 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		saveOrders();
 	}
 	
+	public ArrayList<String> getCustomersByRestaurant(String restaurant){
+		ArrayList<String> retVal = new ArrayList<String>();
+		for(Order o : this.orders.values()) {
+			if(o.getRestaurant().equals(restaurant)) {
+				retVal.add(o.getCustomer());
+			}
+		}
+		
+		return retVal;
+	}
+	
 	public Integer generateId() {
 		return this.orders.size() + 1;
 	}
