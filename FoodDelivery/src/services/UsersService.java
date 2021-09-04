@@ -23,10 +23,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.Article;
+import model.ArticleDTO;
 import model.ArticleInCart;
 import model.ArticleToAdd;
 import model.Cart;
+import model.Comment;
 import model.CustomerType;
+import model.FeedbackDTO;
 import model.Order;
 import model.OrderToSend;
 import model.User;
@@ -35,6 +38,7 @@ import model.UserToRegister;
 import sun.security.action.GetLongAction;
 import dao.ArticlesDAO;
 import dao.CartsDAO;
+import dao.CommentsDAO;
 import dao.OrdersDAO;
 import dao.UsersDAO;
 import dao.UsersDAO;
@@ -311,6 +315,27 @@ public class UsersService {
 		return "OK";
 	}
 	
+	@POST
+	@Path("/addFeedback")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addFeedback(FeedbackDTO feedbackToAdd) {
+		System.out.println("Backend for adding feedback is established.");
+		if (feedbackToAdd.text == null || feedbackToAdd.grade == null
+				|| feedbackToAdd.text.equals("")) {
+			System.out.println("Prazna polja" + feedbackToAdd.text + feedbackToAdd.grade);
+			return Response.status(400).entity("Empty").build();
+		}
+		
+		CommentsDAO commentsDao = getCommentsDAO();
+		
+		System.out.println("dodaje komentar...." + feedbackToAdd.restaurant + " " + feedbackToAdd.text);
+		commentsDao.addComment(new Comment(getUsersDAO().getLoggedUser().getUsername(), feedbackToAdd.restaurant, feedbackToAdd.text, feedbackToAdd.grade, commentsDao.generateId()));
+		System.out.println("dodao komentar uspesno");
+		return Response.status(200).build();
+		
+	}
+	
 	private ArticlesDAO getArticlesDAO() {
 		System.out.println("making articles dao");
 		ArticlesDAO articles = (ArticlesDAO) context.getAttribute("articles");
@@ -366,7 +391,17 @@ public class UsersService {
 			cartsDao.addCart(cart);
 		}				
 		return cart;
-		
+	}
+	
+	private CommentsDAO getCommentsDAO() {
+		System.out.println("making comments dao");
+		CommentsDAO comments = (CommentsDAO) context.getAttribute("comments");
+		if (comments == null) {
+			comments = new CommentsDAO();
+			
+			context.setAttribute("comments", comments);
+		} 
+		return comments;
 	}
 
 }

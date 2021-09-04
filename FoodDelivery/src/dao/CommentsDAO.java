@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import model.Article;
 import model.Comment;
 
 public class CommentsDAO {
@@ -64,6 +65,11 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 		this.comments = comments;
 	}
 	
+	public void addComment(Comment k) {
+		getComments().put(k.getId(), k);
+		saveComments();
+	}
+	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
 	private void loadComments(String contextPath) {
@@ -73,6 +79,7 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 		try {
 			URL url = getClass().getResource("/data/comments.txt");
 			file = new File(url.getPath());
+			//file = new File(contextPath + "/data/comments.txt");
 			in = new BufferedReader(new FileReader(file));
 
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -120,6 +127,7 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 	private void saveComments() {
 		URL url = getClass().getResource("/data/comments.txt");		
 		File f = new File(url.getPath());
+		//File f = new File(this.commentsPath + "/data/comments.txt");
 		FileWriter fileWriter = null;
 		try {
 			fileWriter = new FileWriter(f);

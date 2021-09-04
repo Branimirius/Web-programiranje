@@ -57,6 +57,8 @@ Vue.component("customer-orders", {
 										  		<p>{{ o.price }}din</p>
 										  		<p>{{ o.date }}</p>
 										  		<button v-bind:hidden="o.status!='processing'" v-on:click="cancelOrder(o)" style="float: right;" >Cancel order</button>
+										  		<a v-bind:hidden="o.status!='delivered'" v-bind:href="'#/leave-feedback/'+ o.restaurant" style="background: #d3d3d3d3; opacity: 0.9; float: right;"> Leave feedback</a>
+										  
 										  </li>
 										  
 										</ul>
