@@ -24,9 +24,8 @@ Vue.component("users", {
                     <td>{{ s.surname }}</td>
                     <td>{{ s.name }}</td>
                     <td>{{ s.role }}</td>
-                    <td>{{ s.bonusPoints }}</td>
-                    <td v-if="user.type">{{ s.type.name }}</td>
-                    <a class="btn btn-primary" v-bind:href="'#/user-details/'+ s.username" role="button">INFO</a>
+                    <td v-if="s.bonusPoints">{{ s.bonusPoints }}</td>
+                    <td v-if="s.type">{{ s.type.name }}</td>
                 </tr> 
             </tbody>
         </table>  
@@ -39,7 +38,7 @@ Vue.component("users", {
 		axios
         .get('rest/user/loggedUser')
         .then(response => (this.user = response.data));
-	    
+	    //<a class="btn btn-primary" v-bind:href="'#/user-details/'+ s.username" role="button">INFO</a>
         axios
         .get('rest/user/users')
         .then(response => (this.users = response.data));
