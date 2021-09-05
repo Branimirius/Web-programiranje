@@ -19,7 +19,20 @@ public class Restaurant {
 	private String logoPath;
 	private String id;
 	private String title;
+	private double grade;
 	
+	public Boolean getWorking() {
+		return working;
+	}
+	public void setWorking(Boolean working) {
+		this.working = working;
+	}
+	public double getGrade() {
+		return grade;
+	}
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	public Restaurant() {}
 	public Restaurant(String name, String type, Boolean status, Location location, String logoPath,
@@ -46,6 +59,21 @@ public class Restaurant {
 		*/
 	}
 
+	public void calculateGrade(ArrayList<Integer> grades) {
+		double sum = 0.0;
+		if(grades.size() != 0) {
+			for(Integer g : grades) {
+				sum += g;
+			}
+			this.grade = sum / (grades.size());
+		}
+		else {
+			this.grade = 5.0;
+		}
+		
+		
+	}
+	
 	public String getName() {
 		return name;
 	}

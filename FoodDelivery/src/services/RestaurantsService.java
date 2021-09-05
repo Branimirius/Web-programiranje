@@ -39,6 +39,7 @@ public class RestaurantsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Restaurant> getRestaurants() {
 		System.out.println("a tuj si (restaurants)");
+		getRestaurantsDAO().calculateGrades(getCommentsDAO().getCommentsCollection());
 		return getRestaurantsDAO().getRestaurantsCollection();
 	}
 	

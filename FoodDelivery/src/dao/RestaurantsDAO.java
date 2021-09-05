@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import model.Restaurant;
+import model.Comment;
 import model.CustomerType;
 import model.Location;
 import model.Restaurant;
@@ -180,5 +182,24 @@ public class RestaurantsDAO {
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<Integer> getRestaurantGrades(Collection<Comment> comments, String restaurant){
+		ArrayList<Integer> retVal = new ArrayList<Integer>();
+		for(Comment c : comments) {
+			if(c.getRestaurant().equals(restaurant)) {
+				retVal.add(c.getGrade());
+			}
+		}
+		return retVal;
+	}
+	
+	public void calculateGrades(Collection<Comment> comments) {
+		for(Restaurant r : this.restaurants.values()) {
+			r.setGrade(5.0);
+			r.calculateGrade(this.getRestaurantGrades(comments, r.getId()));
+			System.out.println("Restoran " + r.getId() + " ocena: " + r.getGrade());
+		}
+		this.saveRestaurants();
 	}
 }
