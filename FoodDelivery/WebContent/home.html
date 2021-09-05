@@ -41,7 +41,8 @@
 	                    <li><a v-bind:hidden="mode!='manager'" id="customersPanel" href="#/restaurant-customers" >Customers</a></li>
 	                    <li><a v-bind:hidden="mode!='manager'" id="articlesPanel" href="#/restaurant-articles" >Articles</a></li>
 						<li><a v-bind:hidden="mode!='admin'" id="usersPanel" href="#/users" >Users</a></li>
-	                    <li><a v-bind:hidden="mode!='customer'" id="profilPanel" href="#/profile">Profile</a></li>
+						<li><a v-bind:hidden="mode!='admin'" id="createUsersPanel" href="#/create-users" >Create users</a></li>
+	                    <li><a id="profilPanel" href="#/profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="devGuyProfile" href="#/delivery-profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='notLogged'" style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
 	                    <li><a v-bind:hidden="mode=='notLogged'" style="background : #E2472F;" class="active" id="logout" v-on:click = "logOut" href="login.html">Log Out</a></li>
@@ -85,6 +86,7 @@
 	<script src="app/restaurantArticles.js"></script>	
 	<script src="app/users.js"></script>
 	<script src="app/userDetails.js"></script>
+	<script src="app/create-users.js"></script>
 	<script src="app/restaurantDetails.js"></script>	
 	<script src="app/restaurants.js"></script>
 	<script src="app/deliveryOrders.js"></script>

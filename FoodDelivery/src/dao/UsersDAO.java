@@ -128,6 +128,7 @@ public class UsersDAO {
 	}
 	// Serijalizacija
 	public void saveUsers() {
+		System.out.println("OVDEEEEEEEEEEEEEEEE");
 		URL url = getClass().getResource("/data/users.txt");		
 		File f = new File(url.getPath());
 		FileWriter fileWriter = null;

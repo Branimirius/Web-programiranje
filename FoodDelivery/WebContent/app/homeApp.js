@@ -15,6 +15,7 @@ const RestaurantComments = { template: '<restaurant-comments></restaurant-commen
 const AddArticle = { template: '<add-article></add-article>' }
 const LeaveFeedback = { props: ['id'], template: '<leave-feedback></leave-feedback>' }
 const UserDetails = { props: ['id'], template: '<user-details></user-details>' }
+const CreateUsers = { template: '<create-users></create-users>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -33,6 +34,7 @@ const router = new VueRouter({
 	    { path: '/restaurant-comments', component: RestaurantComments},
 	    { path: '/add-article', component: AddArticle},
 		{ path: '/users', component: Users},
+		{ path: '/create-users', component: CreateUsers},
 		{ path: '/user-details/:id', component: UserDetails, props: true},
 	    { path: '/restaurant-details/:id', component: RestaurantDetails, props: true},
 	    { path: '/leave-feedback/:id', component: LeaveFeedback, props: true}
