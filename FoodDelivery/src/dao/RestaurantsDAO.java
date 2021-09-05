@@ -196,7 +196,7 @@ public class RestaurantsDAO {
 	
 	public void calculateGrades(Collection<Comment> comments) {
 		for(Restaurant r : this.restaurants.values()) {
-			r.setGrade(5.0);
+			r.setGrade(5);
 			r.calculateGrade(this.getRestaurantGrades(comments, r.getId()));
 			System.out.println("Restoran " + r.getId() + " ocena: " + r.getGrade());
 		}

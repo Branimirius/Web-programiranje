@@ -20,7 +20,49 @@ Vue.component("restaurants", {
 		                        <h5 class="card-title">{{ s.name }}</h5>
 		                    </a>
 		                    <p class="card-text"> {{ s.title }} </p>
-		                    <button id="serbia-restaurant" class="btn btn-primary">Saznaj više...</button>	                    
+		                    
+		                    <div v-show="s.grade == 0">
+					  			<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 1">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 2">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 3">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 4">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 5">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+					  		</div>
 		                  </div>	                  
 		            </div>
 	             </div>                                       

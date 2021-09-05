@@ -15,13 +15,55 @@ Vue.component("web-shop", {
 	                    alt="Card image cap" style="width: 20rem; height: 10rem; opacity: 1; float: right;" >
 		                                        
 	                <div >
-		                  <div class="card-body" >
+	                   <div class="card-body" >
 		                    <a v-bind:href="'#/learn-more/'+ s.id" >
 		                        <h5 class="card-title">{{ s.name }}</h5>
 		                    </a>
 		                    <p class="card-text"> {{ s.title }} </p>
-		                    <button id="serbia-restaurant" class="btn btn-primary">Saznaj više...</button>	                    
-		                  </div>	                  
+		                    
+		                    <div v-show="s.grade == 0">
+					  			<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 1">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 2">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 3">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 4">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+					  		</div>
+					  		<div v-show="s.grade == 5">
+						  		<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+					  		</div>
+	                    </div>	                  
 		            </div>
 	             </div>                                       
 	          </div>   

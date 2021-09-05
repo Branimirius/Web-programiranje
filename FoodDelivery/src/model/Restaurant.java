@@ -19,7 +19,7 @@ public class Restaurant {
 	private String logoPath;
 	private String id;
 	private String title;
-	private double grade;
+	private Integer grade;
 	
 	public Boolean getWorking() {
 		return working;
@@ -30,7 +30,7 @@ public class Restaurant {
 	public double getGrade() {
 		return grade;
 	}
-	public void setGrade(double grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
@@ -65,10 +65,10 @@ public class Restaurant {
 			for(Integer g : grades) {
 				sum += g;
 			}
-			this.grade = sum / (grades.size());
+			this.grade = (int) Math.round(sum / (grades.size()));
 		}
 		else {
-			this.grade = 5.0;
+			this.grade = 5;
 		}
 		
 		
