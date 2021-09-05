@@ -35,6 +35,7 @@ import model.OrderToSend;
 import model.User;
 import model.UserToLog;
 import model.UserToRegister;
+import dto.UserRegistrationByAdmin;
 import sun.security.action.GetLongAction;
 import dao.ArticlesDAO;
 import dao.CartsDAO;
@@ -66,7 +67,7 @@ public class UsersService {
 		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
 		return usersDao.getUsersCollection();
 	}
-	
+
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -94,6 +95,27 @@ public class UsersService {
 		}
 	}
 		
+	@POST
+	@Path("/createUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createUser(UserRegistrationByAdmin userToRegister) {
+		System.out.println("Backend for registration is established."+ userToRegister.username + "  " + userToRegister.role);
+		
+		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+
+		if (usersDao.searchUser(userToRegister.username) != null) {
+			System.out.println("vec je registrovan lik");
+			return Response.status(400).entity("Username koji ste uneli vec je zauzet.").build();
+		} else {
+			System.out.println("dodaje lika....");
+			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
+					userToRegister.date, userToRegister.role, null, 0, null, null));
+			System.out.println("dodao lika uspesno");
+			return Response.status(200).build();
+		}
+	}
+
 	@GET
 	@Path("/logout")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -247,10 +269,9 @@ public class UsersService {
 	@Path("/activeOrders")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Order> activeOrders() {
-		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());
-		
+		return getOrdersDAO().getOrdersByUser(getUsersDAO().getLoggedUser().getUsername());	
 	}
-	
+
 	@GET
 	@Path("/activeDemands")
 	@Produces(MediaType.APPLICATION_JSON)
