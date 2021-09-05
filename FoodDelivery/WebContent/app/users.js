@@ -25,7 +25,9 @@ Vue.component("users", {
                     <td>{{ s.name }}</td>
                     <td>{{ s.role }}</td>
                     <td v-if="s.bonusPoints">{{ s.bonusPoints }}</td>
-                    <td v-if="s.type">{{ s.type.name }}</td>
+                    <td v-else >0</td>
+                    <td v-if="s.role=='customer'">{{ s.type.name }}</td>
+                    <td v-else>X</td>
                 </tr> 
             </tbody>
         </table>  

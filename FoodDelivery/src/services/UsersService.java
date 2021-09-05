@@ -64,7 +64,7 @@ public class UsersService {
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User> getUsers() {
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 		return usersDao.getUsersCollection();
 	}
 
@@ -102,7 +102,7 @@ public class UsersService {
 	public Response createUser(UserRegistrationByAdmin userToRegister) {
 		System.out.println("Backend for registration is established."+ userToRegister.username + "  " + userToRegister.role);
 		
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 
 		if (usersDao.searchUser(userToRegister.username) != null) {
 			System.out.println("vec je registrovan lik");
