@@ -7,12 +7,14 @@ const DeliveryOrders = { template: '<delivery-orders></delivery-orders>' }
 const Deliveries = { template: '<deliveries></deliveries>' }
 const Restaurant = { template: '<restaurant></restaurant>' }
 const Restaurants = { template: '<restaurants></restaurants>' }
+const Users = { template: '<users></users>' }
 const RestaurantDetails = { props: ['id'], template: '<restaurant-details></restaurant-details>' }
 const RestaurantArticles = { template: '<restaurant-articles></restaurant-articles>' }
 const RestaurantCustomers = { template: '<restaurant-customers></restaurant-customers>' }
 const RestaurantComments = { template: '<restaurant-comments></restaurant-comments>' }
 const AddArticle = { template: '<add-article></add-article>' }
 const LeaveFeedback = { props: ['id'], template: '<leave-feedback></leave-feedback>' }
+const UserDetails = { props: ['id'], template: '<user-details></user-details>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -30,6 +32,8 @@ const router = new VueRouter({
 	    { path: '/restaurant-customers', component: RestaurantCustomers},
 	    { path: '/restaurant-comments', component: RestaurantComments},
 	    { path: '/add-article', component: AddArticle},
+		{ path: '/users', component: Users},
+		{ path: '/user-details/:id', component: UserDetails, props: true},
 	    { path: '/restaurant-details/:id', component: RestaurantDetails, props: true},
 	    { path: '/leave-feedback/:id', component: LeaveFeedback, props: true}
 	    
@@ -59,6 +63,8 @@ var app = new Vue({
 		    			this.mode = 'deliveryGuy';
 		    		} else if (response.data.role == "manager") {
 		    			this.mode = 'manager';
+					} else if (response.data.role == "admin") {
+		    			this.mode = 'admin';
 		    		} else {
 		    			this.mode = 'notLogged';
 		    		}
