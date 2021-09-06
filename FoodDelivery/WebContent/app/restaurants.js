@@ -63,6 +63,9 @@ Vue.component("restaurants", {
 								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star checked"></span>
 					  		</div>
+					  		<a v-bind:href="'#/see-comments/'+ s.id">
+		                        <b>See comments</b>
+		                    </a>
 		                  </div>	                  
 		            </div>
 	             </div>                                       

@@ -90,9 +90,32 @@ public class ArticlesDAO {
 		return null;
 	}
 	
+	public Article searchArticleById(Integer article) {
+		if (getArticles() != null) {
+			for (Article k : getArticles().values()) {
+				if (k.getId().equals(article)) {
+					return k;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public void addArticle(Article k) {
 		getArticles().put(k.getId(), k);
 		saveArticles();
+	}
+	public void editArticle(Article article) {
+		for(Article a : this.articles.values()) {
+			if(a.getId().equals(article.getId())) {
+				a.setName(article.getName());
+				a.setDescription(article.getDescription());
+				a.setPrice(article.getPrice());
+				a.setAmount(article.getAmount());
+				a.setPicture(article.getPicture());
+			}
+		}
+		this.saveArticles();
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt

@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import dao.ArticlesDAO;
 import dao.OrdersDAO;
 import dao.UsersDAO;
+import dto.ArticleEditDTO;
 import model.Article;
 import model.ArticleDTO;
 import model.CustomerType;
@@ -84,6 +85,32 @@ public class ArticlesService {
 			articlesDao.addArticle(new Article(articleToAdd.name, articleToAdd.price, articleToAdd.type, getUsersDAO().getLoggedUser().getRestaurant(), articleToAdd.amount,
 					articleToAdd.description, articleToAdd.imagePath, articlesDao.generateId()));
 			System.out.println("dodao artikal uspesno");
+			return Response.status(200).build();
+		}
+	}
+	@POST
+	@Path("/editArticle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editArticle(ArticleEditDTO articleToAdd) {
+		System.out.println("Backend for adding article is established.");
+		if (articleToAdd.name == null || articleToAdd.description == null
+				|| articleToAdd.name.equals("")
+				|| articleToAdd.description.equals("")) {
+			System.out.println("Prazna polja" + articleToAdd.name + articleToAdd.price);
+			return Response.status(400).entity("Name i description su obavezna polja.").build();
+		}
+		
+		ArticlesDAO articlesDao = getArticlesDAO();
+
+		if (articlesDao.searchArticleById(articleToAdd.id) == null) {
+			System.out.println("ne postoji artikal");
+			return Response.status(400).entity("Name koji menjate ne postoji.").build();
+		} else {
+			System.out.println("dodaje artikal....");
+			articlesDao.editArticle(new Article(articleToAdd.name, articleToAdd.price, articleToAdd.type, getUsersDAO().getLoggedUser().getRestaurant(), articleToAdd.amount,
+					articleToAdd.description, articleToAdd.imagePath, articleToAdd.id));
+			System.out.println("izmenio artikal uspesno");
 			return Response.status(200).build();
 		}
 	}

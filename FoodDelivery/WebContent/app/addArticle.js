@@ -1,7 +1,7 @@
 Vue.component("add-article", {	
 	data: function () {
 	    return {	    	
-	    	error:'',
+	    	errorMessage:'',
 	    	name: '',		    			    	
 		    price: 0,
 		    type:'',

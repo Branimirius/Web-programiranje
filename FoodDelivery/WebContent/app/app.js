@@ -1,11 +1,13 @@
 const WebShop = { template: '<web-shop></web-shop>' }
 const LearnMore = { props: ['id'], template: '<learn-more></learn-more>' }
+const SeeComments = { props: ['id'], template: '<see-comments></see-comments>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
 	    { path: '/', component: WebShop},
-	    { path: '/learn-more/:id', component: LearnMore, props: true }
+	    { path: '/learn-more/:id', component: LearnMore, props: true },
+	    { path: '/see-comments/:id', component: SeeComments, props: true }
 	  ]
 });
 

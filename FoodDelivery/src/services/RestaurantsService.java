@@ -16,6 +16,7 @@ import dao.CommentsDAO;
 import dao.OrdersDAO;
 import dao.RestaurantsDAO;
 import dao.UsersDAO;
+import dto.CommentDTO;
 import model.Comment;
 import model.Order;
 import model.OrderToSend;
@@ -41,6 +42,14 @@ public class RestaurantsService {
 		System.out.println("a tuj si (restaurants)");
 		getRestaurantsDAO().calculateGrades(getCommentsDAO().getCommentsCollection());
 		return getRestaurantsDAO().getRestaurantsCollection();
+	}
+	
+	@GET
+	@Path("/getComments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Comment> getComments() {
+		System.out.println("a tuj si (Comments)");
+		return getCommentsDAO().getCommentsCollection();
 	}
 	
 	@GET
@@ -83,6 +92,15 @@ public class RestaurantsService {
 		OrdersDAO orda = getOrdersDAO();
 		System.out.println("stigao na backend za prepare");
 		orda.prepareOrder(order); 
+		return "OK";
+	}
+	
+	@POST
+	@Path("/approveComment")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String approveComment(CommentDTO comment) {
+		getCommentsDAO().approveComment(comment.id);
 		return "OK";
 	}
 

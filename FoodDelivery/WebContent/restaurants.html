@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/restaurants.css">
 	<link rel="stylesheet" type="text/css" href="css/sidebar.css">  
 	<link rel="stylesheet" type="text/css" href="css/rating.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   	<style>
 		.checked {
@@ -66,26 +67,6 @@
 	
 	 
 	<div  id="webShop" class = "restaurants"> 
-		  <!-- PRE RUTERA       
-          <div v-for="s in restaurants">            
-             <div class="card-content" >
-                <img class="card-img-top" v-bind:src="'pictures/' + s.type + '.png'"
-                    alt="Card image cap" style="width: 5rem; z-index: 500;" >
-                <img class="card-img-top" v-bind:src="s.logoPath"
-                    alt="Card image cap" style="width: 20rem; height: 10rem; opacity: 1; float: right;" >
-	                                        
-                <div >
-	                  <div class="card-body" >
-	                    <a href="#" >
-	                        <h5 class="card-title">{{ s.name }}</h5>
-	                    </a>
-	                    <p class="card-text"> {{ s.title }} </p>
-	                    <button id="serbia-restaurant" class="btn btn-primary">Saznaj više...</button>	                    
-	                  </div>	                  
-	            </div>
-             </div>                                       
-          </div> 
-          -->  
           <router-view></router-view>  
     </div>
     
@@ -95,6 +76,7 @@
 	<script src="js/axios.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/toast.js"></script>	
+	<script src="app/seeComments.js"></script>
 	<script src="app/webShop.js"></script>
 	<script src="app/learnMore.js"></script>
 	<script src="app/app.js"></script>

@@ -36,7 +36,7 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 		//loadTestData();
 		//this.saveComments();
 		loadComments(commentsPath);
-		
+		//this.initApproveAll();
 	}
 
 	public HashMap<Integer, Comment> getComments() {
@@ -68,6 +68,12 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 	public void addComment(Comment k) {
 		getComments().put(k.getId(), k);
 		saveComments();
+	}
+	public void initApproveAll() {
+		for(Comment c : this.comments.values()) {
+			c.setApproved(false);
+		}
+		this.saveComments();
 	}
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
@@ -178,6 +184,15 @@ private String commentsPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\We
 			}
 		}
 		return retVal;
+	}
+	
+	public void approveComment(Integer id) {
+		for(Comment c : this.comments.values()) {
+			if(c.getId().equals(id)) {
+				c.setApproved(true);
+			}
+		}
+		this.saveComments();
 	}
 	
 	public Integer generateId() {

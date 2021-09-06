@@ -16,6 +16,7 @@ Vue.component("restaurant-articles", {
 			      <h3> {{ a.name }} </h3>
 			      <p> {{ a.description }} </p>
 			      {{ a.price }}din
+			      <a v-bind:href="'#/edit-article/'+ a.id" class="button" style="float : right;"> Edit </a>
 			    </li>
 			  </ul>
 		</tbody>

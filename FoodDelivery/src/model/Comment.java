@@ -6,6 +6,7 @@ public class Comment {
 	private String text;
 	private Integer grade;
 	private Integer id;
+	private Boolean approved;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	
@@ -18,6 +19,15 @@ public class Comment {
 		this.text = text;
 		this.grade = grade;
 		this.id = id;
+		this.approved = false;
+	}
+
+	public Boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
 	}
 
 	public String getCustomer() {

@@ -1,8 +1,18 @@
-Vue.component("restaurant-comments", {
+function findRestaurant(restaurants, id) {
+	return restaurants.find(el => el.id == id);
+}
+
+function filterComments(comments, id) {
+	return comments.filter(el => el.restaurant == id);
+}
+
+Vue.component("see-comments", {
+	props:['id'],
 	data: function () {
 		    return {
 		      restaurant: { },
-		      comments: []
+		      comments: [],
+		      restaurantId: this.$route.params.id
 		    }
 	},
 	template: ` 
@@ -15,10 +25,6 @@ Vue.component("restaurant-comments", {
         <div class="col-md-4">
             <div class="profile-img">
                 <img v-bind:src="restaurant.logoPath" alt=""/>
-                <div class="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" accept=".jpg, .jpeg, .png" name="file"/>
-                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -32,20 +38,18 @@ Vue.component("restaurant-comments", {
                         <p class="proile-rating">TYPE : <span> {{ restaurant.type }} </span></p>
             </div>
         </div>
-        <div class="col-md-2">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"/>
-        </div>
+        
     </div>
 
 	<label v-bind:hidden="comments.length != 0"> There is no comments right now. </label>
-	<label v-bind:hidden="comments.length == 0"> Comments about your restaurant: </label>
+	<label v-bind:hidden="comments.length == 0"> Comments about this restaurant: </label>
 	
 	<div class="row">
         <div class="col-md-8">
             <div class="tab-content profile-tab" id="myTabContent">
                 <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="profile-tab">
                     <ul v-for="o in comments" class="list-group">
-					  <li class="list-group-item">
+					  <li v-show="o.approved == true" class="list-group-item">
 					  		<label> {{ o.customer }}</label>
 					  		<p>{{ o.text }}</p>
 					  		<div v-show="o.grade == 0">
@@ -90,7 +94,6 @@ Vue.component("restaurant-comments", {
 								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star checked"></span>
 					  		</div>
-					  		<button v-show="o.approved == false" v-on:click="approveComment(o)" style="float: right;" type="button" class="btn btn-primary btn-sm">Approve</button>
 					  </li>
 					</ul>
                 </div>
@@ -101,11 +104,11 @@ Vue.component("restaurant-comments", {
 `
 	, 
 	methods : {
-		approveComment : function(comment){
+		processOrder : function(comment){
 			
 			axios
-	        .post('rest/restaurants/approveComment',{"id": comment.id})
-			.then(response => (alert("Comment will be approved by manager.")));
+	        .post('rest/restaurants/processOrder',{"id": comment.id})
+			.then(response => (alert("Order for " + comment.restaurant + " confirmed by manager.")));
 		    location.reload();
 		},
 		prepareOrder : function(comment){
@@ -119,15 +122,12 @@ Vue.component("restaurant-comments", {
 		    
 	mounted () {		
 		axios
-        .get('rest/restaurants/activeRestaurant')
-        .then(response => (this.restaurant = response.data));
+        .get('rest/restaurants/getRestaurants')
+        .then(response => (this.restaurant = findRestaurant(response.data, this.restaurantId)));
 	    
         axios
-        .get('rest/restaurants/restaurantComments')
-        .then(response => (this.comments = response.data));
-        
-        
-        
+        .get('rest/restaurants/getComments')
+        .then(response => (this.comments = filterComments(response.data, this.restaurantId)));
         
     }
 });
