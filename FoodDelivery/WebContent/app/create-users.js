@@ -59,7 +59,7 @@ template: `
 			</div>
 		</div>
 		<div class="col-12">
-			<button class="btn btn-primary" type="submit" v-on:click="registerUser">Register</button>
+			<button class="btn btn-primary" type="button" v-on:click="registerUser">Register</button>
 		</div>
 	</form>
 	
@@ -82,23 +82,11 @@ methods : {
 		
 		
 		axios 
-			.post('rest/user/createUser', JSON.stringify(loginParameters),{
+			.post('rest/user/createUser', loginParameters,{
 		        headers: {
 		            'Content-Type': 'application/json',
 		        }
 		    })
-			.then(response => {
-				if (response.data == "Username, password i email su obavezna polja.") {
-					this.errorMessage="Username, password i email su obavezna polja.";
-				} 
-				else if (response.data == "Username koji ste uneli vec je zauzet.") {
-					this.errorMessage="Username koji ste uneli vec je zauzet.";
-				} 
-				
-				else {						
-					window.location.href = "http://localhost:3665/FoodDelivery/home.html#/";				
-				}
-			})
 		
 		
 		

@@ -122,7 +122,7 @@ public class RestaurantsService {
 		System.out.println("making users dao");
 		UsersDAO users = (UsersDAO) context.getAttribute("users");
 		if (users == null) {
-			users = new UsersDAO();
+			users = (UsersDAO) context.getAttribute("users");
 			
 			context.setAttribute("users", users);
 		} 

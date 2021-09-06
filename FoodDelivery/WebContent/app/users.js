@@ -28,6 +28,7 @@ Vue.component("users", {
                     <td v-else >0</td>
                     <td v-if="s.role=='customer'">{{ s.type.name }}</td>
                     <td v-else>X</td>
+                    <button type="button" class="btn btn-primary" v-on:click="deleteUser(s.username)">Delete</button>
                 </tr> 
             </tbody>
         </table>  
@@ -35,6 +36,25 @@ Vue.component("users", {
                 
 `
 	,
+    methods: {
+        deleteUser(user) {
+            axios
+                .post('rest/user/deleteUser', user,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response =>{
+                    this.users = [];
+                    response.data.forEach(el => {
+                        this.users.push(el);
+                    });
+                    return this.users;
+                })
+                
+                
+        }
+    },
 		    
 	mounted () {		
 		axios
