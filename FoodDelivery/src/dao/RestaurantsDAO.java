@@ -40,9 +40,9 @@ public class RestaurantsDAO {
 		
 		this.setRestaurants(new HashMap<String, Restaurant>());
 		//this.setRestaurantsPath(restaurantsPath);
-		this.loadTestData();
-		this.saveRestaurants();
-		//loadRestaurants(restaurantsPath);
+		//this.loadTestData();
+		//this.saveRestaurants();
+		loadRestaurants(restaurantsPath);
 	}
 
 	public HashMap<String, Restaurant> getRestaurants() {
