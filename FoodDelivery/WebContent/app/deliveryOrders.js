@@ -39,7 +39,7 @@ Vue.component("delivery-orders", {
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"/>
+                        <button class="profile-edit-btn" name="btnAddMore" value="Edit"/>
                     </div>
                 </div>
                 <div class="row">
