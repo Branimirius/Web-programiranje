@@ -186,6 +186,18 @@ public class UsersDAO {
 		return null;
 	}
 
+	public Collection<User> getManagersCollection() {
+		ArrayList<User> retVal = new ArrayList<User>();
+		if (!users.isEmpty()) {
+			for(User u: this.users.values()){
+				if(u.getRole().equals("manager")) {
+					retVal.add(u);
+				}
+			}
+		}
+		return retVal;
+	}
+
 	public User getLoggedUser() {
 		if(loggedUser == null) {
 			return null;

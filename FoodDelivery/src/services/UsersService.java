@@ -78,6 +78,14 @@ public class UsersService {
 		return usersDao.getUsersCollection();
 	}
 
+	@GET
+	@Path("/getManagers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getManagers() {
+		UsersDAO usersDao = getUsersDAO();
+		return usersDao.getManagersCollection();
+	}
+
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
