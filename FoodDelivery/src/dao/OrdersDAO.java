@@ -22,10 +22,10 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import dto.OrderToSend;
 import model.ArticleInCart;
 import model.Cart;
 import model.Order;
-import model.OrderToSend;
 
 public class OrdersDAO {
 	private HashMap<Integer, Order> orders;

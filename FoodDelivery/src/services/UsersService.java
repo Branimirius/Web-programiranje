@@ -23,19 +23,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.Article;
-import model.ArticleDTO;
 import model.ArticleInCart;
-import model.ArticleToAdd;
 import model.Cart;
 import model.Comment;
 import model.CustomerType;
-import model.FeedbackDTO;
 import model.Order;
-import model.OrderToSend;
 import model.User;
-import model.UserToLog;
-import model.UserToRegister;
+import dto.ArticleDTO;
+import dto.ArticleToAdd;
+import dto.FeedbackDTO;
+import dto.OrderToSend;
 import dto.UserRegistrationByAdmin;
+import dto.UserToLog;
+import dto.UserToRegister;
 import sun.security.action.GetLongAction;
 import dao.ArticlesDAO;
 import dao.CartsDAO;
@@ -276,7 +276,7 @@ public class UsersService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String add(ArticleToAdd a) {
 		if(getActiveCart() == null) {
-			System.out.println("Korisnik nije ulogovan.");
+			System.out.println("Korisnik nije ulogovan ili nije ulogovan na nalog kupca.");
 			
 		}
 		else {

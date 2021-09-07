@@ -18,12 +18,12 @@ import javax.ws.rs.core.Response;
 import dao.ArticlesDAO;
 import dao.OrdersDAO;
 import dao.UsersDAO;
+import dto.ArticleDTO;
 import dto.ArticleEditDTO;
+import dto.UserToRegister;
 import model.Article;
-import model.ArticleDTO;
 import model.CustomerType;
 import model.User;
-import model.UserToRegister;
 
 @Path("/articles")
 public class ArticlesService {

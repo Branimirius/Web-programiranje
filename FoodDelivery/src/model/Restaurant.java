@@ -27,6 +27,14 @@ public class Restaurant {
 	public void setWorking(Boolean working) {
 		this.working = working;
 	}
+	public void toggleWorking() {
+		if(this.working) {
+			setWorking(false);
+		}
+		else {
+			setWorking(true);
+		}
+	}
 	public double getGrade() {
 		return grade;
 	}

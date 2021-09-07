@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class UserToLog {
 	public String username;

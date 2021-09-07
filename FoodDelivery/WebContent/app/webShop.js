@@ -20,6 +20,11 @@ Vue.component("web-shop", {
 		                        <h5 class="card-title">{{ s.name }}</h5>
 		                    </a>
 		                    <p class="card-text"> {{ s.title }} </p>
+		                    <p class="proile-rating"> STATUS : 
+	            				<span v-if="s.working"> Open </span>
+	            				<span v-else> Closed </span>
+	            			</p>
+	            			<p class="proile-rating" style="float : right;"><span> {{s.location.adress}} </span></p>
 		                    
 		                    <div v-show="s.grade == 0">
 					  			<span class="fa fa-star"></span>

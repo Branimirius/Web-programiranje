@@ -17,9 +17,10 @@ import dao.OrdersDAO;
 import dao.RestaurantsDAO;
 import dao.UsersDAO;
 import dto.CommentDTO;
+import dto.OrderToSend;
+import dto.RestaurantToSend;
 import model.Comment;
 import model.Order;
-import model.OrderToSend;
 import model.Restaurant;
 
 @Path("/restaurants")
@@ -71,6 +72,17 @@ public class RestaurantsService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Restaurant activeRestaurant() {
 		return getRestaurantsDAO().getActiveRestaurant(getUsersDAO().getLoggedUser().getRestaurant());
+	}
+	
+	@POST
+	@Path("/toggleRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String toggleWorking(RestaurantToSend restaurant) {
+		
+		System.out.println("stigao na backend za toggle");
+		getRestaurantsDAO().toggleWorking(restaurant.id);
+		return "OK";
 	}
 	
 	@POST

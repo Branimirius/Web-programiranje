@@ -30,10 +30,17 @@ Vue.component("restaurant", {
                             {{ restaurant.title }}
                         </h6>
                         <p class="proile-rating">TYPE : <span> {{ restaurant.type }} </span></p>
+            			<p class="proile-rating">STATUS : 
+            				<span v-if="restaurant.working"> Open </span>
+            				<span v-else> Closed </span>
+            			</p>
             </div>
         </div>
         <div class="col-md-2">
             <button class="profile-edit-btn" name="btnAddMore" value="Edit"/>
+            <button v-on:click="toggleWorkingRestaurant(restaurant)" v-bind:hidden="restaurant.working == false" class="btn btn-secondary btn-sm" style="float: right;" >Close restaurant</button>
+			<button v-on:click="toggleWorkingRestaurant(restaurant)" v-bind:hidden="restaurant.working == true" class="btn btn-secondary btn-sm" style="float: right;" >Open restaurant</button>
+					  
         </div>
     </div>
 
@@ -50,8 +57,8 @@ Vue.component("restaurant", {
 					  		<p>{{ o.status }}</p>
 					  		<p>{{ o.price }}din</p>
 					  		<p>{{ o.date }}</p>
-					  		<button v-on:click="processOrder(o)" v-bind:hidden="o.status != 'processing'" style="float: right;" >Process order</button>
-					  		<button v-on:click="prepareOrder(o)" v-bind:hidden="o.status != 'preparing'" style="float: right;" >Prepare order</button>
+					  		<button v-on:click="processOrder(o)" v-bind:hidden="o.status != 'processing'" class="btn btn-secondary btn-sm" style="float: right;" >Process order</button>
+					  		<button v-on:click="prepareOrder(o)" v-bind:hidden="o.status != 'preparing'" class="btn btn-secondary btn-sm" style="float: right;" >Prepare order</button>
 					  
 					  </li>
 					</ul>
@@ -76,6 +83,12 @@ Vue.component("restaurant", {
 	        .post('rest/restaurants/prepareOrder',{"id": order.id})
 			.then(response => (alert("Order for " + order.restaurant + " prepared.")));
 		    location.reload();
+		},
+		toggleWorkingRestaurant : function(restaurant){
+			
+			axios
+	        .post('rest/restaurants/toggleRestaurant',{"id": restaurant.id})
+			.then(response => (alert("Restaurant working status is now changed.")));
 		}
 	},
 		    
