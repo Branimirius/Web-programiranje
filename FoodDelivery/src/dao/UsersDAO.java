@@ -34,7 +34,7 @@ public class UsersDAO {
 		this.setUsers(new HashMap<String, User>());
 		//this.loadTestData();
 		//this.saveUsers();
-		loadUsers(usersPath);
+		loadUsers();
 	}
 
 	public HashMap<String, User> getUsers() {
@@ -59,8 +59,10 @@ public class UsersDAO {
 	}
 	
 	public User searchUser(String username) {
-		if (getUsers() != null) {
-			for (User k : getUsers().values()) {
+		System.out.println(username + "+++++++++++++");
+		if (users != null) {
+			for (User k : users.values()) {
+				System.out.println(k.getUsername() + "=====");
 				if (k.getUsername().equals(username)) {
 					return k;
 				}
@@ -76,7 +78,7 @@ public class UsersDAO {
 	
 	// Ucitavanje korisnika iza fajla korisnici.txt
 	@SuppressWarnings("unchecked")
-	private void loadUsers(String contextPath) {
+	private void loadUsers() {
 		FileWriter fileWriter = null;
 		BufferedReader in = null;
 		File file = null;
@@ -203,8 +205,10 @@ public class UsersDAO {
 			}
 		}
 		return retVal;
-		
 	}
-	
 
+	public void deleteUser(String username){
+		users.remove(username);
+		saveUsers();
+	}
 }

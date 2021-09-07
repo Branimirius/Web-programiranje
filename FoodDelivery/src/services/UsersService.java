@@ -60,11 +60,21 @@ public class UsersService {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@PostConstruct
+	// ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
+	public void init() {
+		// Ovaj objekat se instancira vi�e puta u toku rada aplikacije
+		// Inicijalizacija treba da se obavi samo jednom
+		if (context.getAttribute("users") == null) {
+	    	context.setAttribute("users", new UsersDAO());
+		}
+	}
+	
 	@GET
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User> getUsers() {
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 		return usersDao.getUsersCollection();
 	}
 
@@ -102,7 +112,7 @@ public class UsersService {
 	public Response createUser(UserRegistrationByAdmin userToRegister) {
 		System.out.println("Backend for registration is established."+ userToRegister.username + "  " + userToRegister.role);
 		
-		UsersDAO usersDao = (UsersDAO) context.getAttribute("users");
+		UsersDAO usersDao = getUsersDAO();
 
 		if (usersDao.searchUser(userToRegister.username) != null) {
 			System.out.println("vec je registrovan lik");
@@ -113,6 +123,28 @@ public class UsersService {
 					userToRegister.date, userToRegister.role, null, 0, null, null));
 			System.out.println("dodao lika uspesno");
 			return Response.status(200).build();
+		}
+	}
+
+	@POST
+	@Path("/deleteUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteUser(String username) {
+		System.out.println("Obrisan " + username);
+		
+		UsersDAO usersDao = getUsersDAO();
+
+		if (usersDao.searchUser(username) == null) {
+			System.out.println("Korisnik " + username + "ne postoji");
+			return Response.status(400).entity("Username koji ste uneli ne postoji.").build();
+		} else {
+			System.out.println("brise " + username);
+			usersDao.deleteUser(username);
+
+			return Response.status(200)
+							.entity(usersDao.getUsersCollection())
+							.build();
 		}
 	}
 
@@ -128,6 +160,7 @@ public class UsersService {
 		if(usersDao.getLoggedUser() != null) {
 			session.invalidate();
 			usersDao.setLoggedUser(null);
+			System.out.println("ODJAVA");
 			return Response.status(200).build();
 		}
 		else {
@@ -370,11 +403,6 @@ public class UsersService {
 	private UsersDAO getUsersDAO() {
 		System.out.println("making users dao");
 		UsersDAO users = (UsersDAO) context.getAttribute("users");
-		if (users == null) {
-			users = new UsersDAO();
-			
-			context.setAttribute("users", users);
-		} 
 		return users;
 	}
 	private CartsDAO getCartsDAO() {

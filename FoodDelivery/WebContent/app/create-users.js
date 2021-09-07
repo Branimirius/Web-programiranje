@@ -9,7 +9,7 @@ Vue.component("create-users", {
 		    gender:'',
 		    date:'',
 			errorMessage:'',
-			role:'menager'
+			role:''
 			
 	    }
 },
@@ -46,20 +46,20 @@ template: `
 		<div class="col-md-6">
 			<label for="validationServer05" class="form-label">Role</label>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" v-model="role" name="flexRadioDefault" id="flexRadioDefault1" checked>
+				<input class="form-check-input" type="radio" v-model="role" name="flexRadioDefault" value="manager" id="flexRadioDefault1" checked>
 				<label class="form-check-label" for="flexRadioDefault1">
 					Menager
 				</label>
 			</div>
 			<div class="form-check">
-				<input class="form-check-input" type="radio" v-model="role" name="flexRadioDefault" id="flexRadioDefault2">
+				<input class="form-check-input" type="radio" v-model="role" name="flexRadioDefault" value="deliveryGuy" id="flexRadioDefault2">
 				<label class="form-check-label" for="flexRadioDefault2">
 					Delivery guy
 				</label>
 			</div>
 		</div>
 		<div class="col-12">
-			<button class="btn btn-primary" type="submit" v-on:click="registerUser">Register</button>
+			<button class="btn btn-primary" type="button" v-on:click="registerUser">Register</button>
 		</div>
 	</form>
 	
@@ -82,23 +82,11 @@ methods : {
 		
 		
 		axios 
-			.post('rest/user/createUser', JSON.stringify(loginParameters),{
+			.post('rest/user/createUser', loginParameters,{
 		        headers: {
 		            'Content-Type': 'application/json',
 		        }
 		    })
-			.then(response => {
-				if (response.data == "Username, password i email su obavezna polja.") {
-					this.errorMessage="Username, password i email su obavezna polja.";
-				} 
-				else if (response.data == "Username koji ste uneli vec je zauzet.") {
-					this.errorMessage="Username koji ste uneli vec je zauzet.";
-				} 
-				
-				else {						
-					window.location.href = "http://localhost:3665/FoodDelivery/home.html#/";				
-				}
-			})
 		
 		
 		
