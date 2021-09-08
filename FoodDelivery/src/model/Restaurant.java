@@ -20,7 +20,17 @@ public class Restaurant {
 	private String id;
 	private String title;
 	private Integer grade;
+	private String manager;
 	
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public Boolean getWorking() {
 		return working;
 	}
@@ -44,7 +54,7 @@ public class Restaurant {
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 	public Restaurant() {}
 	public Restaurant(String name, String type, Boolean status, Location location, String logoPath,
-			String id, String title) {
+			String id, String title, String manager) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -55,6 +65,7 @@ public class Restaurant {
 		this.logoPath = logoPath;
 		this.id = id;
 		this.title = title;
+		this.manager = manager;
 		/*constructing Logo:
 		InputStream imgStream = getClass().getResourceAsStream(logoPath);
 		try {

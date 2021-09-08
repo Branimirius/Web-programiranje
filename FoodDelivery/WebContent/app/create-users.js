@@ -66,7 +66,7 @@ template: `
 `
 , 
 methods : {
-	registerUser : function() {
+	registerUser() {
 		toast(" uslo je ovde admine");
 		
 		let loginParameters = {

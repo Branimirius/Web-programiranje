@@ -42,7 +42,5 @@ a.articles:hover {
   background: #eee;
   cursor: pointer;
 }
-tbody.articles {
-	overflow: scroll;
-}
+
 

@@ -1,6 +1,6 @@
 package dto;
 
-public class UserRegistrationByAdmin {
+public class UserRegistrationByAdminDTO {
 	public String name;
 	public String surname;
 	public String username;
@@ -9,7 +9,7 @@ public class UserRegistrationByAdmin {
 	public String gender;
     public String role;
 	
-	public UserRegistrationByAdmin() {}
+	public UserRegistrationByAdminDTO() {}
 	
 	public String getName() {
 		return name;

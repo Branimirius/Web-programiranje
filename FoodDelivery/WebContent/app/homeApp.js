@@ -19,6 +19,7 @@ const CreateUsers = { template: '<create-users></create-users>' }
 const SeeComments = { props: ['id'], template: '<see-comments></see-comments>' }
 const EditArticle = { props: ['id'], template: '<edit-article></edit-article>' }
 const FilteredRestaurants = { props: ['filter'], template: '<filtered-restaurants></filtered-restaurants>' }
+const CreateReastaurant = { template: '<create-restaurant></create-restaurant>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -43,6 +44,7 @@ const router = new VueRouter({
 	    { path: '/leave-feedback/:id', component: LeaveFeedback, props: true},
 	    { path: '/see-comments/:id', component: SeeComments, props: true },
 	    { path: '/filtered-restaurants/:filter', component: FilteredRestaurants, props: true },
+		{ path: '/create-restaurant', component: CreateReastaurant},
 	    { path: '/edit-article/:id', component: EditArticle, props: true }
 	    
 	  ]

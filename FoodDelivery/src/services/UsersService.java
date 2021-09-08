@@ -33,7 +33,7 @@ import dto.ArticleDTO;
 import dto.ArticleToAdd;
 import dto.FeedbackDTO;
 import dto.OrderToSend;
-import dto.UserRegistrationByAdmin;
+import dto.UserRegistrationByAdminDTO;
 import dto.UserToLog;
 import dto.UserToRegister;
 import sun.security.action.GetLongAction;
@@ -78,6 +78,14 @@ public class UsersService {
 		return usersDao.getUsersCollection();
 	}
 
+	@GET
+	@Path("/getManagers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getManagers() {
+		UsersDAO usersDao = getUsersDAO();
+		return usersDao.getManagersCollection();
+	}
+
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -109,7 +117,7 @@ public class UsersService {
 	@Path("/createUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createUser(UserRegistrationByAdmin userToRegister) {
+	public Response createUser(UserRegistrationByAdminDTO userToRegister) {
 		System.out.println("Backend for registration is established."+ userToRegister.username + "  " + userToRegister.role);
 		
 		UsersDAO usersDao = getUsersDAO();
@@ -118,7 +126,7 @@ public class UsersService {
 			System.out.println("vec je registrovan lik");
 			return Response.status(400).entity("Username koji ste uneli vec je zauzet.").build();
 		} else {
-			System.out.println("dodaje lika....");
+			System.out.println("dodaje lika...." + userToRegister.username);
 			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
 					userToRegister.date, userToRegister.role, null, 0, null, null));
 			System.out.println("dodao lika uspesno");

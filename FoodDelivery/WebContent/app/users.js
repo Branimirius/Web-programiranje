@@ -19,7 +19,7 @@ Vue.component("users", {
                 </tr>
             </thead>
             <tbody  v-for="s in users">
-                <tr>
+                <tr v-if="s.role!='admin'">
                     <td>@{{ s.username }}</td>
                     <td>{{ s.surname }}</td>
                     <td>{{ s.name }}</td>
