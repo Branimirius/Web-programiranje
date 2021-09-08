@@ -107,7 +107,7 @@ public class UsersService {
 		} else {
 			System.out.println("dodaje lika....");
 			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
-					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("bronze"), null));
+					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("bronze"), null, null));
 			System.out.println("dodao lika uspesno");
 			return Response.status(200).build();
 		}
@@ -118,19 +118,21 @@ public class UsersService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUser(UserRegistrationByAdminDTO userToRegister) {
-		System.out.println("Backend for registration is established."+ userToRegister.username + "  " + userToRegister.role);
+		System.out.println("Backend for registration is established."+ userToRegister.getUsername() + "  " + userToRegister.getRole());
 		
 		UsersDAO usersDao = getUsersDAO();
 
-		if (usersDao.searchUser(userToRegister.username) != null) {
+		if (usersDao.searchUser(userToRegister.getUsername()) != null) {
 			System.out.println("vec je registrovan lik");
 			return Response.status(400).entity("Username koji ste uneli vec je zauzet.").build();
 		} else {
-			System.out.println("dodaje lika...." + userToRegister.username);
-			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
-					userToRegister.date, userToRegister.role, null, 0, null, null));
+			System.out.println("dodaje lika...." + userToRegister.getUsername());
+			usersDao.addUser(new User(userToRegister.getUsername(), userToRegister.getPassword(), userToRegister.getName(), userToRegister.getSurname(), userToRegister.getGender(),
+					userToRegister.getDate(), userToRegister.getRole(), null, 0, null, null, userToRegister.getFree()));
 			System.out.println("dodao lika uspesno");
-			return Response.status(200).build();
+			return Response.status(200)
+							.entity(usersDao.getManagersCollection())
+							.build();
 		}
 	}
 

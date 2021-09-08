@@ -66,6 +66,7 @@ public class Restaurant {
 		this.id = id;
 		this.title = title;
 		this.manager = manager;
+		this.grade = 1;
 		/*constructing Logo:
 		InputStream imgStream = getClass().getResourceAsStream(logoPath);
 		try {

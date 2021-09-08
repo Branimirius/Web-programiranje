@@ -1,14 +1,23 @@
 package dto;
 
 public class UserRegistrationByAdminDTO {
-	public String name;
-	public String surname;
-	public String username;
-	public String password;
-	public String date;
-	public String gender;
-    public String role;
+	private String name;
+	private String surname;
+	private String username;
+	private String password;
+	private String date;
+	private String gender;
+	private String role;
+	private Boolean free;
 	
+	public Boolean getFree() {
+		return free;
+	}
+
+	public void setFree(Boolean free) {
+		this.free = free;
+	}
+
 	public UserRegistrationByAdminDTO() {}
 	
 	public String getName() {

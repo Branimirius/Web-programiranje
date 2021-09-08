@@ -22,7 +22,16 @@ public class User {
 	private ArrayList<Integer> demandList;	
 	// polje za menadzera
 	private String restaurant;
+	private Boolean free;
 	
+	public Boolean getFree() {
+		return free;
+	}
+
+	public void setFree(Boolean free) {
+		this.free = free;
+	}
+
 	//konstruktor
 	public User() {
 		
@@ -30,7 +39,7 @@ public class User {
 	
 	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
 			String role,Integer cart, Integer bonusPoints, CustomerType type,
-			String restaurant) {
+			String restaurant, Boolean free) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -62,6 +71,7 @@ public class User {
 			this.cart = null;
 			this.bonusPoints = 0;
 			this.type = null;
+			this.free = free;
 		}
 		else {
 			this.demandList = null;

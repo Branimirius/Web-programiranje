@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.sun.tools.javac.jvm.PoolConstant.LoadableConstant;
 
 import model.CustomerType;
 import model.User;
@@ -160,16 +161,16 @@ public class UsersDAO {
 	private void loadTestData() {
 		
 		User admin = new User("Mike", "1234", "Mike", "Ehrmantraut", "M",
-				"3/3/1946", "admin", 0, 0, null, null);
+				"3/3/1946", "admin", 0, 0, null, null, null);
 
 		User customer = new User("Jesse", "1234", "Jesse", "Pinkman", "M",
-				"3/3/1988", "customer", 1, 0, new CustomerType("gold"), null);
+				"3/3/1988", "customer", 1, 0, new CustomerType("gold"), null, null);
 		
 		User delieveryGuy = new User("Gus", "1234", "Gustavo", "Fring", "M",
-				"3/3/1966", "deliveryGuy", 0, 0, null, null);
+				"3/3/1966", "deliveryGuy", 0, 0, null, null, null);
 		
 		User manager = new User("Heisenberg", "1234", "Walter", "White", "M",
-				"3/3/1955", "manager", 0, 0, null, null);
+				"3/3/1955", "manager", 0, 0, null, null, true);
 
 		users.put(admin.getUsername(), admin);
 		users.put(customer.getUsername(), customer);

@@ -172,16 +172,16 @@ public class RestaurantsDAO {
 	public void loadTestData() {
 		//(String name, String type, String status, Location location, Image logo,
 		//String id) {
-			Restaurant admin = new Restaurant("Zlatiborska Komplet Lepinja", "Serbian", true, new Location(43.617484924583316, 19.725842881883942,"Zlatibor,Dobroselica", "31315"), "pictures/zorinaKrcma.png",
+			Restaurant admin = new Restaurant("Zlatiborska Komplet Lepinja", "Serbian", true, new Location("43.617484924583316", "19.725842881883942","Zlatibor,Dobroselica", "31315"), "pictures/zorinaKrcma.png",
 					"zorinakrcma1", "Komplet Lepinja & kiselo mleko", "");
 
-			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(45.26032761319397, 19.832726727973252,"Novi Sad,Bulevar Oslobodjenja 41", "21000"), "pictures/savocaLogo.png",
+			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location("45.26032761319397", "19.832726727973252","Novi Sad,Bulevar Oslobodjenja 41", "21000"), "pictures/savocaLogo.png",
 					"savoca1", "Pizza", "");
 			
-			Restaurant delieveryGuy = new Restaurant("Gyros master", "Greek", false, new Location(45.24796398924438, 19.84224932612519,"Novi Sad,Dimitrija Tucovica 3", "21000"), "pictures/gyrosMaster.png",
+			Restaurant delieveryGuy = new Restaurant("Gyros master", "Greek", false, new Location("45.24796398924438", "19.84224932612519","Novi Sad,Dimitrija Tucovica 3", "21000"), "pictures/gyrosMaster.png",
 					"girosmaster1", "Giros", "");
 			
-			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(45.245685371364765, 19.84398271263121,"Novi Sad,Promenada", "21000"), "pictures/crepesLogo.png",
+			Restaurant manager = new Restaurant("Crepes", "French", true, new Location("45.245685371364765", "19.84398271263121","Novi Sad,Promenada", "21000"), "pictures/crepesLogo.png",
 					"crepes1", "Francuske palacinke", "");
 
 			restaurants.put(admin.getId(), admin);
