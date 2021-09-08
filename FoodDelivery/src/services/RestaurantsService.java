@@ -1,5 +1,6 @@
 package services;
 
+import java.io.File;
 import java.util.Collection;
 
 import javax.servlet.ServletContext;
@@ -11,12 +12,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import dao.CommentsDAO;
 import dao.OrdersDAO;
 import dao.RestaurantsDAO;
 import dao.UsersDAO;
+import dto.RestaurantDTO;
 import model.Comment;
+import model.Location;
 import model.Order;
 import model.OrderToSend;
 import model.Restaurant;
@@ -41,6 +45,29 @@ public class RestaurantsService {
 		System.out.println("a tuj si (restaurants)");
 		getRestaurantsDAO().calculateGrades(getCommentsDAO().getCommentsCollection());
 		return getRestaurantsDAO().getRestaurantsCollection();
+	}
+
+	@POST
+	@Path("/createRestaurant")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createRestaurant(RestaurantDTO restaurant) {
+		System.out.println("Backend for registration is established. | "+ restaurant.getManager() + "  " + restaurant.getName()
+		+ " logo->" + restaurant.getLogo());
+		
+		RestaurantsDAO restaurants = getRestaurantsDAO();
+
+		if (restaurants.searchRestaurant(restaurant.getId()) != null) {
+			System.out.println("vec je registrovan restoran");
+			return Response.status(400).entity("Id koji ste uneli vec je zauzet.").build();
+		} else {
+			System.out.println("dodaje lika...." + restaurant.getId());
+			restaurants.addRestaurant(new Restaurant(restaurant.getName(), restaurant.getType(), false, 
+					new Location(restaurant.getGeoLength(), restaurant.getGeoWidth(), restaurant.getAdress(), restaurant.getZipCode()), 
+					"pictures" + File.separator + restaurant.getLogo(), restaurant.getId(), "", restaurant.getManager()));
+			System.out.println("dodat restoran uspesno");
+			return Response.status(200).build();
+		}
 	}
 	
 	@GET

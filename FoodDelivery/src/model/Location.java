@@ -1,14 +1,14 @@
 package model;
 
 public class Location {
-	private double geoLength;
-	private double geoWidth;
+	private String geoLength;
+	private String geoWidth;
 	private String adress;
 	private String zipCode;
 	
 	//TODO: kada se uradi serijalizacija treba namestiti generateId() funkciju
 		
-	public Location(double geoLength, double geoWidth, String adress, String zipCode) {
+	public Location(String geoLength, String geoWidth, String adress, String zipCode) {
 		super();
 		this.geoLength = geoLength;
 		this.geoWidth = geoWidth;
@@ -20,19 +20,19 @@ public class Location {
 		
 	}
 
-	public double getGeoLength() {
+	public String getGeoLength() {
 		return geoLength;
 	}
 
-	public void setGeoLength(double geoLength) {
+	public void setGeoLength(String geoLength) {
 		this.geoLength = geoLength;
 	}
 
-	public double getGeoWidth() {
+	public String getGeoWidth() {
 		return geoWidth;
 	}
 
-	public void setGeoWidth(double geoWidth) {
+	public void setGeoWidth(String geoWidth) {
 		this.geoWidth = geoWidth;
 	}
 

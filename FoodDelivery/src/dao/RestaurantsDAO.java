@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import model.Restaurant;
+import model.User;
 import model.Comment;
 import model.CustomerType;
 import model.Location;
@@ -70,6 +71,24 @@ public class RestaurantsDAO {
 
 	public void setRestaurants(HashMap<String, Restaurant> restaurants) {
 		this.restaurants = restaurants;
+	}
+	
+	public Restaurant searchRestaurant(String id) {
+		System.out.println(id + "+++++++++++++");
+		if (restaurants != null) {
+			for (Restaurant k : restaurants.values()) {
+				System.out.println(k.getId() + "=====");
+				if (k.getId().equals(id)) {
+					return k;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void addRestaurant(Restaurant k) {
+		getRestaurants().put(k.getId(), k);
+		saveRestaurants();
 	}
 	 
 	@SuppressWarnings("unchecked")
@@ -154,16 +173,16 @@ public class RestaurantsDAO {
 		//(String name, String type, String status, Location location, Image logo,
 		//String id) {
 			Restaurant admin = new Restaurant("Zlatiborska Komplet Lepinja", "Serbian", true, new Location(), "pictures/zorinaKrcma.png",
-					"zorinakrcma1", "Komplet Lepinja & kiselo mleko");
+					"zorinakrcma1", "Komplet Lepinja & kiselo mleko", "");
 
 			Restaurant customer = new Restaurant("Savoca", "Italian", true, new Location(), "pictures/savocaLogo.png",
-					"savoca1", "Pizza");
+					"savoca1", "Pizza", "");
 			
 			Restaurant delieveryGuy = new Restaurant("Gyros master", "Greek", false, new Location(), "pictures/gyrosMaster.png",
-					"girosmaster1", "Giros");
+					"girosmaster1", "Giros", "");
 			
 			Restaurant manager = new Restaurant("Crepes", "French", true, new Location(), "pictures/crepesLogo.png",
-					"crepes1", "Francuske palacinke");
+					"crepes1", "Francuske palacinke", "");
 
 			restaurants.put(admin.getId(), admin);
 			restaurants.put(customer.getId(), customer);

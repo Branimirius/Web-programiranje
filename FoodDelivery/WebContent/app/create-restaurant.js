@@ -8,51 +8,86 @@ Vue.component("create-restaurant", {
 			city: '',
 			number: '',
 			hide: false,
-			managers: null
+			username: '',		    			    	
+		    password:'',
+		    name:'',
+		    surname:'',		    			    	
+		    gender:'',
+		    date:'',
+			role:'',
+			managers: [],
+			manager: '',
+			logo: '',
+			id: '',
+			type: ''
 			
 	    }
 },
 	
 template: ` 
-	<form class="row g-3" style="background:white" v-if="!hide">
+	<form class="row g-3" style="background:white" v-if="!hide" name="form1">
 			<div class="col-md-6">
-				<label for="validationServer01" class="form-label">geoLength</label>
+				<label for="validationServer01" class="form-label">Name:</label>
+				<input type="text" id="name" class="form-control is-valid" value="" required>
+			</div>
+			<div class="col-md-6">
+				<label for="validationServer01" class="form-label">Menager:</label>
+				<div class="input-group mb-3">
+					<select id="manager" class="form select form-select-lg" aria-label="Default select example">
+						<option selected>Free managers</option>
+						<option v-for="m in managers">@{{ m.username }}</option>
+					</select>
+					<button class="btn btn-outline-secondary" type="button" v-on:click="registerManager">Add manager</button>
+				</div>
+			</div>
+			<div class="col-6">
+				<label for="formFile" class="form-label">Logo:</label>
+				<input class="form-control" type="file" id="formFile" name="formFile">
+			</div>
+			<div class="col-6">
+				<label for="type" class="form-label">Type:</label>
+				<input class="form-control" type="text" id="type">
+			</div>
+			<div class="col-md-6">
+				<label for="validationServer01" class="form-label">Geographical length:</label>
 				<input type="text" class="form-control is-valid" id="geoLength" value="" required>
 			</div>
 			<div class="col-md-6">
-				<label for="validationServer02" class="form-label">geoWidth</label>
+				<label for="validationServer02" class="form-label">Geographical width:</label>
 				<input type="text" class="form-control is-valid"  id="geoWidth" value="" required>
 			</div>
 			<div class="col-md-6">
-				<label for="validationServerUsername" class="form-label">City</label>
+				<label for="validationServerUsername" class="form-label">City:</label>
 				<input type="text" class="form-control is-invalid" id="city" value="" required>
 			</div>
 			<div class="col-md-6">
-				<label for="validationServer05" class="form-label">Adress</label>
+				<label for="validationServer05" class="form-label">Adress:</label>
 				<input type="text" class="form-control is-invalid"  id="adress" value="" required>
 			</div>
 			<div class="col-md-3">
-				<label for="validationServer02" class="form-label">ZipCode</label>
+				<label for="validationServer02" class="form-label">ZipCode:</label>
 				<input type="text" class="form-control is-valid"  id="zipCode" value="" required>
 			</div>
 			<div class="col-md-3">
-				<label for="validationServer05" class="form-label">House number</label>
+				<label for="validationServer05" class="form-label">House number:</label>
 				<input type="text" class="form-control is-invalid"  id="number" value="" required>
 			</div>
-			<select class="form-select" aria-label="Default select example">
-				<option selected>Menagers</option>
-				<option value="1">One</option>
-				<option value="2">Two</option>
-				<option value="3">Three</option>
-			</select>
-			<div class="col-12">
+			<div class="col-md-3">
+				<label for="validationServer05" class="form-label">ID:</label>
+				<input type="text" class="form-control is-invalid"  id="id" value="" required>
+			</div>
+			<div class="col-md-3">
+				<label for="validationServer05" class="form-label">Finish:</label>
 				<button class="btn btn-primary" type="button" v-on:click="registerRestaurant">Register</button>
 			</div>
-			<div id="js-map" style="height: 400px; width: 100%;"></div>
+			<div class="col-md-12">
+				<label for="validationServer05" class="form-label">Map:</label>
+				<div id="js-map" style="height: 400px; width: 100%;"></div>
+				</div>
 			</div>
 		</div>
 	</form>
-	<form class="row g-3" style="background:white" v-if="hide">
+	<form class="row g-3" style="background:white" v-else>
 		<div class="col-md-6">
 			<label for="validationServer01" class="form-label">Name</label>
 			<input type="text" class="form-control is-valid" v-model="name" id="validationServer01" required>
@@ -104,7 +139,7 @@ template: `
 `
 , 
 methods : {
-	registerRestaurant : function() {
+	registerRestaurant() {
 		
 		this.geoLength = document.getElementById("geoLength").value;
 		this.geoWidth = document.getElementById("geoWidth").value;
@@ -112,20 +147,35 @@ methods : {
 		this.adress = document.getElementById("adress").value;
 		this.number = document.getElementById("number").value;
 		this.zipCode = document.getElementById("zipCode").value;
-		
+		this.name = document.getElementById("name").value;
+		this.id = document.getElementById("id").value;
+		this.type = document.getElementById("type").value;
+		this.manager = document.getElementById("manager").value;
+		var file = document.forms['form1']['formFile'].files[0];
+
 		let parameters = {
-			
+			geoLength : this.geoLength,
+			geoWidth : this.geoWidth,
+			city : this.city,
+			adress : this.adress,
+			number : this.number,
+			zipCode : this.zipCode,
+			manager : this.manager,
+			name : this.name,
+			id: this.id,
+			type: this.type,
+			logo: file.name
 		};
 
 		axios 
-			.post('rest/restaurant/createRestaurant', parameters,{
+			.post('rest/restaurants/createRestaurant', parameters,{
 		        headers: {
 		            'Content-Type': 'application/json',
 		        }
 		    })
 	}, 
 
-	registerUser : function() {
+	registerUser() {
 		
 		let loginParameters = {
 			name : this.name,
@@ -143,7 +193,15 @@ methods : {
 		            'Content-Type': 'application/json',
 		        }
 		    })
+		axios
+			.get('rest/user/getManagers')
+			.then(response => (this.managers = response.data));
 		this.hide = false;
+	}, 
+
+	registerManager() {
+		
+		this.hide = true;
 	}, 
 
 	saveLocation(){
