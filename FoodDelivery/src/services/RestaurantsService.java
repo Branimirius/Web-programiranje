@@ -48,7 +48,29 @@ public class RestaurantsService {
 		getRestaurantsDAO().calculateGrades(getCommentsDAO().getCommentsCollection());
 		return getRestaurantsDAO().getRestaurantsCollection();
 	}
+	
+	@POST
+	@Path("/deleteRestaurant")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteRestaurant(String id) {
+		System.out.println("Obrisan " + id);
+		
+		RestaurantsDAO restaurants = getRestaurantsDAO();
 
+		if (restaurants.searchRestaurant(id) == null) {
+			System.out.println("Korisnik " + id + "ne postoji");
+			return Response.status(400).entity("Username koji ste uneli ne postoji.").build();
+		} else {
+			System.out.println("brise " + id);
+			restaurants.deleteRestaurant(id);
+
+			return Response.status(200)
+							.entity(restaurants.getRestaurantsCollection())
+							.build();
+		}
+	}
+	
 	@POST
 	@Path("/createRestaurant")
 	@Consumes(MediaType.APPLICATION_JSON)

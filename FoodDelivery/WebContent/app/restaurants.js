@@ -28,7 +28,8 @@ Vue.component("restaurants", {
 		      filterType: "",
 		      filterStatus: "",
 		      filterGrade: 0,
-		      sortBy: ""
+		      sortBy: "",
+			  role: null
 		    }
 	},
 	template: ` 
@@ -86,7 +87,7 @@ Vue.component("restaurants", {
 				    </select>
 				<label v-bind:hidden="restaurants.length != 0"> There is no restaurants that match your search. Use reset button. </label>
 			</div>
-			 <div v-for="s in restaurants">            
+			 <div v-for="s in restaurants">       
 	             <div class="card-content" >
 	                <img class="card-img-top" v-bind:src="'pictures/' + s.type + '.png'"
 	                    alt="Card image cap" style="width: 5rem; z-index: 500;" >
@@ -150,6 +151,9 @@ Vue.component("restaurants", {
 					  		<a v-bind:href="'#/see-comments/'+ s.id">
 		                        <b>See comments</b>
 		                    </a>
+							<div v-if="role=='admin'">
+								<button type="button" v-on:click="deleteRestaurant(s.id)" class="btn btn-primary">Delete</button>
+							</div>
 		                  </div>	                  
 		            </div>
 	             </div>                                       
@@ -159,17 +163,37 @@ Vue.component("restaurants", {
 	, 
 	
 	mounted () {
-    	//this.restaurants = ["5", "6"]   	
-        axios
-        .get('rest/restaurants/getRestaurants')
-        .then(response => (this.restaurants = response.data));
-        axios
-        .get('rest/restaurants/getRestaurants')
-        .then(response => (this.backupArray = response.data));
+    	//this.restaurants = ["5", "6"]  
+		axios.all([axios.get('rest/restaurants/getRestaurants'),
+				   axios.get('rest/restaurants/getRestaurants'),
+				   axios.get('rest/user/loggedUser')
+				   ]).then(axios.spread((...responses) => {
+						this.restaurants = responses[0].data
+						this.backupArray = responses[1].data
+						this.role = responses[2].data.role
+				   })) 	
         
         
     },
 	methods: {
+		deleteRestaurant(id) {
+            axios
+                .post('rest/restaurants/deleteRestaurant', id,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response =>{
+                    this.restaurants = [];
+                    response.data.forEach(el => {
+                        this.restaurants.push(el);
+                    });
+                    return this.restaurants;
+                })
+                
+                
+        },
+
     	filterRestaurants : function() {
     		
     		switch(this.searchParam) {

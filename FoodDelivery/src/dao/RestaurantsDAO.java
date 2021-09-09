@@ -231,4 +231,13 @@ public class RestaurantsDAO {
 		this.saveRestaurants();
 	}
 	
+	public void deleteRestaurant(String id){
+		UsersDAO users = new UsersDAO();
+		String username = restaurants.get(id).getManager();
+		users.getUsers().get(username).setFree(true);
+		users.saveUsers();
+		restaurants.remove(id);
+		saveRestaurants();
+	}
+	
 }
