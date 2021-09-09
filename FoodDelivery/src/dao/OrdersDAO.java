@@ -240,6 +240,15 @@ private String ordersPath = "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\Web-
 		return retVal;
 	}
 	
+	public Order getOrderById(Integer id) {
+		for(Order o : this.orders.values()) {
+			if(o.getId() == id) {
+				return o;
+			}
+		}
+		return null;
+	}
+	
 	public void cancelOrder(OrderToSend order) {
 		System.out.println("usao u cancel");
 		for(Order o : this.orders.values()) {

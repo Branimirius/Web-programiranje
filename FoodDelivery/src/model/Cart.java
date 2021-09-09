@@ -57,6 +57,13 @@ public class Cart {
 		}
 		setPrice(value);
 	}
+	public void calculateDiscountedPrice(double discount) {
+		double value = 0.0;
+		for(ArticleInCart a : this.articles) {
+			value += (a.count * a.article.getPrice());
+		}
+		setPrice(value - (value * (discount / 100)));
+	}
 	private Integer generateId() {
 		return this.articles.size() + 1;
 	}

@@ -71,6 +71,14 @@ public class CartsDAO {
 		}		
 		return null;
 	}
+	public Cart getCartById(Integer id) {
+		for(Cart c : carts.values()) {
+			if(c.getId() == id) {
+				return c;
+			}				
+		}		
+		return null;
+	}
 	
 	public String getCartsPath() {
 		return cartsPath;

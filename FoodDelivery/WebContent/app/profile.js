@@ -85,7 +85,7 @@ Vue.component("profile", {
                                         <label>Broj poena</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{ user.Bonuspoints }}</p>
+                                        <p>{{ user.bonusPoints }}</p>
                                     </div>
                                 </div>
                             </div>

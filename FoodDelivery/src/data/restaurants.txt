@@ -3,68 +3,72 @@
     "name" : "Zlatiborska Komplet Lepinja",
     "type" : "Serbian",
     "articles" : [ ],
-    "working": true,
+    "working" : true,
     "location" : {
-      "geoLength" : 0.0,
-      "geoWidth" : 0.0,
-      "adress" : null,
-      "zipCode" : null
+      "geoLength" : "43.617484924583316",
+      "geoWidth" : "19.725842881883942",
+      "adress" : "Zlatibor,Dobroselica",
+      "zipCode" : "31315"
     },
     "logoPath" : "pictures/zorinaKrcma.png",
     "id" : "zorinakrcma1",
     "title" : "Komplet Lepinja & kiselo mleko",
-    "grade": 1,
-    "manager" : null
+    "grade" : 5.0,
+    "manager" : "",
+    "status" : true
   },
   "savoca1" : {
     "name" : "Savoca",
     "type" : "Italian",
     "articles" : [ ],
-    "working": true,
+    "working" : true,
     "location" : {
-      "geoLength" : 0.0,
-      "geoWidth" : 0.0,
-      "adress" : null,
-      "zipCode" : null
+      "geoLength" : "45.26032761319397",
+      "geoWidth" : "19.832726727973252",
+      "adress" : "Novi Sad,Bulevar Oslobodjenja 41",
+      "zipCode" : "21000"
     },
     "logoPath" : "pictures/savocaLogo.png",
     "id" : "savoca1",
     "title" : "Pizza",
-    "grade": 1,
-    "manager" : null
+    "grade" : 3.0,
+    "manager" : "",
+    "status" : true
   },
   "crepes1" : {
     "name" : "Crepes",
     "type" : "French",
     "articles" : [ ],
-    "working": true,
+    "working" : true,
     "location" : {
-      "geoLength" : 0.0,
-      "geoWidth" : 0.0,
-      "adress" : null,
-      "zipCode" : null
+      "geoLength" : "45.245685371364765",
+      "geoWidth" : "19.84398271263121",
+      "adress" : "Novi Sad,Promenada",
+      "zipCode" : "21000"
     },
     "logoPath" : "pictures/crepesLogo.png",
     "id" : "crepes1",
     "title" : "Francuske palacinke",
-    "grade": 1,
-    "manager" : null
+    "grade" : 3.0,
+    "manager" : "",
+    "status" : true
   },
   "girosmaster1" : {
     "name" : "Gyros master",
     "type" : "Greek",
     "articles" : [ ],
-    "working": true,
+    "working" : false,
     "location" : {
-      "geoLength" : 0.0,
-      "geoWidth" : 0.0,
-      "adress" : null,
-      "zipCode" : null
+      "geoLength" : "45.24796398924438",
+      "geoWidth" : "19.84224932612519",
+      "adress" : "Novi Sad,Dimitrija Tucovica 3",
+      "zipCode" : "21000"
     },
     "logoPath" : "pictures/gyrosMaster.png",
     "id" : "girosmaster1",
     "title" : "Giros",
-    "grade": 1,
-    "manager" : null
+    "grade" : 5.0,
+    "manager" : "",
+    "status" : false
   }
 }

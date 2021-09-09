@@ -1,8 +1,8 @@
 Vue.component("shopping-cart", {
 	data: function () {
 		    return {
-		      user: null,
-		      sc: null,
+		      user: {},
+		      sc: {},
 		      articles: [],
 		      total: 0
 		    }
@@ -21,15 +21,15 @@ Vue.component("shopping-cart", {
 		      
 		    
 		 </ul>
-		 <div>
+		 <div style="background: #d3d3d3d3; opacity: 0.9;">
 				
-				<button v-on:click="clearSc" >Obriši korpu</button>				
-				<button v-on:click="placeOrder" >Naruci</button>
+				<button class="btn btn-danger" v-on:click="clearSc" >Obriši korpu</button>				
+				<button class="btn btn-secondary" v-on:click="placeOrder" >Naruci</button>
 				<p>
 				Ukupno: {{sc.price}} dinara.
 				</p>
 			<p>
-				<a href="#/">Proizvodi</a>
+				<a class="badge badge-primary" href="#/">Proizvodi</a>
 			</p>
 			
 		 </div>
@@ -65,8 +65,11 @@ Vue.component("shopping-cart", {
           .get('rest/user/activeCart')
           .then(response => (this.sc = response.data));
         axios
-        .get('rest/user/justArticles')
-        .then(response => (this.articles = response.data));
+	        .get('rest/user/justArticles')
+	        .then(response => (this.articles = response.data));
+        axios
+	        .get('rest/user/loggedUser')
+	        .then(response => (this.user = response.data));
         
         
         

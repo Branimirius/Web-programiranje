@@ -85,7 +85,57 @@ public class User {
 		
 		
 	}
+	public void calculateBonus(double price) {
+		if(this.bonusPoints == null){
+			this.bonusPoints = 0;
+			this.bonusPoints += (int) Math.round(((price / 1000) * 133));
+		}
+		else {
+			this.bonusPoints += (int) Math.round(((price / 1000) * 133));
+		}
+		
+		if(this.bonusPoints > 500 && this.bonusPoints <= 1000) {
+			this.type = new CustomerType("bronze");
+		}
+		else if(this.bonusPoints > 1000 && this.bonusPoints <= 1500) {
+			this.type = new CustomerType("silver");
+		}
+		else if(this.bonusPoints > 1500) {
+			this.type = new CustomerType("gold");
+		}
+	}
+	public void calculatePunishment(double price) {
+		if(this.bonusPoints == null){
+			this.bonusPoints = 0;
+		}
+		else {
+			this.bonusPoints -= (int) Math.round(((price / 1000) * 133 * 4));
+		}
+		
+		if(this.bonusPoints > 500 && this.bonusPoints <= 1000) {
+			this.type = new CustomerType("bronze");
+		}
+		else if(this.bonusPoints > 1000 && this.bonusPoints <= 1500) {
+			this.type = new CustomerType("silver");
+		}
+		else if(this.bonusPoints > 1500) {
+			this.type = new CustomerType("gold");
+		}
+		
+		if(this.bonusPoints < 0) {
+			this.bonusPoints = 0;
+		}
+	}
 	
+	
+	public Integer getBonusPoints() {
+		return bonusPoints;
+	}
+
+	public void setBonusPoints(Integer bonusPoints) {
+		this.bonusPoints = bonusPoints;
+	}
+
 	public String getImagePath() {
 		return imagePath;
 	}

@@ -32,7 +32,9 @@ Vue.component("articles-show-home", {
 		      filterGrade: 0,
 		      articles: null,
 		      restaurants: [],
-		      user: {}
+		      user: {},
+		      sortBy: "",
+		      count : 1
 		    }
 	},
 	template: ` 
@@ -46,7 +48,9 @@ Vue.component("articles-show-home", {
 			      <h3> {{ a.name }} </h3>
 			      <p> {{ a.description }} </p>
 			      {{ a.price }}din
-			      <button v-on:click="addToCart(a)" style="float: right;" >Dodaj u korpu</button>
+			      <button class="btn btn-secondary" v-on:click="addToCart(a)" style="float: right;" >Dodaj u korpu</button>
+			      <input type="number" class="form-control" style="float: right; height: 10%; width: 15%;" v-model = "count">
+		    
 			    </li>
 			  </ul>
 			</div>
@@ -296,8 +300,8 @@ Vue.component("articles-show-home", {
     	},
     	addToCart : function(article) {
     		axios
-			.post('rest/user/addToCart', {"id": article.id, "count": 1})
-			.then(response => (toast('Article ' + article.name + " added to the Shopping Cart")))
+			.post('rest/user/addToCart', {"id": article.id, "count": this.count})
+			.then(response => (alert('Article ' + article.name + " added to the Shopping Cart")))
 		}
     	
     		

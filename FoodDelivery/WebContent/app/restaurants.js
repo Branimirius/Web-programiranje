@@ -27,7 +27,8 @@ Vue.component("restaurants", {
 		      toggleCheck: false,
 		      filterType: "",
 		      filterStatus: "",
-		      filterGrade: 0
+		      filterGrade: 0,
+		      sortBy: ""
 		    }
 	},
 	template: ` 

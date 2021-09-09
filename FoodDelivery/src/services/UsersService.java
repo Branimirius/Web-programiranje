@@ -290,8 +290,12 @@ public class UsersService {
 			
 		}
 		else {
-			getActiveCart().addArticle(getArticlesDAO().getArticle(a.id), a.count);
-			getCartsDAO().saveCarts();
+			CartsDAO carts = getCartsDAO();
+			Cart temp = getActiveCart();
+			temp.addArticle(getArticlesDAO().getArticle(a.id), a.count);
+			temp.calculateDiscountedPrice(getUsersDAO().getLoggedUser().getType().getDiscount());
+			carts.getCarts().put(temp.getId(), temp);
+			carts.saveCarts();
 			System.out.println("Product " + getArticlesDAO().getArticle(a.id)
 					+ " added with count: " + a.count);
 		}
@@ -303,8 +307,10 @@ public class UsersService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String placeOrder() {
 		OrdersDAO orda = getOrdersDAO();
+		UsersDAO users = getUsersDAO();
 		orda.processCartOrder(getActiveCart());		
-		
+		users.getLoggedUser().calculateBonus(getActiveCart().getPrice());
+		users.saveUsers();
 		return "OK";
 	}
 	
@@ -337,8 +343,11 @@ public class UsersService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String cancelOrder(OrderToSend order) {
 		OrdersDAO orda = getOrdersDAO();
+		UsersDAO users = getUsersDAO();
 		System.out.println("stigao na backend za cancel");
 		orda.cancelOrder(order); 
+		users.getLoggedUser().calculatePunishment(orda.getOrderById(order.id).getPrice());
+		users.saveUsers();
 		return "OK";
 	}
 	
@@ -448,7 +457,8 @@ public class UsersService {
 		if(cart == null) {
 			cart = new Cart(new ArrayList<ArticleInCart>(), u.getUsername(), 0.0, u.getCart());
 			cartsDao.addCart(cart);
-		}				
+		}
+		cart.calculateDiscountedPrice(u.getType().getDiscount());
 		return cart;
 	}
 	

@@ -9,7 +9,8 @@ Vue.component("restaurant-details", {
 		      articles: null,
 		      filteredArticles: null,
 		      total: 0,
-		      restaurantId: this.$route.params.id
+		      restaurantId: this.$route.params.id,
+		      count : 1
 		    }
 	},
 		
@@ -23,7 +24,8 @@ Vue.component("restaurant-details", {
 		      <h3> {{ a.name }} </h3>
 		      <p> {{ a.description }} </p>
 		      {{ a.price }}din
-		      <button v-on:click="addToCart(a)" style="float: right;" >Dodaj u korpu</button>
+		      <button class="btn btn-secondary" v-on:click="addToCart(a)" style="float: right;" >Dodaj u korpu</button>
+		      <input type="number" class="form-control" style="float: right; height: 10%; width: 15%;" v-model = "count">
 		    </li>
 		      
 		    
@@ -37,7 +39,7 @@ Vue.component("restaurant-details", {
 	methods : {
 		addToCart : function(article) {
     		axios
-			.post('rest/user/addToCart', {"id": article.id, "count": 1})
+			.post('rest/user/addToCart', {"id": article.id, "count": this.count})
 			.then(response => (alert('Article ' + article.name + " added to the Shopping Cart")))
 		}
 	},

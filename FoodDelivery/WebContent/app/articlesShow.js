@@ -1,8 +1,8 @@
 Vue.component("articles-show", {
 	data: function () {
 		    return {
-		      articles: null
-		      
+		      articles: null,
+		      count: 1
 		    }
 	},
 	template: ` 
@@ -14,7 +14,8 @@ Vue.component("articles-show", {
 		      <h3> {{ a.name }} </h3>
 		      <p> {{ a.description }} </p>
 		      {{ a.price }}din
-		      <button v-on:click="addToCart" style="float: right;" >Dodaj u korpu</button>
+		      <button class="btn btn-secondary" v-on:click="addToCart" style="float: right;" >Dodaj u korpu</button>
+		      <input type="number" class="form-control" style="float: right; height: 10%; width: 15%;" v-model = "count">
 		    </li>
 		      
 		    
@@ -42,7 +43,7 @@ Vue.component("articles-show", {
     	},
     	addToCart : function(article) {
     		axios
-			.post('rest/user/addToCart', {"id": article.id, "count": 1})
+			.post('rest/user/addToCart', {"id": article.id, "count": this.count})
 			.then(response => (toast('Article ' + article.name + " added to the Shopping Cart")))
 		}
     		
