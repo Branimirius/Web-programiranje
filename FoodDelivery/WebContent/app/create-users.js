@@ -76,7 +76,8 @@ methods : {
 			password : this.password,
 			date : this.date,
 			gender : this.gender,
-			role : this.role
+			role : this.role,
+			free : true
 		};
 				
 		
@@ -87,10 +88,6 @@ methods : {
 		            'Content-Type': 'application/json',
 		        }
 		    })
-		
-		
-		
-		
 	}, 
 	
 	signalChange : function()

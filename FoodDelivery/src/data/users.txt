@@ -80,7 +80,8 @@
     "cart" : null,
     "type" : null,
     "demandList" : null,
-    "restaurant" : "savoca1"
+    "restaurant" : "savoca1",
+    "free" : true
   },
   "Skinny" : {
     "username" : "Skinny",

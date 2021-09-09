@@ -35,7 +35,7 @@ template: `
 				<label for="validationServer01" class="form-label">Menager:</label>
 				<div class="input-group mb-3">
 					<select id="manager" class="form select form-select-lg" aria-label="Default select example">
-						<option v-for="m in managers">@{{ m.username }}</option>
+						<option v-for="m in managers">{{ m.username }}</option>
 					</select>
 					<button class="btn btn-outline-secondary" type="button" v-on:click="registerManager">Add manager</button>
 				</div>
@@ -173,7 +173,12 @@ methods : {
 		            'Content-Type': 'application/json',
 		        }
 		    })
-		window.location.href = "http://localhost:3665/FoodDelivery/home.html#/create-restaurant";
+		axios 
+			.post('rest/user/occupyManager', this.manager,{
+		        headers: {
+		            'Content-Type': 'application/json',
+		        }
+		    })
 	}, 
 
 	registerUser() {

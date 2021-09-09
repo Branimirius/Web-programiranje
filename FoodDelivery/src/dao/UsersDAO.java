@@ -60,16 +60,7 @@ public class UsersDAO {
 	}
 	
 	public User searchUser(String username) {
-		System.out.println(username + "+++++++++++++");
-		if (users != null) {
-			for (User k : users.values()) {
-				System.out.println(k.getUsername() + "=====");
-				if (k.getUsername().equals(username)) {
-					return k;
-				}
-			}
-		}
-		return null;
+		return users.get(username);
 	}
 	
 	public void addUser(User k) {
@@ -187,12 +178,14 @@ public class UsersDAO {
 		return null;
 	}
 
-	public Collection<User> getManagersCollection() {
+	public Collection<User> getFreeManagersCollection() {
 		ArrayList<User> retVal = new ArrayList<User>();
 		if (!users.isEmpty()) {
 			for(User u: this.users.values()){
 				if(u.getRole().equals("manager")) {
-					retVal.add(u);
+					if(u.getFree()) {
+						retVal.add(u);
+					}
 				}
 			}
 		}
@@ -222,6 +215,11 @@ public class UsersDAO {
 
 	public void deleteUser(String username){
 		users.remove(username);
+		saveUsers();
+	}
+	
+	public void occupyTheManager(String username) {
+		users.get(username).setFree(false);
 		saveUsers();
 	}
 }

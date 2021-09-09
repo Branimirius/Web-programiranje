@@ -48,6 +48,7 @@ public class User {
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.role = role;
+		this.free = free;
 		if(role == "customer") {
 			this.orderList = new ArrayList<Integer>();
 			this.demandList = null;
@@ -71,7 +72,6 @@ public class User {
 			this.cart = null;
 			this.bonusPoints = 0;
 			this.type = null;
-			this.free = free;
 		}
 		else {
 			this.demandList = null;

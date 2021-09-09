@@ -83,7 +83,16 @@ public class UsersService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<User> getManagers() {
 		UsersDAO usersDao = getUsersDAO();
-		return usersDao.getManagersCollection();
+		return usersDao.getFreeManagersCollection();
+	}
+
+	@POST
+	@Path("/occupyManager")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response occupyManager(String manager) {
+		UsersDAO usersDao = getUsersDAO();
+		usersDao.occupyTheManager(manager);
+		return  Response.status(200).build();
 	}
 
 	@POST
@@ -107,7 +116,7 @@ public class UsersService {
 		} else {
 			System.out.println("dodaje lika....");
 			usersDao.addUser(new User(userToRegister.username, userToRegister.password, userToRegister.name, userToRegister.surname, userToRegister.gender,
-					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("bronze"), null, null));
+					userToRegister.date, "customer", getCartsDAO().generateId(), 0, new CustomerType("bronze"), null, true));
 			System.out.println("dodao lika uspesno");
 			return Response.status(200).build();
 		}
@@ -128,10 +137,14 @@ public class UsersService {
 		} else {
 			System.out.println("dodaje lika...." + userToRegister.getUsername());
 			usersDao.addUser(new User(userToRegister.getUsername(), userToRegister.getPassword(), userToRegister.getName(), userToRegister.getSurname(), userToRegister.getGender(),
-					userToRegister.getDate(), userToRegister.getRole(), null, 0, null, null, userToRegister.getFree()));
+					userToRegister.getDate(), userToRegister.getRole(), null, 0, null, null, true));
 			System.out.println("dodao lika uspesno");
+			Collection<User> menagers = usersDao.getFreeManagersCollection();
+			if(!userToRegister.getFree()){
+				usersDao.occupyTheManager(userToRegister.getUsername());
+			}
 			return Response.status(200)
-							.entity(usersDao.getManagersCollection())
+							.entity(menagers)
 							.build();
 		}
 	}
