@@ -3,6 +3,7 @@ package services;
 import java.io.File;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -39,7 +40,6 @@ public class RestaurantsService {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@GET
 	@Path("/getRestaurants")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,12 +58,11 @@ public class RestaurantsService {
 		+ " logo->" + restaurant.getLogo());
 		
 		RestaurantsDAO restaurants = getRestaurantsDAO();
-
 		if (restaurants.searchRestaurant(restaurant.getId()) != null) {
 			System.out.println("vec je registrovan restoran");
 			return Response.status(400).entity("Id koji ste uneli vec je zauzet.").build();
 		} else {
-			System.out.println("dodaje lika...." + restaurant.getId());
+			System.out.println("dodaje restoran...." + restaurant.getId());
 			restaurants.addRestaurant(new Restaurant(restaurant.getName(), restaurant.getType(), false, 
 					new Location(restaurant.getGeoLength(), restaurant.getGeoWidth(), restaurant.getAdress(), restaurant.getZipCode()), 
 					"pictures" + File.separator + restaurant.getLogo(), restaurant.getId(), "", restaurant.getManager()));
@@ -180,7 +179,7 @@ public class RestaurantsService {
 		UsersDAO users = (UsersDAO) context.getAttribute("users");
 		if (users == null) {
 			users = (UsersDAO) context.getAttribute("users");
-			
+		
 			context.setAttribute("users", users);
 		} 
 		return users;
