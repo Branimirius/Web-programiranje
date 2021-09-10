@@ -2,7 +2,7 @@ Vue.component("user-details", {
 	props:['id'],
 	data: function () {
 		    return {
-		      users: null,
+		      users: this.$root.$data.user,
 		      username: this.$route.params.id
 		    }
 	},

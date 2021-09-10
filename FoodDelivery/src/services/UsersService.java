@@ -437,6 +437,10 @@ public class UsersService {
 	private UsersDAO getUsersDAO() {
 		System.out.println("making users dao");
 		UsersDAO users = (UsersDAO) context.getAttribute("users");
+//		if(users == null) {
+//			users = new UsersDAO();
+//			context.setAttribute("users", users);
+//		}
 		return users;
 	}
 	private CartsDAO getCartsDAO() {

@@ -1,7 +1,7 @@
 Vue.component("delivery-profile", {
 	data: function () {
 		    return {
-		      user: null
+		      user: this.$root.$data.user
 		      
 		    }
 	},
@@ -92,9 +92,9 @@ Vue.component("delivery-profile", {
 	},
 
 	mounted () {		
-		axios
-        .get('rest/user/loggedUser')
-        .then(response => (this.user = response.data));
-        
+//		axios
+//        .get('rest/user/loggedUser')
+//        .then(response => (this.user = response.data));
+//        
     }
 });

@@ -1,7 +1,7 @@
 Vue.component("shopping-cart", {
 	data: function () {
 		    return {
-		      user: {},
+		      user: this.$root.$data.user,
 		      sc: {},
 		      articles: [],
 		      total: 0
@@ -67,10 +67,10 @@ Vue.component("shopping-cart", {
         axios
 	        .get('rest/user/justArticles')
 	        .then(response => (this.articles = response.data));
-        axios
-	        .get('rest/user/loggedUser')
-	        .then(response => (this.user = response.data));
-        
+//        axios
+//	        .get('rest/user/loggedUser')
+//	        .then(response => (this.user = response.data));
+//        
         
         
         

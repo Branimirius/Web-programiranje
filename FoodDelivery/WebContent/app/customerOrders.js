@@ -1,7 +1,7 @@
 Vue.component("customer-orders", {
 	data: function () {
 		    return {
-		      user: null,
+		      user: this.$root.$data.user,
 		      orders: []
 		    }
 	},
@@ -81,9 +81,9 @@ Vue.component("customer-orders", {
 	},
 		    
 	mounted () {		
-		axios
-        .get('rest/user/loggedUser')
-        .then(response => (this.user = response.data));
+//		axios
+//        .get('rest/user/loggedUser')
+//        .then(response => (this.user = response.data));
 	    
     	axios
         .get('rest/user/activeOrders')

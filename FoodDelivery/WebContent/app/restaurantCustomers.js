@@ -2,7 +2,7 @@ Vue.component("restaurant-customers", {
 	data: function () {
 		    return {
 		      customers: null,
-		      user: {}
+		      user: this.$root.$data.user
 		    }
 	},
 	template: ` 
@@ -29,9 +29,9 @@ Vue.component("restaurant-customers", {
         .get('rest/articles/getCustomersByRestaurant')
         .then(response => (this.customers = response.data))
         
-        axios
-        .get('rest/user/loggedUser')
-        .then(response => (this.user = response.data))
+//        axios
+//        .get('rest/user/loggedUser')
+//        .then(response => (this.user = response.data))
         
     },
 	methods: {
