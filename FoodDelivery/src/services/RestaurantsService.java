@@ -44,7 +44,6 @@ public class RestaurantsService {
 	@Path("/getRestaurants")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Restaurant> getRestaurants() {
-		System.out.println("a tuj si (restaurants)");
 		getRestaurantsDAO().calculateGrades(getCommentsDAO().getCommentsCollection());
 		return getRestaurantsDAO().getRestaurantsCollection();
 	}
@@ -97,7 +96,6 @@ public class RestaurantsService {
 	@Path("/getComments")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Comment> getComments() {
-		System.out.println("a tuj si (Comments)");
 		return getCommentsDAO().getCommentsCollection();
 	}
 	

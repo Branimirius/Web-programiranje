@@ -42,7 +42,6 @@ public class ArticlesService {
 	@Path("/getArticles")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Article> getArticles() {
-		System.out.println("a tuj si (articles)");
 		return getArticlesDAO().getArticlesCollection();
 	}
 	

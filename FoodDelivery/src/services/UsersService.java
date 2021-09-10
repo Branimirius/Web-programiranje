@@ -70,6 +70,18 @@ public class UsersService {
 		if (context.getAttribute("users") == null) {
 	    	context.setAttribute("users", new UsersDAO());
 		}
+		if (context.getAttribute("articles") == null) {
+	    	context.setAttribute("articles", new ArticlesDAO());
+		}
+		if (context.getAttribute("carts") == null) {
+	    	context.setAttribute("carts", new CartsDAO());
+		}
+		if (context.getAttribute("orders") == null) {
+	    	context.setAttribute("orders", new OrdersDAO());
+		}
+		if (context.getAttribute("comments") == null) {
+	    	context.setAttribute("comments", new CommentsDAO());
+		}
 	}
 	
 	@GET
@@ -427,11 +439,11 @@ public class UsersService {
 	private ArticlesDAO getArticlesDAO() {
 		System.out.println("making articles dao");
 		ArticlesDAO articles = (ArticlesDAO) context.getAttribute("articles");
-		if (articles == null) {
-			articles = new ArticlesDAO();
-			
-			context.setAttribute("articles", articles);
-		} 
+//		if (articles == null) {
+//			articles = new ArticlesDAO();
+//			
+//			context.setAttribute("articles", articles);
+//		} 
 		return articles;
 	}
 	private UsersDAO getUsersDAO() {
@@ -446,21 +458,21 @@ public class UsersService {
 	private CartsDAO getCartsDAO() {
 		System.out.println("making carts dao");
 		CartsDAO carts = (CartsDAO) context.getAttribute("carts");
-		if (carts == null) {
-			carts = new CartsDAO();
-			
-			context.setAttribute("carts", carts);
-		} 
+//		if (carts == null) {
+//			carts = new CartsDAO();
+//			
+//			context.setAttribute("carts", carts);
+//		} 
 		return carts;
 	}
 	private OrdersDAO getOrdersDAO() {
 		System.out.println("making orders dao");
 		OrdersDAO orders = (OrdersDAO) context.getAttribute("orders");
-		if (orders == null) {
-			orders = new OrdersDAO();
-			
-			context.setAttribute("orders", orders);
-		} 
+//		if (orders == null) {
+//			orders = new OrdersDAO();
+//			
+//			context.setAttribute("orders", orders);
+//		} 
 		return orders;
 	}
 	
@@ -484,11 +496,11 @@ public class UsersService {
 	private CommentsDAO getCommentsDAO() {
 		System.out.println("making comments dao");
 		CommentsDAO comments = (CommentsDAO) context.getAttribute("comments");
-		if (comments == null) {
-			comments = new CommentsDAO();
-			
-			context.setAttribute("comments", comments);
-		} 
+//		if (comments == null) {
+//			comments = new CommentsDAO();
+//			
+//			context.setAttribute("comments", comments);
+//		} 
 		return comments;
 	}
 
