@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -157,7 +159,7 @@ public class UsersService {
 		System.out.println("Obrisan " + username);
 		
 		UsersDAO usersDao = getUsersDAO();
-
+		
 		if (usersDao.searchUser(username) == null) {
 			System.out.println("Korisnik " + username + "ne postoji");
 			return Response.status(400).entity("Username koji ste uneli ne postoji.").build();

@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.sun.tools.javac.jvm.PoolConstant.LoadableConstant;
 
 import model.CustomerType;
 import model.User;

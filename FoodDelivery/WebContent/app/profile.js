@@ -1,7 +1,7 @@
 Vue.component("profile", {
 	data: function () {
 		    return {
-		      user: null
+		      user: this.$root.$data.user
 		      
 		    }
 	},
@@ -98,12 +98,5 @@ Vue.component("profile", {
 	, 
 	methods : {
 		
-	},
-
-	mounted () {		
-		axios
-        .get('rest/user/loggedUser')
-        .then(response => (this.user = response.data));
-        
-    }
+	}
 });
