@@ -45,7 +45,7 @@
 						<li><a v-bind:hidden="mode!='admin'" id="usersPanel" href="#/users" >Users</a></li>
 						<li><a v-bind:hidden="mode!='admin'" id="createUsersPanel" href="#/create-users" >Create user</a></li>
 						<li><a v-bind:hidden="mode!='admin'" id="createRestaurantsPanel" href="#/create-restaurant" >Create restaurant</a></li>
-	                    <li><a id="profilPanel" href="#/profile">Profile</a></li>
+	                    <li><a v-bind:hidden="mode!='customer'" id="profilPanel" href="#/profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='deliveryGuy'" id="devGuyProfile" href="#/delivery-profile">Profile</a></li>
 	                    <li><a v-bind:hidden="mode!='notLogged'" style="background : #E2472F;" class="active" id="login" href="login.html">Log In</a></li>
 	                    <li><a v-bind:hidden="mode=='notLogged'" style="background : #E2472F;" class="active" id="logout" v-on:click = "logOut" href="login.html">Log Out</a></li>

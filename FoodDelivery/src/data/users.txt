@@ -41,7 +41,7 @@
     "gender" : "M",
     "dateOfBirth" : "3/3/1966",
     "role" : "deliveryGuy",
-    "imagePath" : null,
+    "imagePath" : "pictures/Gus.jpg",
     "orderList" : null,
     "cart" : null,
     "type" : null,

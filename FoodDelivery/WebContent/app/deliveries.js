@@ -1,3 +1,23 @@
+function sortByNameAsc(restaurants){
+	return restaurants.sort((a, b) => (a.restaurant > b.restaurant) ? 1 : (b.restaurant > a.restaurant) ? -1 : 0);
+}
+function sortByNameDesc(restaurants){
+	return restaurants.sort((a, b) => (a.restaurant < b.restaurant) ? 1 : (b.restaurant < a.restaurant) ? -1 : 0);
+}
+function sortByGradeAsc(restaurants){
+	return restaurants.sort((a, b) => (a.price > b.price) ? 1 : (b.price > a.price) ? -1 : 0);
+}
+function sortByGradeDesc(restaurants){
+	return restaurants.sort((a, b) => (a.price < b.price) ? 1 : (b.price < a.price) ? -1 : 0);
+}
+function sortByAdressAsc(restaurants){
+	return restaurants.sort((a, b) => (a.date > b.date) ? 1 : (b.date > a.date) ? -1 : 0);
+}
+function sortByAdressDesc(restaurants){
+	return restaurants.sort((a, b) => (a.date < b.date) ? 1 : (b.date < a.date) ? -1 : 0);
+}
+
+
 Vue.component("deliveries", {
 	data: function () {
 		    return {
@@ -20,9 +40,9 @@ Vue.component("deliveries", {
 	<div class="input-group">
 			  <select class="form-select" v-model="searchParam" aria-label="Default select example">
 				  <option value="" disabled selected hidden>Search params</option>
-				  <option value="name">Name</option>
-				  <option value="surname">Surname</option>
-				  <option value="username">Username</option>
+				  <option value="restaurant">Restaurant</option>
+				  <option value="price">Price</option>
+				  <option value="date">Date</option>
 			  </select>
 			  <div class="form-outline">
 			    <input type="search" v-model="searchText" id="form1" class="form-control" />
@@ -32,31 +52,16 @@ Vue.component("deliveries", {
 			  <button type="button" v-on:click="toggleFilters" class="btn btn-secondary">Filters</button>
 			
 			</div>
-			<div v-show="toggleCheck" class="input-group">
-			  <select class="form-select" @change="onTypeChange($event)" v-model="filterType" aria-label="Default select example">
-				  <option value="" disabled selected hidden>Role</option>
-				  <option value="customer">customer</option>
-				  <option value="deliveryGuy">delivery guy</option>
-				  <option value="manager">manager</option>
-			  </select>
-			  <select class="form-select" @change="onStatusChange($event)" v-model="filterStatus" aria-label="Default select example">
-				  <option value="" disabled selected hidden>Rank</option>
-				  <option value="bronze">Bronze</option>
-				  <option value="silver">Silver</option>
-				  <option value="gold">Gold</option>
-			  </select>
-			  
-			  
-			</div>
+			
 			<div class="container emp-profile">
 				<select class="form-select" @change="onSortChange($event)" v-model="sortBy" aria-label="Default select example">
 				  <option value="" disabled selected hidden>Sort by: </option>
-				  <option value="nameAsc">Name ascending</option>
-				  <option value="nameDesc">Name descending</option>
-				  <option value="surnameAsc">Surname ascending</option>
-				  <option value="surnameDesc">Surname descending</option>
-				  <option value="pointsAsc">Points ascending</option>
-				  <option value="pointsDesc">Points descending</option>
+				  <option value="nameAsc">Restaurant ascending</option>
+				  <option value="nameDesc">Restaurant descending</option>
+				  <option value="surnameAsc">Price ascending</option>
+				  <option value="surnameDesc">Price descending</option>
+				  <option value="pointsAsc">Date ascending</option>
+				  <option value="pointsDesc">Date descending</option>
 			    </select>
 				<label v-bind:hidden="orders.length != 0"> There is no orders that match your search. Use reset button. </label>
 			</div>
@@ -95,14 +100,14 @@ Vue.component("deliveries", {
 		filterRestaurants : function() {
     		
     		switch(this.searchParam) {
-    		  case "name":
-    			this.orders = this.orders.filter(el=>(el.name.toUpperCase().includes(this.searchText.toUpperCase())));
+    		  case "restaurant":
+    			this.orders = this.orders.filter(el=>(el.restaurant.toUpperCase().includes(this.searchText.toUpperCase())));
     		    break;
-    		  case "surname":
-    			this.orders = this.orders.filter(el=>(el.surname.toUpperCase().includes(this.searchText.toUpperCase())));
+    		  case "price":
+    			this.orders = this.orders.filter(el=>(el.price.toUpperCase().includes(this.searchText.toUpperCase())));
     		    break;
-    		  case "username":
-      			this.orders = this.orders.filter(el=>(el.username.toUpperCase().includes(this.searchText.toUpperCase())));
+    		  case "date":
+      			this.orders = this.orders.filter(el=>(el.date.toUpperCase().includes(this.searchText.toUpperCase())));
       		    break;
     		  default:
     			  this.orders = this.backupArray;
